@@ -1,7 +1,7 @@
 package com.unicauca.AuthService.service;
 
-import infra.dto.AuthRequest;
-import infra.dto.RegisterRequest;
+import com.unicauca.AuthService.infra.dto.AuthRequest;
+import com.unicauca.AuthService.infra.dto.RegisterRequest;
 import com.unicauca.AuthService.entity.User;
 import com.unicauca.AuthService.repository.UserRepository;
 import org.springframework.stereotype.Service;

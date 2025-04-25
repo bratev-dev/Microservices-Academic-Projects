@@ -1,4 +1,4 @@
-package infra.dto;
+package com.unicauca.AuthService.infra.dto;
 
 import com.unicauca.AuthService.entity.Role;
 import lombok.Data;

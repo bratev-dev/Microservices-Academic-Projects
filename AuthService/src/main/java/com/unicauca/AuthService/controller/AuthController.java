@@ -1,7 +1,7 @@
 package com.unicauca.AuthService.controller;
 
-import infra.dto.AuthRequest;
-import infra.dto.RegisterRequest;
+import com.unicauca.AuthService.infra.dto.AuthRequest;
+import com.unicauca.AuthService.infra.dto.RegisterRequest;
 import com.unicauca.AuthService.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

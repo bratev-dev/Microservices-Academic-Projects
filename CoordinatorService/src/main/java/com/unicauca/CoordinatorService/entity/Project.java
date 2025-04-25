@@ -1,4 +1,4 @@
-package entity;
+package com.unicauca.CoordinatorService.entity;
 
 import jakarta.persistence.*;
 

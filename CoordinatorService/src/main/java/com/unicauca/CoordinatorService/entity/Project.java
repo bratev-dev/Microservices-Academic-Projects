@@ -1,10 +1,14 @@
 package com.unicauca.CoordinatorService.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Data
 @Entity
+@NoArgsConstructor
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +29,9 @@ public class Project {
 
     // Relación con empresa (por ejemplo vía ID o DTO externo)
     private Long empresaId;
+
+    // Atributo para saber a quién está asignado el proyecto
+    private Long assignedTo;
+
+
 }

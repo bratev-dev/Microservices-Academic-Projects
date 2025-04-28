@@ -5,24 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ea94489-993c-42b3-bc4a-f24a45ca14df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/co/edu/unicauca/CompanyService/controller/CompanyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/co/edu/unicauca/CompanyService/dto/CompanyRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/co/edu/unicauca/CompanyService/dto/CompanyResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/co/edu/unicauca/CompanyService/entity/Company.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/co/edu/unicauca/CompanyService/event/EventPublisher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/co/edu/unicauca/CompanyService/event/ProjectPublishedEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/co/edu/unicauca/CompanyService/repository/CompanyRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/co/edu/unicauca/CompanyService/service/CompanyService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentService/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentService/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentService/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentService/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentService/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/HELP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/entity/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/entity/Company.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,21 +15,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Rubeiro-Romero"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Rubeiro-Romero&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/bratev-dev/Microservices-Academic-Projects.git",
-    "accountId": "44d2bcd0-1e7d-4caa-b442-870bafde7250"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/bratev-dev/Microservices-Academic-Projects.git&quot;,
+    &quot;accountId&quot;: &quot;44d2bcd0-1e7d-4caa-b442-870bafde7250&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2wKQc44NSJRdY3i023cJ4KqsSft" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -55,9 +38,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "feature/company-service",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/rubei/Documents/Ingenieria del Software/CoordinatorService",
+    "last_opened_file_path": "C:/Users/rubei/Documents/Ingenieria del Software/CompanyService",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -89,6 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1745787862158</updated>
       <workItem from="1745787863828" duration="72000" />
+      <workItem from="1745796504422" duration="44000" />
     </task>
     <servers />
   </component>

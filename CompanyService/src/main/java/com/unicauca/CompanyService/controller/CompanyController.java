@@ -1,15 +1,68 @@
 package com.unicauca.CompanyService.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.unicauca.CompanyService.entity.Company;
+import com.unicauca.CompanyService.service.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/companies")
 public class CompanyController {
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello from Company Service!";
+    @Autowired
+    private CompanyService companyService;
+
+    // Crear una nueva empresa
+    @PostMapping
+    public ResponseEntity<Company> createCompany(@RequestBody Company company) {
+        Company createdCompany = companyService.createCompany(company);
+        return ResponseEntity.created(URI.create("/api/companies/" + createdCompany.getId())).body(createdCompany);
+    }
+
+    // Obtener todas las empresas
+    @GetMapping
+    public List<Company> getAllCompanies() {
+        return companyService.getAllCompanies();
+    }
+
+    // Obtener una empresa por su ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Company> getCompanyById(@PathVariable String id) {
+        Optional<Company> company = companyService.getCompanyById(id);
+        if (company.isPresent()) {
+            return ResponseEntity.ok(company.get());
+        } else {
+            return ResponseEntity.notFound().build();  // Devolver 404 si no se encuentra la empresa
+        }
+    }
+
+    // Actualizar una empresa
+    @PutMapping("/{id}")
+    public ResponseEntity<Company> updateCompany(@PathVariable String id, @RequestBody Company companyDetails) {
+        Optional<Company> existingCompany = companyService.getCompanyById(id);
+
+        if (existingCompany.isPresent()) {
+            Company updatedCompany = companyService.updateCompany(id, companyDetails);
+            return ResponseEntity.ok(updatedCompany);
+        } else {
+            return ResponseEntity.notFound().build();  // Devolver 404 si no se encuentra la empresa
+        }
+    }
+
+    // Eliminar una empresa
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCompany(@PathVariable String id) {
+        Optional<Company> existingCompany = companyService.getCompanyById(id);
+        if (existingCompany.isPresent()) {
+            companyService.deleteCompany(id);
+            return ResponseEntity.noContent().build();  // Devolver 204 No Content si la eliminación fue exitosa
+        } else {
+            return ResponseEntity.notFound().build();  // Devolver 404 si no se encuentra la empresa
+        }
     }
 }

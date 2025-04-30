@@ -1,1 +1,11 @@
+com\unicauca\StudentService\Entities\Postulation.class
+com\unicauca\StudentService\Entities\Project.class
+com\unicauca\StudentService\Repository\StudentRepository.class
 com\unicauca\StudentService\StudentServiceApplication.class
+com\unicauca\StudentService\Controller\StudentController.class
+com\unicauca\StudentService\dto\StudentDTO.class
+com\unicauca\StudentService\Entities\Student.class
+com\unicauca\StudentService\dto\ProjectDTO.class
+com\unicauca\StudentService\Entities\Company.class
+com\unicauca\StudentService\Services\StudentService.class
+com\unicauca\StudentService\dto\CompanyDTO.class

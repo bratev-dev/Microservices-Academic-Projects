@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 /**
  *
  * @author jpala
@@ -20,11 +21,14 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
+    
     private final StudentService studentService;
+    private final RestTemplate restTemplate;
     
     @Autowired
-    public StudentController(StudentService studentService){
+    public StudentController(StudentService studentService, RestTemplate restTemplate){
         this.studentService = studentService;
+        this.restTemplate = restTemplate;
     }
     
     @GetMapping
@@ -36,13 +40,14 @@ public class StudentController {
         return ResponseEntity.ok(studentDTOs);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/api/students/{id}")
     public ResponseEntity<StudentDTO> getStudentById(@PathVariable int id) {
         return studentService.getStudentById(id)
                 .map(this::convertToDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     
     @PostMapping
     public ResponseEntity<StudentDTO> createStudent(@RequestBody StudentDTO studentDTO) {
@@ -91,8 +96,25 @@ public class StudentController {
         return ResponseEntity.ok(studentDTOs);
     }
     
+     // Nuevo endpoint para obtener proyectos por companyId
+    @GetMapping("/projects/{companyId}")
+    public ResponseEntity<String> getProjectsByCompanyId(@PathVariable Long companyId) {
+        // Llamada al microservicio de proyectos para obtener los proyectos de una empresa
+        String projectServiceUrl = "http://project-service/api/projects/company/" + companyId;
+        String projects = restTemplate.getForObject(projectServiceUrl, String.class);
+
+        if (projects == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No projects found for company id: " + companyId);
+        }
+        
+        return ResponseEntity.ok(projects);
+    }
+    
     // Métodos de conversión entre entidad y DTO
     private StudentDTO convertToDTO(Student student) {
+        if (student == null) {
+            return null;
+        }
         StudentDTO dto = new StudentDTO();
         dto.setId(student.getId());
         dto.setName(student.getName());
@@ -102,13 +124,14 @@ public class StudentController {
     }
 
     private Student convertToEntity(StudentDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         Student student = new Student();
         student.setId(dto.getId());
         student.setName(dto.getName());
         student.setSemester(dto.getSemester());
         student.setSkills(dto.getSkills());
         return student;
-    }
-    
-    
+    }    
 }

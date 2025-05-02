@@ -22,7 +22,7 @@ public class DataLoader implements CommandLineRunner {
         if (!userRepository.existsByEmail("coordinador@unicauca.com")) {
             String encodedPassword = passwordEncoder.encode("coord123"); // Contraseña encriptada
             User coordinador = User.builder()
-                    .email("coordinador@unicauca.edu.co")
+                    .email("coordinador@unicauca.com")
                     .password(encodedPassword)
                     .role(Role.COORDINATOR)
                     .build();

@@ -39,6 +39,14 @@ public class AuthService {
         return ResponseEntity.ok("Usuario registrado exitosamente");
     }
 
+    public Optional<User> findByEmail(String email) throws Exception {
+        try {
+            return userRepository.findByEmail(email);
+        }catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
 
     public AuthResponse authenticate(AuthRequest request) {
         Optional<User> userOptional = userRepository.findByEmail(request.getEmail());

@@ -4,9 +4,9 @@ package com.unicauca.StudentService.Controller;
 import com.unicauca.StudentService.dto.StudentDTO;
 import com.unicauca.StudentService.Entities.Student;
 import com.unicauca.StudentService.Services.StudentService;
+import com.unicauca.StudentService.command.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +40,8 @@ public class StudentController {
         return ResponseEntity.ok(studentDTOs);
     }
 
-    @GetMapping("/api/students/{id}")
+    //@GetMapping("/api/students/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<StudentDTO> getStudentById(@PathVariable int id) {
         return studentService.getStudentById(id)
                 .map(this::convertToDTO)
@@ -134,4 +135,15 @@ public class StudentController {
         student.setSkills(dto.getSkills());
         return student;
     }    
+    
+    //Implementacion para el Patron Command
+    @PostMapping("/{studentId}/postulate/{projectId}")
+    public ResponseEntity<String> postulateToProject(@PathVariable int studentId, @PathVariable int projectId) {
+        Command command = new ApplyToProjectCommand(studentService, studentId, projectId);
+        CommandInvoker invoker = new CommandInvoker();
+        invoker.setCommand(command);
+        invoker.executeCommand();
+        return ResponseEntity.ok("Postulación ejecutada exitosamente.");
+    }
+    
 }

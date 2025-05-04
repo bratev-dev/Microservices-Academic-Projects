@@ -15,7 +15,7 @@ public interface IUserRepository {
      * @param password Contraseña del usuario
      * @return Usuario si se encuentra, null en caso contrario
      */
-    User validarUsuario(String email, String password);
+    User authenticate(String email, String password);
     boolean saveUser(int id, String email, String password, String role);
     int getUserIdByEmail(String email);
 }

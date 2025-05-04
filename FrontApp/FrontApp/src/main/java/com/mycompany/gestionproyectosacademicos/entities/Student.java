@@ -54,7 +54,7 @@ public class Student implements IObserver{
     public void update(Object obj) {
         if (obj instanceof Project) {
             Project project = (Project) obj;
-            if ("aceptado".equals(project.getState())) { // Comparación con el String del estado
+            if ("aceptado".equals(project.getStatus())) { // Comparación con el String del estado
                 System.out.println("Estudiante " + name + " notificado sobre el proyecto: " + project.getName());
             }
         }

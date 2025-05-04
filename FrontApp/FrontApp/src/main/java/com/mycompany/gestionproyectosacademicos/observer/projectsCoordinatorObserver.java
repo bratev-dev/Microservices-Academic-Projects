@@ -30,10 +30,12 @@ public class projectsCoordinatorObserver extends JFrame implements IObserver{
         ProjectService projectService = (ProjectService) o;
         
         // Crear modelo de tabla
-        DefaultTableModel model = new DefaultTableModel(new String[]{"Proyecto", "Empresa", "Opciones"}, 0);
+        //DefaultTableModel model = new DefaultTableModel(new String[]{"Proyecto", "Empresa", "Opciones"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Proyecto", "Opciones"}, 0);
         
         for(Project project : projects) {
-            model.addRow(new Object[]{project.getName(), project.getCompany().getName(), "Ver más"});
+            //model.addRow(new Object[]{project.getName(), project.getCompany().getName(), "Ver más"});
+            model.addRow(new Object[]{project.getName(), "Ver más"});
         }
         
         tableProjects.setModel(model);

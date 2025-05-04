@@ -79,14 +79,15 @@ public class GUIProjectDetails extends javax.swing.JFrame {
             JLabel companyLabel = new JLabel("Nombre Empresa");
             companyLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
-            JTextArea companyDetails = new JTextArea(project.getCompany().getName());
+            /*JTextArea companyDetails = new JTextArea(project.getCompany().getName());
             companyDetails.setEditable(false);
             companyDetails.setLineWrap(true);
             companyDetails.setWrapStyleWord(true);
             companyDetails.setBackground(new Color(236, 236, 236));
             companyDetails.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
             companyDetails.setPreferredSize(new Dimension(100, 20));
-
+            */
+            
             JLabel companyDetailsLabel = new JLabel("Detalles Empresa");
             companyDetailsLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
@@ -102,11 +103,13 @@ public class GUIProjectDetails extends javax.swing.JFrame {
             JScrollPane companyScroll = new JScrollPane(companyDescription);
             companyScroll.setBorder(BorderFactory.createEmptyBorder());
 
+            /*
             companyPanel.add(companyLabel, BorderLayout.NORTH);
             companyPanel.add(companyDetails, BorderLayout.CENTER);
             companyPanel.add(companyDetailsLabel, BorderLayout.SOUTH);
             companyPanel.add(companyScroll, BorderLayout.AFTER_LAST_LINE); 
-
+            */
+            
             // Panel de detalles del proyecto
             JPanel projectPanel = new JPanel(new BorderLayout(10, 10));
             projectPanel.setBackground(Color.WHITE);

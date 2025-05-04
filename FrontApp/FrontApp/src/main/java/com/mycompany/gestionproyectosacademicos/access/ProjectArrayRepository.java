@@ -21,7 +21,7 @@ public class ProjectArrayRepository implements IProjectRepository{
      */
     
     public ProjectArrayRepository() {
-        if (projects == null) {
+        /*if (projects == null) {
             projects = new ArrayList<>();
             // Datos de ejemplo
             Company company = new Company("Projects SAS", "4", "empresa@gmail.com", "THECNOLOGY", "EDUARDO", "GALINZDEZ", "3154789645", "MANAGER");
@@ -145,7 +145,7 @@ public class ProjectArrayRepository implements IProjectRepository{
             "Automatizar la gestión de contratos", 
             "Facilitar la creación y gestión de contratos digitales", 
             "9", "4000000", "2025-12-10", "En revisión", company));
-        }
+        }*/
     }
     
     @Override
@@ -199,6 +199,11 @@ public class ProjectArrayRepository implements IProjectRepository{
 
     @Override
     public boolean existsCompany(String nit, String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean evaluateProject(Long projectId, String newStatus) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

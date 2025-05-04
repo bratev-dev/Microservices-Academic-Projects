@@ -523,9 +523,9 @@ public void validateDate(String date) throws ParseException {
             validateDate(date);
             
             jTextDay.setBackground(Color.LIGHT_GRAY);
-        Project project = new Project(id, name,summary ,objetives,description ,
-                maxTime,budget,date,state,company);
-        projectService.addProject(project);
+        /*Project project = new Project(id, name,summary ,objetives,description ,
+                maxTime,budget,date,state,company);*/
+        //projectService.addProject(project);
         JOptionPane.showMessageDialog(this, "Proyecto subido con exito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         

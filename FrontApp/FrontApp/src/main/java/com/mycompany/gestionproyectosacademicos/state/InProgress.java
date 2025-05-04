@@ -6,7 +6,7 @@ public class InProgress implements ProjectState{
 
     @Override
     public void manageState(Project project) {
-        project.setState(getStateName());
+        project.setStatus(getStateName());
     }
 
     @Override

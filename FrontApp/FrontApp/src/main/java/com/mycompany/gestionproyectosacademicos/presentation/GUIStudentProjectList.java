@@ -522,7 +522,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
     }
     
     private void loadProjectsFromDatabase() {
-        allProjects = new ArrayList<>();  // Inicializa la lista antes de llenarla
+        /*allProjects = new ArrayList<>();  // Inicializa la lista antes de llenarla
         String sql = """
             SELECT p.*, 
                    c.companyname AS companyname, 
@@ -570,11 +570,11 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
             JOptionPane.showMessageDialog(this, 
                 "No se encontraron proyectos en la base de datos.",
                 "Información", JOptionPane.INFORMATION_MESSAGE);
-        }
+        }*/
     }
     
     private void displayCurrentPage() {
-        // Limpiar tabla
+        /*// Limpiar tabla
         tableModel.setRowCount(0);
 
         // Calcular índices para la página actual
@@ -599,7 +599,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
                 project.getDescription(),
                 ">"
             });
-        }
+        }*/
     }
     
     private void addSampleData() {

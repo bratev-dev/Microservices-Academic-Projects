@@ -105,7 +105,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 
                 while (rs.next()) {
                     Project project = new Project();
-                    project.setId(rs.getInt("id"));
+                    //project.setId(rs.getInt("id"));
                     project.setName(rs.getString("name"));
                     project.setDescription(rs.getString("description"));
 
@@ -124,7 +124,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
                         state = null; // No asignamos estado si es null
                     }
 
-                    project.setState(state);
+                    //project.setState(state);
 
                     Company company = new Company();
                     company.setName(rs.getString("companyname"));
@@ -135,7 +135,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
                     company.setContactPhoneNumber(rs.getString("contactnumber"));
                     company.setContactPosition(rs.getString("contactposition"));
 
-                    project.setCompany(company);
+                    //project.setCompany(company);
                     projects.add(project);
                 }
             }
@@ -149,45 +149,47 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
     
     @Override
     public Project getProjectById(int projectId) throws SQLException {
-        String sql = "SELECT p.*, c.companyname, c.companynit " +
-                     "FROM projects p " +
-                     "LEFT JOIN company c ON p.company_nit = c.companynit " +
-                     "WHERE p.id = ?";
-
-        try (Connection conn = ConexionPostgreSQL.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, projectId);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    // Crear la compañía
-                    Company company = new Company();
-                    company.setName(rs.getString("companyname"));
-                    company.setNit(rs.getString("companynit"));
-                    // Añade otros campos de la compañía si los necesitas
-
-                    // Crear y retornar el proyecto
-                    return new Project(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getString("state"),
-                        company
-                    );
-                } else {
-                    throw new SQLException("No se encontró el proyecto con ID: " + projectId);
-                }
-            }
-        } catch (SQLException e) {
-            // Registrar la excepción y mostrar mensaje
-            throw new SQLException("Error al obtener el proyecto: " + e.getMessage(), e);
-        }
+//        String sql = "SELECT p.*, c.companyname, c.companynit " +
+//                     "FROM projects p " +
+//                     "LEFT JOIN company c ON p.company_nit = c.companynit " +
+//                     "WHERE p.id = ?";
+//
+//        try (Connection conn = ConexionPostgreSQL.conectar();
+//             PreparedStatement stmt = conn.prepareStatement(sql)) {
+//
+//            stmt.setInt(1, projectId);
+//
+//            try (ResultSet rs = stmt.executeQuery()) {
+//                if (rs.next()) {
+//                    // Crear la compañía
+//                    Company company = new Company();
+//                    company.setName(rs.getString("companyname"));
+//                    company.setNit(rs.getString("companynit"));
+//                    // Añade otros campos de la compañía si los necesitas
+//
+//                    // Crear y retornar el proyecto
+//                    /*return new Project(
+//                        rs.getInt("id"),
+//                        rs.getString("name"),
+//                        rs.getString("description"),
+//                        rs.getString("state"),
+//                        company
+//                    );*/
+//                } else {
+//                    throw new SQLException("No se encontró el proyecto con ID: " + projectId);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            // Registrar la excepción y mostrar mensaje
+//            throw new SQLException("Error al obtener el proyecto: " + e.getMessage(), e);
+//        }
+//        
+        return new Project(); // esto no es
     }
     
     private Project mapProject(ResultSet rs) throws SQLException {
         Project project = new Project();
-        project.setId(rs.getInt("id"));
+        //project.setId(rs.getInt("id"));
         project.setName(rs.getString("name"));
         project.setDescription(rs.getString("description"));
 
@@ -205,7 +207,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
             state = null; // No asignamos estado si es null
         }
 
-        project.setState(state);
+        //project.setState(state);
 
         Company company = new Company();
         company.setName(rs.getString("companyname"));
@@ -216,7 +218,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
         company.setContactPhoneNumber(rs.getString("contactnumber"));
         company.setContactPosition(rs.getString("contactposition"));
 
-        project.setCompany(company);
+        //project.setCompany(company);
         return project;
     }
 
@@ -257,13 +259,13 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 
             pstmt.setString(1, project.getName());
             pstmt.setString(2, project.getSummary());
-            pstmt.setString(3, project.getObjectives());
+            //pstmt.setString(3, project.getObjectives());
             pstmt.setString(4, project.getDescription());
-            pstmt.setString(5, project.getMaxTimeInMonths());
-            pstmt.setString(6, project.getBudget());
+            //pstmt.setString(5, project.getMaxTimeInMonths());
+            //pstmt.setString(6, project.getBudget());
             pstmt.setDate(7, Date.valueOf(project.getDate())); // Convertir LocalDate a SQL Date
             pstmt.setString(8, "Received"); // Estado inicial por defecto
-            pstmt.setString(9, project.getCompany().getNit()); // Relación con la empresa
+            //pstmt.setString(9, project.getCompany().getNit()); // Relación con la empresa
 
             pstmt.executeUpdate(); // Ejecuta la inserción
             System.out.println("✅ Proyecto guardado correctamente");
@@ -342,6 +344,11 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 
     @Override
     public List<Project> getProjectsByAcademicPeriod(String academicPeriod) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean evaluateProject(Long projectId, String newStatus) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

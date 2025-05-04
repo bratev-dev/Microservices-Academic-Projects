@@ -7,7 +7,7 @@ import com.mycompany.gestionproyectosacademicos.entities.Project;
  */
 public class Rejected implements ProjectState{
     public void manageState(Project project) {
-        project.setState(getStateName());
+        project.setStatus(getStateName());
     }
     
     public String getStateName() {

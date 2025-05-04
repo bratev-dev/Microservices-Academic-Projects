@@ -4,6 +4,7 @@ import com.mycompany.gestionproyectosacademicos.access.Factory;
 import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
 import com.mycompany.gestionproyectosacademicos.access.IProjectRepository;
 import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
+import com.mycompany.gestionproyectosacademicos.access.ProjectRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 import com.mycompany.gestionproyectosacademicos.entities.Coordinator;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
@@ -34,54 +35,50 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
-public class GUICoordinator extends javax.swing.JFrame implements IObserver{
+    ProjectService projectService = new ProjectService(new ProjectRepositoryMS());
     private final AcademicPeriodGeneratorService periodGenerator;
-    private final Coordinator coordinator;
-    private final ProjectService projectService;
+
     // Colores personalizados
     private final Color colorBackSelect = new Color(217, 217, 217); // #D9D9D9
     private final Color colorTxtSelect = new Color(19, 45, 70);    // #132D46
     private final Color colorBackOrigin = new Color(98, 114, 129);      // #627281
     private final Color colorTxtOrigin = new Color(255, 255, 255);     // #FFFFFF
+
     /**
      * Creates new form GUIMenu
      */
-    public GUICoordinator(CoordinatorService coordinatorService, int idCoordinator) {
-        IProjectRepository projectRepository = Factory.getInstance().getRepository(IProjectRepository.class, "ARRAYS");
-        //ICompanyRepository companyRepository = Factory.getInstance().getRepository(ICompanyRepository.class, "ARRAYS");
-        
+    public GUICoordinator() {
         this.periodGenerator = new AcademicPeriodGeneratorService();
-        this.projectService = new ProjectService(projectRepository);
-        this.coordinator = coordinatorService.getCoordinator(idCoordinator);
-        
-        // Registrar GUICoordinator como observador de ProjectService
+
         this.projectService.addObserver(this);
-        
+
         initComponents();
-        
+
         List<String> periods = this.periodGenerator.generateAcademicPeriods();
-        for(String period : periods) {
+        for (String period : periods) {
             cmbAcademicPeriod.addItem(period);
         }
-        
     }
-    
+
     private void centerContentCells(JTable table) {
         // Crear un renderizador centrado
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER); // Centrar el contenido
 
         for (int i = 0; i < table.getColumnCount(); i++) {
-        table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
     }
-    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -856,21 +853,14 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSessionActionPerformed
-        IUserRepository userRepo = Factory.getInstance().getRepository(IUserRepository.class, "POSTGRE");
-        ICompanyRepository compRepo = Factory.getInstance().getRepository(ICompanyRepository.class, "POSTGRE");
-        UserServices userService = new UserServices(userRepo);
-        CompanyService companyService = new CompanyService(compRepo, userRepo);
-        AuthService authService = new AuthService(null); // Crear la instancia del servicio de autenticación
-        GUILogin login = new GUILogin(authService, userService, companyService); // Pasar la instancia al constructor
-        login.setVisible(true); // Mostrar la ventana
-        this.dispose();
+
     }//GEN-LAST:event_btnCloseSessionActionPerformed
 
     private void btnRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestsActionPerformed
         CardLayout cl = (CardLayout) pnlRight.getLayout();
         cl.show(pnlRight, "card2");
         changeColorBtn(btnRequests);
-        
+
         // Notificar a los observers para llenar la tabla
         this.projectService.notifyObservers();
     }//GEN-LAST:event_btnRequestsActionPerformed
@@ -883,12 +873,9 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver{
 
     private void cmbAcademicPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAcademicPeriodActionPerformed
         List<Project> projects = projectService.getProjects();
-        System.out.println("Total de proyectos: " + projects.size());
         String selectedPeriod = (String) cmbAcademicPeriod.getSelectedItem();
-        System.out.println("Periodo seleccionado: " + selectedPeriod);
         // Filtrar los proyectos por el período académico seleccionado
         List<Project> filteredProjects = projectService.getProjectsByAcademicPeriod(selectedPeriod);
-        System.out.println("Proyectos filtrados: " + filteredProjects.size());
 
         // Actualizar la tabla con los proyectos filtrados
         update(filteredProjects); // Notificar a los observadores con los proyectos filtrados
@@ -897,76 +884,89 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver{
     public List<Project> getProjects() {
         return projectService.getProjects();
     }
-    
+
     private void btnCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommentActionPerformed
-        
+
     }//GEN-LAST:event_btnCommentActionPerformed
 
     private void btnChangeStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeStateActionPerformed
         // Obtener el proyecto seleccionado
         int selectedRow = tblRequests.getSelectedRow();
-        if (selectedRow >= 0) {
-            Project project = projectService.getProjects().get(selectedRow);
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor seleccione un proyecto", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-            // Configurar los radio buttons en GUIChangeState según el estado actual del proyecto
-            switch (project.getState()) {
-                case "Recibido":
-                    rBtnReceived.setSelected(true);
-                    break;
-                case "Aceptado":
-                    rBtnAccepted.setSelected(true);
-                    break;
-                case "Rechazado":
-                    rBtnRejected.setSelected(true);
-                    break;
-                case "En ejecución":
-                    rBtnInProgress.setSelected(true);
-                    break;
-                case "Cerrado":
-                    rBtnClosed.setSelected(true);
-                    break;
-            }
+        // Obtener el ID del proyecto seleccionado
+        Project selectedProject = projectService.getProjects().get(selectedRow);
 
-            // Mostrar la ventana GUIChangeState
-            GUIChangeState.pack();
-            GUIChangeState.setLocationRelativeTo(null); // Centrar la ventana
-            GUIChangeState.setVisible(true);
+        // Mostrar la ventana de cambio de estado
+        GUIChangeState.setLocationRelativeTo(null);
+        GUIChangeState.pack();
+        GUIChangeState.setVisible(true);
+
+        // Configurar el estado actual del proyecto en los radio buttons
+        switch (selectedProject.getStatus()) {
+            case "RECEIVED":
+                rBtnReceived.setSelected(true);
+                break;
+            case "ACCEPTED":
+                rBtnAccepted.setSelected(true);
+                break;
+            case "REJECTED":
+                rBtnRejected.setSelected(true);
+                break;
+            case "IN_PROGRESS":
+                rBtnInProgress.setSelected(true);
+                break;
+            case "CLOSED":
+                rBtnClosed.setSelected(true);
+                break;
+            default:
+                rBtnReceived.setSelected(true);
         }
     }//GEN-LAST:event_btnChangeStateActionPerformed
 
     private void btnSaveStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveStateActionPerformed
-        // Obtener el proyecto seleccionado
         int selectedRow = tblRequests.getSelectedRow();
-        if (selectedRow >= 0) {
-            Project project = projectService.getProjects().get(selectedRow);
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado ningún proyecto", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-            // Determinar el nuevo estado basado en el radio button seleccionado
-            ProjectState newState = null;
-            if (rBtnReceived.isSelected()) {
-                newState = new Received();
-            } else if (rBtnAccepted.isSelected()) {
-                newState = new Accepted();
-            } else if (rBtnRejected.isSelected()) {
-                newState = new Rejected();
-            } else if (rBtnInProgress.isSelected()) {
-                newState = new InProgress();
-            } else if (rBtnClosed.isSelected()) {
-                newState = new Closed();
-            }
+        Project selectedProject = projectService.getProjects().get(selectedRow);
+        String newStatus = "";
 
-            if (newState != null) {
-                // Cambiar el estado del proyecto
-                project.changeState(newState);
+        if (rBtnReceived.isSelected()) {
+            newStatus = "RECEIVED";
+        } else if (rBtnAccepted.isSelected()) {
+            newStatus = "ACCEPTED";
+        } else if (rBtnRejected.isSelected()) {
+            newStatus = "REJECTED";
+        } else if (rBtnInProgress.isSelected()) {
+            newStatus = "IN_PROGRESS";
+        } else if (rBtnClosed.isSelected()) {
+            newStatus = "CLOSED";
+        }
 
-                // Actualizar la interfaz de usuario en GUISeeDetails
-                lblState.setText(project.getState());
+        boolean success = projectService.evaluateProject(selectedProject.getId(), newStatus);
 
-                // Cerrar la ventana de cambio de estado
-                GUIChangeState.dispose();
-            }
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Estado actualizado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            // Actualizar el estado en la interfaz
+            selectedProject.setStatus(newStatus); // Actualizar el objeto local
+            lblState.setText(newStatus); // Actualizar la etiqueta
+
+            // Forzar actualización de la tabla
+            projectService.notifyObservers();
+
+            GUIChangeState.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el estado", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveStateActionPerformed
-    
+
     private void changeColorBtn(JButton botonSeleccionado) {
         // Restaurar el estilo de todos los botones
         for (JButton boton : new JButton[]{btnPerfil, btnRequests}) {
@@ -978,30 +978,33 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver{
         botonSeleccionado.setBackground(colorBackSelect);
         botonSeleccionado.setForeground(colorTxtSelect);
     }
-    
+
     public static void main(String args[]) {
-        
+        GUICoordinator inst = new GUICoordinator();
+        inst.setExtendedState(JFrame.MAXIMIZED_BOTH);  // Esta línea maximiza la ventana
+        inst.setLocationRelativeTo(null);
+        inst.setVisible(true);
     }
-    
+
     public void openSeeDetails(int row) {
         // Obtener el proyecto correspondiente a la fila seleccionada
         List<Project> projects = projectService.getProjects();
-        
+
         // Verificar si la lista está vacía
         if (projects == null || projects.isEmpty()) {
             System.out.println("No hay proyectos disponibles.");
             return; // Salir del método si no hay proyectos
         }
-        
+
         // Verificar si el índice (row) es válido
         if (row < 0 || row >= projects.size()) {
             System.out.println("Índice fuera de los límites de la lista de proyectos.");
             return; // Salir del método si el índice no es válido
         }
-        
+
         // Obtener el proyecto correspondiente a la fila seleccionada
         Project project = projects.get(row);
-        
+
         // Configurar los detalles del proyecto en GUISeeDetails
         lblProjectName.setText("<html>" + project.getName() + "</html>");
         lblSummary.setText("<html>" + project.getSummary() + "</html>");
@@ -1010,10 +1013,10 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver{
         lblMaxTimeInMonths.setText(String.valueOf(project.getMaxTimeInMonths()));
         lblBudget.setText(String.valueOf(project.getBudget()));
         lblDate.setText(project.getDate().toString());
-        lblState.setText(project.getState());
+        lblState.setText(project.getStatus());
 
         // Configurar los detalles de la empresa
-        Company company = project.getCompany();
+        /*Company company = project.getCompany();
         if (company != null) {
             lblCompanyName.setText("<html>" + company.getName() + "</html>");
             lblCompanyNit.setText(company.getNit());
@@ -1025,8 +1028,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver{
             lblCompanyContactPosition.setText(company.getContactPosition());
         } else {
             System.out.println("No hay información de la empresa asociada al proyecto.");
-        }
-        
+        }*/
         GUISeeDetails.pack();
         // Mostrar la ventana GUISeeDetails
         GUISeeDetails.setVisible(true);
@@ -1035,7 +1037,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver{
     void comment(Project project) {
         // Configurar el texto actual del JTextArea con el comentario existente
         txtAreaComments.setText(project.getComments());
-        
+
         // Mostrar la ventana GUIComments
         GUIComments.pack();
         GUIComments.setVisible(true);
@@ -1050,33 +1052,35 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver{
             GUIComments.dispose(); // Cerrar la ventana de comentarios
         });
     }
-    
+
     @Override
-        public void update(Object o) {
-            // Verificar si el objeto notificado es una lista de proyectos
-            if (o instanceof List<?>) {
-                List<?> projects = (List<?>) o;
+    public void update(Object o) {
+        // Verificar si el objeto notificado es una lista de proyectos
+        if (o instanceof List<?>) {
+            List<?> projects = (List<?>) o;
 
-                // Crear un modelo de tabla para tblRequests
-                DefaultTableModel model = new DefaultTableModel(new String[]{"Nombre", "Empresa", "Opciones"}, 0);
-                
-                // Llenar la tabla con los proyectos
-                for (Object project : projects) {
-                    if (project instanceof Project) {
-                        Project p = (Project) project;
-                        model.addRow(new Object[]{p.getName(), p.getCompany().getName(), ""});
-                    }
+            // Crear un modelo de tabla para tblRequests
+            //DefaultTableModel model = new DefaultTableModel(new String[]{"Nombre", "Empresa", "Opciones"}, 0);
+            DefaultTableModel model = new DefaultTableModel(new String[]{"Nombre", "Opciones"}, 0);
+
+            // Llenar la tabla con los proyectos
+            for (Object project : projects) {
+                if (project instanceof Project) {
+                    Project p = (Project) project;
+                    //model.addRow(new Object[]{p.getName(), p.getCompany().getName(), ""});
+                    model.addRow(new Object[]{p.getName(), ""});
                 }
-
-                // Asignar el modelo a la tabla
-                tblRequests.setModel(model);
-                tblRequests.getColumn("Opciones").setCellRenderer(new GUICoordinatorButtonRenderer());
-                tblRequests.getColumn("Opciones").setCellEditor(new GUICoordinatorButtonEditor(new JCheckBox(), this));
-                
-                // Centrar el contenido de las celdas en las columnas
-                centerContentCells(tblRequests);
             }
-        }    
+
+            // Asignar el modelo a la tabla
+            tblRequests.setModel(model);
+            tblRequests.getColumn("Opciones").setCellRenderer(new GUICoordinatorButtonRenderer());
+            tblRequests.getColumn("Opciones").setCellEditor(new GUICoordinatorButtonEditor(new JCheckBox(), this));
+
+            // Centrar el contenido de las celdas en las columnas
+            centerContentCells(tblRequests);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame GUIChangeState;
@@ -1160,7 +1164,5 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver{
     private javax.swing.JTable tblRequests;
     private javax.swing.JTextArea txtAreaComments;
     // End of variables declaration//GEN-END:variables
-
-    
 
 }

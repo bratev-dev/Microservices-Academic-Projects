@@ -2,6 +2,7 @@ package com.unicauca.CoordinatorService.service;
 
 import com.unicauca.CoordinatorService.entity.Project;
 import com.unicauca.CoordinatorService.entity.ProjectStatus;
+import com.unicauca.CoordinatorService.infra.dto.EvaluationRequest;
 import com.unicauca.CoordinatorService.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @Service
 public class ProjectService {
+
     private final ProjectRepository projectRepository;
 
     public ProjectService(ProjectRepository projectRepository) {
@@ -24,22 +26,21 @@ public class ProjectService {
         return projectRepository.findById(Long.valueOf(id));
     }
 
-    public Project acceptProject(Long id) {
+    public Project evaluateProject(Long id, EvaluationRequest req) {
         Project project = projectRepository.findById(id).orElseThrow();
-        project.setStatus(ProjectStatus.ACCEPTED);
+        project.setStatus(req.getStatus());
+        System.out.println("decisión tomada: " + req.getStatus());
+        project.setComments(req.getComments());
+        project.setAssignedTo(req.assignedTo);
         return projectRepository.save(project);
     }
 
-    public Project rejectProject(Long id) {
-        Project project = projectRepository.findById(id).orElseThrow();
-        project.setStatus(ProjectStatus.REJECTED);
-        return projectRepository.save(project);
+    public List<Project> getInProgessProjects() {
+        return projectRepository.findByStatus(ProjectStatus.IN_PROGRESS);
     }
 
-    public Project ClosedProject(Long id, Long projectId) {
-        Project project = projectRepository.findById(projectId).orElseThrow();
-        project.setStatus(ProjectStatus.CLOSED);
-        return projectRepository.save(project);
+    public List<Project> getEvaluatedProjects() {
+        return projectRepository.findByStatusNot(ProjectStatus.IN_PROGRESS);
     }
 
 }

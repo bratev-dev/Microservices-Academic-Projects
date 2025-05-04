@@ -21,6 +21,10 @@ public class CompanyService {
     private  AuthFeignClient authFeignClient;
 
 
+    public boolean existsCompany(Long nit, String email) {
+        return companyRepository.existsByNitAndCorreo(nit, email);
+    }
+
 
     @Transactional
     // Crear una nueva empresa

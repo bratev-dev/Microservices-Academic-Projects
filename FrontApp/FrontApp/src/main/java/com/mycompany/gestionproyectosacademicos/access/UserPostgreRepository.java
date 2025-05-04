@@ -17,7 +17,7 @@ public class UserPostgreRepository implements IUserRepository {
        
 
     @Override
-    public User validarUsuario(String email, String password) {
+    public User authenticate(String email, String password) {
         String sql = "SELECT id, email, password, role FROM public.user WHERE email = ? AND password = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);

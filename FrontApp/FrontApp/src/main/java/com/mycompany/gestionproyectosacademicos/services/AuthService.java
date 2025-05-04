@@ -23,16 +23,12 @@ public class AuthService {
     //private ICompanyRepository companyRepository;
     //private final IProjectRepository projectRepository = Factory.getInstance().getRepository(IProjectRepository.class, "ARRAYS");
 
-    public IUserRepository getUserRepository() {
-        return userRepository;
-    }
-
     public AuthService(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
      public JFrame login(String email, String password) {
-        User user = userRepository.validarUsuario(email, password);
+        User user = userRepository.authenticate(email, password);
         
         if (user == null) {
             return null;
@@ -63,10 +59,7 @@ public class AuthService {
                 return guiCompany;
                    
             case "COORDINATOR":
-                ICoordinatorRepository coordRepo = Factory.getInstance().getRepository(ICoordinatorRepository.class, "POSTGRE");
-                CoordinatorService coordService = new CoordinatorService(coordRepo);
-                
-                GUICoordinator instance = new GUICoordinator(coordService, user.getId());
+                GUICoordinator instance = new GUICoordinator();
                 instance.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 return instance;
             default:

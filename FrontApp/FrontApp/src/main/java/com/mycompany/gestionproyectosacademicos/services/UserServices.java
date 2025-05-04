@@ -25,7 +25,7 @@ public class UserServices {
      * @return true si la autenticación es exitosa, false en caso contrario.
      */
     public boolean autenticarUsuario(String email, String password) {
-        User user = userRepository.validarUsuario(email, password);
+        User user = userRepository.authenticate(email, password);
         return user != null;
     }
 

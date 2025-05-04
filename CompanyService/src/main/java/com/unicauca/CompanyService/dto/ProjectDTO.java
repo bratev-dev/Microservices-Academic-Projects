@@ -1,18 +1,16 @@
-package com.unicauca.CompanyService.entity;
-import jakarta.persistence.*;
+package com.unicauca.CompanyService.dto;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
 
 @Data
-@Entity
 @NoArgsConstructor
-public class Project {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@AllArgsConstructor
+public class ProjectDTO {
     private String name;
     private String summary;
     private String goals;
@@ -20,15 +18,9 @@ public class Project {
     private Integer maxtimeMonths;
     private double budget;
     private LocalDate date;
-
-    @Enumerated(EnumType.STRING)
-    private ProjectStatus status;
-
+    private String status; // Usamos String para recibir el estado
     private String comments;
-
-    // Relación con empresa (por ejemplo vía ID o DTO externo)
+    @NotNull
     private Long companyId;
-
-    // Atributo para saber a quién está asignado el proyecto
     private Long assignedTo;
 }

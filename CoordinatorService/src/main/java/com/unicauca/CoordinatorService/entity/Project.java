@@ -23,12 +23,12 @@ public class Project {
     private LocalDate date;
 
     @Enumerated(EnumType.STRING)
-    private ProjectStatus estado;
+    private ProjectStatus status;
 
-    private String comentarios;
+    private String comments;
 
     // Relación con empresa (por ejemplo vía ID o DTO externo)
-    private Long empresaId;
+    private Long companyId;
 
     // Atributo para saber a quién está asignado el proyecto
     private Long assignedTo;

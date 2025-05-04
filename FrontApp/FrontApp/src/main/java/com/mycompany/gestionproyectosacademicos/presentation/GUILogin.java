@@ -31,10 +31,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GUILogin extends javax.swing.JFrame {
+
     private AuthService authService;
     private UserServices userService;
     private CompanyService companyService;
-    
+
     public GUILogin(AuthService authService, UserServices userService, CompanyService companyService) {
         initComponents(); // Llamada al código autogenerado
         setLocationRelativeTo(null); // Para centrar la ventana
@@ -45,7 +46,7 @@ public class GUILogin extends javax.swing.JFrame {
         agregarPlaceholder(txtEmail, "Ingrese su correo!");
         agregarPlaceholder(txtPassword, "Ingrese su contraseña!");
     }
-    
+
     public GUILogin(AuthService authService) {
         initComponents(); // Llamada al código autogenerado
         setLocationRelativeTo(null); // Para centrar la ventana
@@ -54,8 +55,7 @@ public class GUILogin extends javax.swing.JFrame {
         agregarPlaceholder(txtEmail, "Ingrese su correo!");
         agregarPlaceholder(txtPassword, "Ingrese su contraseña!");
     }
-    
-    
+
     private void agregarPlaceholder(JTextField textField, String placeholder) {
         textField.setText(placeholder);
         textField.setForeground(Color.GRAY);
@@ -78,10 +78,6 @@ public class GUILogin extends javax.swing.JFrame {
             }
         });
     }
-    
-    
-
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -306,7 +302,7 @@ public class GUILogin extends javax.swing.JFrame {
             return;
         }
 
-        JFrame nextGUI = autenticarUsuario(email, password);
+        JFrame nextGUI = authService.login(email, password);
         if (nextGUI != null) {
             Messages.showMessageDialog("Inicio de sesión exitoso", "Éxito");
             nextGUI.setVisible(true);
@@ -337,11 +333,6 @@ public class GUILogin extends javax.swing.JFrame {
         }
 
         return true;
-    }
-
-    private JFrame autenticarUsuario(String email, String password) {
-        return authService.login(email, password);
-        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
@@ -358,26 +349,24 @@ public class GUILogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterMouseEntered
 
     private void btnRegisterMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseExited
-       Color colorNormal = new Color(102,0,0);
-       btnRegister.setBackground(colorNormal);// // TODO add your handling code here:
+        Color colorNormal = new Color(102, 0, 0);
+        btnRegister.setBackground(colorNormal);// // TODO add your handling code here:
     }//GEN-LAST:event_btnRegisterMouseExited
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
-  
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnLogin.doClick();
         }
     }
-  
-private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {
-   GUIcompanyRegister register = new GUIcompanyRegister(companyService);    // GUICompany Register
-   register.setVisible(true);
-}
 
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {
+        GUIcompanyRegister register = new GUIcompanyRegister(companyService);    // GUICompany Register
+        register.setVisible(true);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

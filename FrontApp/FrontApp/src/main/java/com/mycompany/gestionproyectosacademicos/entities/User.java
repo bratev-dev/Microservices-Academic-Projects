@@ -9,6 +9,9 @@ public class User {
     private String password;
     private String role; // Puede ser ADMIN, COORDINADOR, ESTUDIANTE, EMPRESA
 
+    public User() {
+    }
+
     public User(int id, String email, String password, String role) {
         this.id = id;
         this.email = email;

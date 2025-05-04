@@ -24,7 +24,7 @@ public class UserArrayRepository implements IUserRepository {
      * Método para validar si un usuario existe con el correo y contraseña dados
      */
     @Override
-    public User validarUsuario(String email, String password) {
+    public User authenticate(String email, String password) {
         for (User user : users) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 return user;

@@ -31,6 +31,7 @@ public class ProjectController {
     // Buscar proyecto por ID
     @GetMapping("/{id}")
     public Optional<Project> getProjectById(@PathVariable int id) {
+        System.out.println("Controller");
         return service.getProjectById(id);
     }
 
@@ -45,4 +46,33 @@ public class ProjectController {
     public boolean deleteProject(@PathVariable int id) {
         return service.deleteProject(id);
     }
+
+    // Aprobar un proyecto
+    @PostMapping("/{id}/approve")
+    public String approveProject(@PathVariable int id) {
+        System.out.println("================================================================================\n" +
+                "                                CONTROLLER                                       \n" +
+                "================================================================================");
+        return service.approveProject(id);
+    }
+
+    // Rechazar un proyecto
+    @PostMapping("/{id}/reject")
+    public String rejectProject(@PathVariable int id) {
+    System.out.println("Filtro UNO");
+        return service.rejectProject(id);
+    }
+
+    // Asignar un proyecto
+    @PostMapping("/{id}/assign")
+    public String assignProject(@PathVariable int id) {
+        return service.assignProject(id);
+    }
+
+    // Completar un proyecto
+    @PostMapping("/{id}/complete")
+    public String completeProject(@PathVariable int id) {
+        return service.completeProject(id);
+    }
+
 }

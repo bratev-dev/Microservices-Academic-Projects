@@ -17,7 +17,7 @@ import org.springframework.data.annotation.Version;
 @Getter
 @Setter
 public class Company {
-
+//Comentario de prueba para commit
 
     @Id
     @JsonProperty("nit")

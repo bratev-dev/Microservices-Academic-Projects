@@ -1,13 +1,12 @@
 package com.unicauca.CompanyService.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Version;
 
 @Entity
@@ -15,11 +14,14 @@ import org.springframework.data.annotation.Version;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Company {
 
 
     @Id
-    private String id;
+    @JsonProperty("nit")
+    private Long id;
 
     private String name;
     private String email;
@@ -28,8 +30,9 @@ public class Company {
     private String contactLastNames;
     private String contactPhoneNumber;
     private String contactPosition;
-    private String description;
     private String password;
+
+
     @Version
     private Long version;
 }

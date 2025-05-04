@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CompanyResponse {
-    private String id;
+    private long id;
 
     private String name;
     private String email;
@@ -13,6 +13,6 @@ public class CompanyResponse {
     private String contactLastNames;
     private String contactPhoneNumber;
     private String contactPosition;
-    private String description;
     private String password;
+
 }

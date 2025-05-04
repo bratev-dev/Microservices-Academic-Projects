@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CompanyRequest {
-    private String id;
+    private Long id;
     private String name;
     private String email;
     private String sector;
@@ -12,6 +12,5 @@ public class CompanyRequest {
     private String contactLastNames;
     private String contactPhoneNumber;
     private String contactPosition;
-    private String description;
-    private String password;
+
 }

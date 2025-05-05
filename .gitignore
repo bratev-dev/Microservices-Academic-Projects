@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Compiled class files
 *.class
 
@@ -83,3 +84,6 @@ application-*.yml
 .DS_Store
 Thumbs.db
 
+=======
+/FrontApp/FrontApp/target/
+>>>>>>> d33ccdbf1dbe59e57ec8e0348b7e843da0517658

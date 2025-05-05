@@ -6,6 +6,7 @@ import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
 import com.mycompany.gestionproyectosacademicos.access.IProjectRepository;
 import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
 import com.mycompany.gestionproyectosacademicos.access.ProjectRepositoryMS;
+import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 import com.mycompany.gestionproyectosacademicos.entities.Coordinator;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
@@ -855,7 +856,10 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSessionActionPerformed
-
+        AuthService authService = new AuthService(new UserRepositoryMS()); // Crear la instancia del servicio de autenticación
+        GUILogin login = new GUILogin(authService); // Pasar la instancia al constructor
+        login.setVisible(true); // Mostrar la ventana
+        this.dispose();
     }//GEN-LAST:event_btnCloseSessionActionPerformed
 
     private void btnRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestsActionPerformed
@@ -951,7 +955,6 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
             newStatus = "REJECTED";
         }
 
-
         boolean success = projectService.evaluateProject(selectedProject.getId(), newStatus);
 
         if (success) {
@@ -1022,7 +1025,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         Company company = companyService.getCompany(String.valueOf(project.getCompanyId()));
         if (company != null) {
             lblCompanyName.setText("<html>" + company.getName() + "</html>");
-            lblCompanyNit.setText(company.getNit());
+            lblCompanyNit.setText(company.getNit() != null ? String.valueOf(company.getNit()) : "");
             lblCompanyEmail.setText(company.getEmail());
             lblCompanySector.setText(company.getSector());
             lblCompanyContactPhone.setText(company.getContactPhoneNumber());

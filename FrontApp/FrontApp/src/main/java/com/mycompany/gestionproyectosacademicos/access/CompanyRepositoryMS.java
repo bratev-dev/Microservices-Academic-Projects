@@ -27,12 +27,12 @@ public class CompanyRepositoryMS implements ICompanyRepository {
     }
 
     @Override
-    public boolean existsCompany(String nit, String email) {
+    public boolean existsCompany(Long nit, String email) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Company findByNIT(String idCompany) {
+    public Company findByNIT(Long idCompany) {
         // Construir la URL completa para obtener la compañía
         String url = apiUrl + idCompany;
 

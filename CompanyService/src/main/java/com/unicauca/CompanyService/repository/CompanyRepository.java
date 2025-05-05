@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
     // Aquí puedes agregar consultas personalizadas si las necesitas más adelante
 
-    boolean existsByNitAndCorreo(Long id, String email);
+    boolean existsByIdAndEmail(Long id, String email);
 }

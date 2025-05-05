@@ -26,6 +26,18 @@ public class CompanyController {
         return ResponseEntity.created(URI.create("/api/companies/" + createdCompany.getId())).body(createdCompany);
     }
 
+    @Autowired
+    private CompanyService empresaService;
+
+    @GetMapping("/buscar")
+    public ResponseEntity<Boolean> existeEmpresaPorIdYEmail(
+            @RequestParam Long id,
+            @RequestParam String email) {
+
+        boolean existe = empresaService.existsCompany(id, email);
+        return ResponseEntity.ok(existe);
+    }
+
     // Obtener todas las empresas
     @GetMapping
     public List<Company> getAllCompanies() {
@@ -34,13 +46,23 @@ public class CompanyController {
     @Autowired
     private CompanyRepository companyRepository;
     // Obtener una empresa por su ID
-    @GetMapping("/{id}")
+   // @GetMapping("/{id}")
 
 //    public ResponseEntity<Company> getCompanyById(@PathVariable String id) {
 //        return companyService.getCompanyById(id)
 //                .map(ResponseEntity::ok)
 //                .orElse(ResponseEntity.notFound().build());
 //    }
+
+    @GetMapping("/nombre/{id}")
+    public ResponseEntity<String> getNombreEmpresaById(@PathVariable long id) {
+        Optional<Company> company = companyService.getCompanyById(id);
+        if (company.isPresent()) {
+            return ResponseEntity.ok(company.get().getName()); // Solo retorna el nombre
+        } else {
+            return ResponseEntity.notFound().build(); // 404 si no existe
+        }
+    }
 
     public ResponseEntity<Company> getCompanyById(@PathVariable long id) {
         Optional<Company> company = companyService.getCompanyById(id);

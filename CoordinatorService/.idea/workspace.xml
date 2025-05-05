@@ -4,8 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ea94489-993c-42b3-bc4a-f24a45ca14df" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/entity/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/entity/Company.java" afterDir="false" />
+    <list default="true" id="5ea94489-993c-42b3-bc4a-f24a45ca14df" name="Changes" comment="Se implementa correctamente el patrón State">
+      <change beforePath="$PROJECT_DIR$/../CompanyService/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/CompanyServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/CompanyServiceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/controller/CompanyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/controller/CompanyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/CompanyRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/CompanyRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/CompanyResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/CompanyResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/ProjectDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/ProjectDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/UserRegisterRequest$UserRegisterRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/UserRegisterRequest$UserRegisterRequestBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/UserRegisterRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/UserRegisterRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Company.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Company.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/event/ProjectPublishedEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/event/ProjectPublishedEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/observer/ProjectObserver.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/observer/ProjectObserver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/CompanyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/CompanyService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/AcceptedState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/AcceptedState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/InProgressState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/InProgressState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/ReceivedState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/ReceivedState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/CoordinatorServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/CoordinatorServiceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/controller/ProjectController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/controller/ProjectController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/entity/ProjectStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/entity/ProjectStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/infra/dto/ProjectDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/infra/dto/ProjectDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/repository/DataLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/repository/DataLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/service/CompanyServiceClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/service/CompanyServiceClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/service/ProjectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/unicauca/CoordinatorService/service/ProjectService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/CompanyRepositoryMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/CompanyRepositoryMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/entities/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/entities/Project.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,11 +67,17 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/company-service",
+    "Spring Boot.CoordinatorServiceApplication.executor": "Run",
+    "git-widget-placeholder": "feature/coordination-service",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/rubei/Documents/Ingenieria del Software/CompanyService",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -65,6 +101,9 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StructureViewState">
+    <option name="selectedTab" value="Logical" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5ea94489-993c-42b3-bc4a-f24a45ca14df" name="Changes" comment="" />
@@ -79,5 +118,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Se implementa correctamente el patrón State" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se implementa correctamente el patrón State" />
   </component>
 </project>

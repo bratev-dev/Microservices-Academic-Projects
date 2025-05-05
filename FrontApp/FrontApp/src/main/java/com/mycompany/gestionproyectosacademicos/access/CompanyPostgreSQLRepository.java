@@ -153,48 +153,48 @@ public class CompanyPostgreSQLRepository implements ICompanyRepository {
 
     @Override
     public boolean save(Company company) {
-    try {
-        URL url = new URL(SERVICE_URL);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json; utf-8");
-        con.setDoOutput(true);
+        try {
+            URL url = new URL(SERVICE_URL);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json; utf-8");
+            con.setDoOutput(true);
 
-        String json = mapper.writeValueAsString(company);
-        System.out.println("📦 JSON enviado: " + json);
+            String json = mapper.writeValueAsString(company);
+            System.out.println("📦 JSON enviado: " + json);
 
-        try (OutputStream os = con.getOutputStream()) {
-            byte[] input = json.getBytes("utf-8");
-            os.write(input, 0, input.length);
-        }
-
-        int code = con.getResponseCode();
-        System.out.println("🔁 Código HTTP: " + code);
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                (code >= 200 && code < 300) ? con.getInputStream() : con.getErrorStream(), "utf-8"))) {
-            StringBuilder response = new StringBuilder();
-            String responseLine;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim());
+            try (OutputStream os = con.getOutputStream()) {
+                byte[] input = json.getBytes("utf-8");
+                os.write(input, 0, input.length);
             }
-            System.out.println("📨 Respuesta del servidor: " + response.toString());
-        }
 
-        con.disconnect();
+            int code = con.getResponseCode();
+            System.out.println("🔁 Código HTTP: " + code);
 
-        if (code == HttpURLConnection.HTTP_OK || code == HttpURLConnection.HTTP_CREATED) {
-            JOptionPane.showMessageDialog(null, "✅ Empresa registrada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(null, "❌ Error al registrar empresa. Código HTTP: " + code, "Error", JOptionPane.ERROR_MESSAGE);
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (code >= 200 && code < 300) ? con.getInputStream() : con.getErrorStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println("📨 Respuesta del servidor: " + response.toString());
+            }
+
+            con.disconnect();
+
+            if (code == HttpURLConnection.HTTP_OK || code == HttpURLConnection.HTTP_CREATED) {
+                JOptionPane.showMessageDialog(null, "✅ Empresa registrada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "❌ Error al registrar empresa. Código HTTP: " + code, "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "❌ Excepción al llamar al servicio: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();  // también muestra en consola
             return false;
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "❌ Excepción al llamar al servicio: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();  // también muestra en consola
-        return false;
-    }
 }
 
 

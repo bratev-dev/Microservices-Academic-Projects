@@ -29,6 +29,7 @@ import javax.swing.JTextField;
  * @author ANACONA
  */
 public class GUICompany extends javax.swing.JFrame {
+
     private final Color colorBackSelect = new Color(217, 217, 217); // #D9D9D9
     private final Color colorTxtSelect = new Color(19, 45, 70);    // #132D46
     private final Color colorBackOrigin = new Color(98, 114, 129);      // #627281
@@ -38,20 +39,17 @@ public class GUICompany extends javax.swing.JFrame {
      * Creates new form GUICompany
      */
     private CardLayout card;
-    private final Company company ;
-    private final CompanyService companyService;
+    private CompanyService companyService;
+    private Long companyId;
     private ProjectService projectService;
-    
 
-    
-    public GUICompany(CompanyService companyService, String idCompany) {
+    public GUICompany(CompanyService companyService, ProjectService projectService, String companyIdStr) {
         this.companyService = companyService;
-        this.company = companyService.getCompany(idCompany);
-
+        this.projectService = projectService;
+        this.companyId = Long.parseLong(companyIdStr);
         initComponents();
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -449,6 +447,7 @@ public class GUICompany extends javax.swing.JFrame {
             return null; // Retornar null en caso de error
         }
     }
+
     public static int convertStringToInt(String numberString) {
         try {
             return Integer.parseInt(numberString); // Intenta convertir el String a int
@@ -457,68 +456,47 @@ public class GUICompany extends javax.swing.JFrame {
             return 0; // Retorna 0 o cualquier valor por defecto que desees
         }
     }
-    
 
-public void validateDate(String date) throws ParseException {
-    // Expresión regular para validar el formato dd-MM-yyyy
-    String regex = "^(0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-(\\d{4})$";
-    Pattern pattern = Pattern.compile(regex);
+    public void validateDate(String date) throws ParseException {
+        // Expresión regular para validar el formato dd-MM-yyyy
+        String regex = "^(0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-(\\d{4})$";
+        Pattern pattern = Pattern.compile(regex);
 
-    if (!pattern.matcher(date).matches()) {
-        throw new ParseException("Formato de fecha incorrecto. Usa dd-MM-yyyy", 0);
+        if (!pattern.matcher(date).matches()) {
+            throw new ParseException("Formato de fecha incorrecto. Usa dd-MM-yyyy", 0);
+        }
+
+        // Verificar si la fecha es válida
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        sdf.setLenient(false); // No permite fechas inválidas como 30-02-2024
+
+        sdf.parse(date); // Si la fecha es inválida, lanzará ParseException
     }
-
-    // Verificar si la fecha es válida
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    sdf.setLenient(false); // No permite fechas inválidas como 30-02-2024
-
-    sdf.parse(date); // Si la fecha es inválida, lanzará ParseException
-}
 
 
     private void btnPublish1ActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            // 1. Validación y obtención de datos del formulario
             String name = jTextNameProject.getText().trim();
             String summary = jTextSummary.getText().trim();
-            String goals = jTextObjetives.getText().trim();
+            String goals = jTextObjetives.getText().trim(); // cambia nombre para coincidir con Project
             String description = jTextDescription.getText().trim();
-            String maxTimeStr = jTextMaxTime.getText().strip();
-            String budgetStr = jTextBudget.getText().strip();
-            String day = jTextDay.getText().strip();
-            String month = jTextMonth.getText().strip();
-            String year = jTextYear.getText().strip();
+            String maxTime = jTextMaxTime.getText().strip();
+            String budgetText = jTextBudget.getText().strip();
+            String date = jTextYear.getText().strip() + "-" + jTextMonth.getText().strip() + "-" + jTextDay.getText().strip();
+            String status = "Recibido";
 
-            // Validar campos obligatorios
-            JTextField[] campos = {jTextNameProject, jTextSummary, jTextObjetives,
-                    jTextDescription, jTextMaxTime, jTextBudget, jTextDay, jTextMonth, jTextYear};
-            String[] valores = {name, summary, goals, description, maxTimeStr, budgetStr, day, month, year};
+            JTextField[] campos = {jTextNameProject, jTextSummary, jTextObjetives, jTextDescription, jTextMaxTime, jTextBudget, jTextDay, jTextMonth, jTextYear};
+            String[] valores = {name, summary, goals, description, maxTime, budgetText, jTextDay.getText(), jTextMonth.getText(), jTextYear.getText()};
 
-            validarCamposObligatorios(campos, valores);
+            boolean hayError = false;
 
-            // 2. Conversión y validación de datos
-            int maxTime = validarYConvertirEnteroPositivo(maxTimeStr, jTextMaxTime, "tiempo máximo (meses)");
-            double budget = validarYConvertirDoublePositivo(budgetStr, jTextBudget, "presupuesto");
-            String fechaFormateada = validarYFormatearFecha(year, month, day);
-
-            // 3. Creación del objeto Project
-            Project newProject = new Project();
-            newProject.setName(name);
-            newProject.setSummary(summary);
-            newProject.setGoals(goals);
-            newProject.setDescription(description);
-            newProject.setMaxTimeInMonths(maxTime);
-            newProject.setBudget(budget);
-            newProject.setDate(fechaFormateada);
-            newProject.setStatus("Recibido"); // Estado inicial
-            newProject.setCompanyId(this.company.getId()); // Asignar ID de la compañía
-
-            // 4. Guardar usando saveProject (no necesitamos ID, se generará automáticamente)
-            Project savedProject = projectService.addProject(newProject);
-
-            // 5. Verificar que se guardó correctamente
-            if (savedProject == null || savedProject.getId() == null) {
-                throw new Exception("No se pudo guardar el proyecto. El servicio no devolvió un proyecto válido.");
+            for (int i = 0; i < campos.length; i++) {
+                if (valores[i].isEmpty()) {
+                    campos[i].setBackground(Color.RED);
+                    hayError = true;
+                } else {
+                    campos[i].setBackground(Color.LIGHT_GRAY);
+                }
             }
 
             // 6. Mostrar confirmación y limpiar formulario
@@ -526,97 +504,44 @@ public void validateDate(String date) throws ParseException {
                     "Proyecto guardado exitosamente!\nID: " + savedProject.getId(),
                     "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-            limpiarFormulario();
-
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al guardar el proyecto: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    private void validarCamposObligatorios(JTextField[] campos, String[] valores) {
-        boolean error = false;
-        for (int i = 0; i < campos.length; i++) {
-            if (valores[i].isEmpty()) {
-                campos[i].setBackground(new Color(255, 200, 200)); // Rojo claro
-                error = true;
-            } else {
-                campos[i].setBackground(Color.WHITE);
-            }
-        }
-        if (error) {
-            throw new IllegalArgumentException("Todos los campos marcados en rojo son obligatorios.");
-        }
-    }
-
-    private int validarYConvertirEnteroPositivo(String valor, JTextField campo, String nombreCampo) {
-        try {
-            int numero = Integer.parseInt(valor);
-            if (numero <= 0) {
-                campo.setBackground(new Color(255, 200, 200));
-                throw new IllegalArgumentException("El " + nombreCampo + " debe ser mayor a cero.");
-            }
-            campo.setBackground(Color.WHITE);
-            return numero;
-        } catch (NumberFormatException e) {
-            campo.setBackground(new Color(255, 200, 200));
-            throw new IllegalArgumentException("El " + nombreCampo + " debe ser un número entero válido.");
-        }
-    }
-
-    private double validarYConvertirDoublePositivo(String valor, JTextField campo, String nombreCampo) {
-        try {
-            double numero = Double.parseDouble(valor);
-            if (numero <= 0) {
-                campo.setBackground(new Color(255, 200, 200));
-                throw new IllegalArgumentException("El " + nombreCampo + " debe ser mayor a cero.");
-            }
-            campo.setBackground(Color.WHITE);
-            return numero;
-        } catch (NumberFormatException e) {
-            campo.setBackground(new Color(255, 200, 200));
-            throw new IllegalArgumentException("El " + nombreCampo + " debe ser un número válido.");
-        }
-    }
-
-    private String validarYFormatearFecha(String year, String month, String day) {
-        try {
-            // Validar que sean números
-            int y = Integer.parseInt(year);
-            int m = Integer.parseInt(month);
-            int d = Integer.parseInt(day);
-
-            // Validar rangos
-            if (y < 2023 || y > 2100) throw new IllegalArgumentException("El año debe estar entre 2023 y 2100.");
-            if (m < 1 || m > 12) throw new IllegalArgumentException("El mes debe estar entre 1 y 12.");
-            if (d < 1 || d > 31) throw new IllegalArgumentException("El día debe estar entre 1 y 31.");
-
-            // Validar días específicos por mes
-            if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30) {
-                throw new IllegalArgumentException("El mes " + m + " solo tiene 30 días.");
-            }
-            if (m == 2) {
-                boolean esBisiesto = (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0));
-                if (esBisiesto && d > 29) throw new IllegalArgumentException("Febrero " + y + " solo tiene 29 días.");
-                if (!esBisiesto && d > 28) throw new IllegalArgumentException("Febrero " + y + " solo tiene 28 días.");
+            int maxTimeValue = Integer.parseInt(maxTime);
+            double budgetValue = Double.parseDouble(budgetText);
+            if (maxTimeValue <= 0 || budgetValue < 0) {
+                throw new IllegalArgumentException("Tiempo máximo debe ser positivo y el presupuesto no negativo.");
             }
 
-            // Formatear como yyyy-MM-dd
-            return String.format("%04d-%02d-%02d", y, m, d);
+            validateDate(date); // Validar formato yyyy-MM-dd
+            jTextDay.setBackground(Color.LIGHT_GRAY);
+
+            // Crear el proyecto
+            Project project = new Project();
+            project.setName(name);
+            project.setSummary(summary);
+            project.setGoals(goals);
+            project.setDescription(description);
+            project.setMaxTimeInMonths(maxTimeValue);
+            project.setBudget(budgetValue);
+            project.setDate(date);
+            project.setStatus(status);
+            project.setCompanyId(companyId); // Asume que tienes el ID de empresa del usuario logueado
+
+            // Enviar a backend o servicio
+            projectService.addProject(project); // Esto debe guardar el proyecto
+
+            JOptionPane.showMessageDialog(this, "Proyecto subido con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (NumberFormatException e) {
-            jTextDay.setBackground(new Color(255, 200, 200));
-            jTextMonth.setBackground(new Color(255, 200, 200));
-            jTextYear.setBackground(new Color(255, 200, 200));
-            throw new IllegalArgumentException("La fecha debe contener solo números.");
+            JOptionPane.showMessageDialog(this, "El tiempo máximo y el presupuesto deben ser números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "La fecha debe tener el formato yyyy-MM-dd.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException e) {
             jTextDay.setBackground(new Color(255, 200, 200));
             jTextMonth.setBackground(new Color(255, 200, 200));
             jTextYear.setBackground(new Color(255, 200, 200));
             throw e;
         }
-    }
+    }//GEN-LAST:event_btnPublish1ActionPerformed
+
 
     private void limpiarFormulario() {
         jTextNameProject.setText("");
@@ -638,8 +563,7 @@ public void validateDate(String date) throws ParseException {
     private void jTextMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMonthActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextMonthActionPerformed
-    
-    
+
     private void changeColorBtn(JButton botonSeleccionado) {
         // Restaurar el estilo de todos los botones
         for (JButton boton : new JButton[]{btnProfileCompany, btnPublish, btnMyProjects, btnCloseSessionCompany}) {

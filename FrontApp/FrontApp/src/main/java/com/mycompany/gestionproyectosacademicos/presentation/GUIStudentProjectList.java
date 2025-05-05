@@ -58,8 +58,8 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
     private JButton btnNext;
     private GUIProjectDetails currentDetailsFrame = null;
     
-    private static final String API_URLProjects = "http://localhost:8080/api/projects";
-    private static final String API_URLStudents = "http://localhost:8084/api/students";
+    private static final String API_URLProjects = "http://localhost:8082/api/projects";
+    private static final String API_URLStudents = "http://localhost:8083/api/students";
     
     
     //Metodo para las peticiones HTTP a la API y obtener los proyectos

@@ -32,6 +32,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mycompany.gestionproyectosacademicos.client.CompanyAPIClient;
 import com.mycompany.gestionproyectosacademicos.client.ProjectAPIClient;
 import com.mycompany.gestionproyectosacademicos.dto.ProjectDTO;
 import java.io.*; //BORRAR LUEGO DE PRUEBA
@@ -627,14 +628,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
     
     // Método para obtener el nombre de la empresa a partir del companyId
     private String getCompanyNameById(Long companyId) {
-        // Este es un ejemplo, debes hacer una llamada a la API del microservicio de empresa para obtener el nombre
-        // Podrías hacer un GET al microservicio que maneja las empresas y obtener el nombre a partir de la respuesta
-        // Por ejemplo:
-        // String companyName = apiClient.getCompanyNameById(companyId);
-        // return companyName;
-
-        // Como ejemplo, retornaremos un valor estático (deberás implementar la llamada real)
-        return "Empresa #" + companyId; // Esto es solo un ejemplo.
+        return CompanyAPIClient.getCompanyNameById(companyId);
     }
     
     private void addSampleData() {

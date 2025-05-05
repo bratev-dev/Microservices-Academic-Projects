@@ -5,7 +5,7 @@ import java.net.URL;
 
 public class StudentAPIClient {
 
-    private static final String BASE_URL = "http://localhost:8081/api/students"; // Cambia el puerto si usas otro
+    private static final String BASE_URL = "http://localhost:8084/api/students"; // Cambia el puerto si usas otro
 
     // Método para enviar la postulación
     public static boolean applyToProject(int studentId, int projectId) {

@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 public class ProjectAPIClient {
 
     public static ProjectDTO getProjectById(int projectId) throws IOException {
-        String apiUrl = "http://localhost:8081/projects/" + projectId; // Usa la URL correcta
+        String apiUrl = "http://localhost:8082/projects/" + projectId; // Usa la URL correcta
         HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");

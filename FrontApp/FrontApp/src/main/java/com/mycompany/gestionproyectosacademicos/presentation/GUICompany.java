@@ -501,7 +501,7 @@ public class GUICompany extends javax.swing.JFrame {
 
             // 6. Mostrar confirmación y limpiar formulario
             JOptionPane.showMessageDialog(this,
-                    "Proyecto guardado exitosamente!\nID: " + savedProject.getId(),
+                    "Proyecto guardado exitosamente!\n" ,
                     "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
             int maxTimeValue = Integer.parseInt(maxTime);
@@ -540,7 +540,7 @@ public class GUICompany extends javax.swing.JFrame {
             jTextYear.setBackground(new Color(255, 200, 200));
             throw e;
         }
-    }//GEN-LAST:event_btnPublish1ActionPerformed
+    }                                           
 
 
     private void limpiarFormulario() {

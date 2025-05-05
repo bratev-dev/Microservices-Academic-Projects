@@ -1,15 +1,9 @@
 package com.mycompany.gestionproyectosacademicos.presentation;
 
-import com.mycompany.gestionproyectosacademicos.access.ConexionPostgreSQL;
-import com.mycompany.gestionproyectosacademicos.access.ProjectPostgreSQLRepository;
-import com.mycompany.gestionproyectosacademicos.entities.Company;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
-import com.mycompany.gestionproyectosacademicos.observer.IObserver;
-import com.mycompany.gestionproyectosacademicos.services.AuthService;
-import com.mycompany.gestionproyectosacademicos.services.ProjectService;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.List;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -29,27 +23,33 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mycompany.gestionproyectosacademicos.client.CompanyAPIClient;
+import com.mycompany.gestionproyectosacademicos.client.ProjectAPIClient;
+import com.mycompany.gestionproyectosacademicos.dto.ProjectDTO;
+import java.io.*; //BORRAR LUEGO DE PRUEBA
+import java.net.*; //BORRAR LUEGO DE PRUEBA
 import java.sql.SQLException;
+import java.util.stream.Collectors;
+import javax.swing.SwingUtilities;
 
 
 /**
  *
  * @author Jhonatan
  */
-public class GUIStudentProjectList extends javax.swing.JFrame implements IObserver{
+public class GUIStudentProjectList extends javax.swing.JFrame {
 
     private JTable projectTable;
     private DefaultTableModel tableModel;
-    private ProjectPostgreSQLRepository projectRepository;
-    private ProjectService projectService;
     private List<Project> allProjects;
     private int currentPage = 1;
     private final int PROJECTS_PER_PAGE = 10;
@@ -57,6 +57,59 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
     private JButton btnPrevious;
     private JButton btnNext;
     private GUIProjectDetails currentDetailsFrame = null;
+    
+    private static final String API_URLProjects = "http://localhost:8080/api/projects";
+    private static final String API_URLStudents = "http://localhost:8084/api/students";
+    
+    
+    //Metodo para las peticiones HTTP a la API y obtener los proyectos
+    public void loadProjectsFromAPI() {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URLProjects)) // URL de la API
+                .header("Accept", "application/json") // Cabecera para especificar que queremos JSON
+                .build();
+
+        // Enviar la solicitud asincrónicamente y manejar la respuesta
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+            .thenApply(HttpResponse::body) // Obtener el cuerpo de la respuesta
+            .thenApply(this::parseProjects) // Parsear los proyectos
+            .thenAccept(projects -> {
+                allProjects = projects; // Asignar los proyectos a la lista
+                displayCurrentPage(); // Mostrar la primera página de proyectos
+            })
+            .exceptionally(e -> {
+                e.printStackTrace(); // Manejar errores
+                return null;
+            });
+    }
+
+
+    private void updateProjectList(List<Project> projects) {
+        if (projects == null) {
+            JOptionPane.showMessageDialog(this, "No se pudieron cargar los proyectos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        allProjects = projects; // Actualizar la lista global
+
+        currentPage = 1; // Reiniciar a la primera página
+        displayCurrentPage(); // Mostrar los proyectos en la tabla
+    }
+
+    
+    //Metodo para convertir JSON en DTOProject
+    private List<Project> parseProjects(String responseBody) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            // Convertir el JSON en una lista de objetos Project
+            return objectMapper.readValue(responseBody, objectMapper.getTypeFactory().constructCollectionType(List.class, Project.class));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>(); // Retornar una lista vacía si ocurre un error
+        }
+    }
+
     
     // Clase para el modelo de tabla que no permita edición
     class NonEditableTableModel extends DefaultTableModel {
@@ -85,8 +138,17 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
             return this;
         }
     }
+    
+    //Metodo que devuelve los proyectos de una pagina especifica
+    private List<Project> getProjectsForCurrentPage() {
+        int startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
+        int endIndex = Math.min(startIndex + PROJECTS_PER_PAGE, allProjects.size());
 
-    // Clase para el editor de los botones de detalles
+        return allProjects.subList(startIndex, endIndex);
+    }
+
+
+    //Clase para el editor de los botones de detalles
     class ButtonEditorDetails extends DefaultCellEditor {
         private JButton button;
         private String label;
@@ -113,46 +175,46 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value,
-                                        boolean isSelected, int row, int column) {
+                                                     boolean isSelected, int row, int column) {
             label = "›";
             button.setText(label);
             projectId = Integer.parseInt(table.getValueAt(row, 0).toString());
             isPushed = true;
 
-            // Get the main window that contains the table
+            // Obtener la ventana padre que contiene la tabla
             JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(table);
 
-            // Create and show the details window
+            // Crear y mostrar la ventana de detalles
             SwingUtilities.invokeLater(() -> {
                 try {
-                    // Close previous details window if it exists
-                    if (currentDetailsFrame != null) {
-                        currentDetailsFrame.dispose();
-                    }
-
-                    Project project = projectRepository.getProjectById(projectId);
-                    if (project != null) {
-                        currentDetailsFrame = new GUIProjectDetails(project);
-                        currentDetailsFrame.setVisible(true);
-
-                        // Only hide the parent window after confirming we have a valid project
-                        if (parentFrame != null) {
-                            parentFrame.setVisible(false);
-                        }
-                    } else {
+                    ProjectDTO project = ProjectAPIClient.getProjectById(projectId);
+                    if (project == null) {
                         JOptionPane.showMessageDialog(parentFrame, 
                             "No se encontró el proyecto con ID: " + projectId,
                             "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(GUIStudentProjectList.class.getName()).log(Level.SEVERE, null, ex);
+
+                    // Mostrar detalles directamente con el DTO obtenido
+                    GUIProjectDetails detailsWindow = new GUIProjectDetails(project);
+                    detailsWindow.setVisible(true);
+
+                    // Ocultar la ventana padre, si es necesario
+                    if (parentFrame != null) {
+                        parentFrame.setVisible(false);
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(parentFrame, 
                         "Error al cargar los detalles del proyecto: " + ex.getMessage(),
                         "Error", JOptionPane.ERROR_MESSAGE);
                 }
             });
+
             return button;
         }
+
 
         @Override
         public Object getCellEditorValue() {
@@ -163,15 +225,8 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
 
         private void showProjectDetails(int projectId) {
             try {
-                // Verificar que el proyecto existe antes de intentar cargarlo
-                if (projectRepository == null) {
-                    JOptionPane.showMessageDialog(null, 
-                        "Error: El repositorio de proyectos no está inicializado",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+                ProjectDTO project = ProjectAPIClient.getProjectById(projectId);
 
-                Project project = projectRepository.getProjectById(projectId);
                 if (project == null) {
                     JOptionPane.showMessageDialog(null, 
                         "No se encontró el proyecto con ID: " + projectId,
@@ -179,11 +234,20 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
                     return;
                 }
 
-                // Crear una nueva ventana para mostrar los detalles
-                GUIProjectDetails detailsFrame = new GUIProjectDetails();
-                //detailsFrame.setVisible(true);
-                
-            } catch (SQLException e) {
+                // Convertir a DTO (mismo proceso que arriba)
+                ProjectDTO dto = new ProjectDTO(
+                    project.getName(),
+                    project.getId(),
+                    project.getDescription(),
+                    project.getSummary(),
+                    project.getCompanyName(),
+                    project.getStatus() != null ? project.getStatus().toString() : ""
+                );
+
+                GUIProjectDetails detailsWindow = new GUIProjectDetails(dto);
+                detailsWindow.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, 
                     "Error al cargar los detalles del proyecto: " + e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -203,16 +267,11 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
     public GUIStudentProjectList() {
         initComponents();
         
-        // Inicializar repositorio y controlador
-        projectRepository = new ProjectPostgreSQLRepository();
-        projectService = new ProjectService(projectRepository);
-        projectService.addObserver(this);
-        
         // Inicializar tabla
         initTable();
         
-        // Cargar proyectos desde la BD
-        loadProjectsFromDatabase();
+        // Cargar proyectos desde la API
+        loadProjectsFromAPI();
     }
 
     /**
@@ -439,7 +498,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
         // Configurar renderizador para la columna de botones
         TableColumn buttonColumn = projectTable.getColumnModel().getColumn(4);
         buttonColumn.setCellRenderer(new DetailsButton());
-        buttonColumn.setCellEditor(new ButtonEditorDetails(new JCheckBox()));
+        //buttonColumn.setCellEditor(new ButtonEditorDetails(new JCheckBox()));
         buttonColumn.setMaxWidth(70);
         
         // Configurar anchos de columnas
@@ -521,85 +580,41 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
         );
     }
     
-    private void loadProjectsFromDatabase() {
-        /*allProjects = new ArrayList<>();  // Inicializa la lista antes de llenarla
-        String sql = """
-            SELECT p.*, 
-                   c.companyname AS companyname, 
-                   c.companynit AS companynit, 
-                   c.companysector AS companysector, 
-                   c.contactname AS contactname, 
-                   c.contactlastname AS contactlastname, 
-                   c.contactnumber AS contactnumber, 
-                   c.contactposition AS contactposition 
-            FROM projects p
-            LEFT JOIN company c ON p.company_nit = c.companynit;
-        """;
-
-        try (Connection conn = ConexionPostgreSQL.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Company company = new Company();
-                company.setName(rs.getString("companyname"));
-                company.setNit(rs.getString("companynit")); // Si necesitas este valor
-                // Y otras propiedades de la empresa si son necesarias
-
-                Project project = new Project(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("description"),
-                    rs.getString("state"),
-                    company // Asegúrate de pasar el objeto company al constructor de Project
-                );
-                allProjects.add(project);
-            }
-
-            System.out.println("Proyectos cargados: " + allProjects.size());
-            if (allProjects.isEmpty()) {
-                System.out.println("No se encontraron proyectos en la base de datos.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        
-        if (!allProjects.isEmpty()) {
-            displayCurrentPage();
-        } else {
-            JOptionPane.showMessageDialog(this, 
-                "No se encontraron proyectos en la base de datos.",
-                "Información", JOptionPane.INFORMATION_MESSAGE);
-        }*/
-    }
-    
     private void displayCurrentPage() {
-        /*// Limpiar tabla
+        // Limpiar tabla
         tableModel.setRowCount(0);
 
-        // Calcular índices para la página actual
-        int startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
-        int endIndex = Math.min(startIndex + PROJECTS_PER_PAGE, allProjects.size());
+        if (allProjects == null || allProjects.isEmpty()) {
+            return; // Si no hay proyectos, no hacemos nada
+        }
 
-        // Actualizar el botón de página con formato [2..3]
-        int totalPages = (int) Math.ceil((double) allProjects.size() / PROJECTS_PER_PAGE);
-        btnPage.setText("[" + currentPage + "..." + totalPages + "]");
+        int start = (currentPage - 1) * PROJECTS_PER_PAGE;
+        int end = Math.min(start + PROJECTS_PER_PAGE, allProjects.size());
 
-        // Habilitar/deshabilitar botones de navegación
+        for (int i = start; i < end; i++) {
+            Project p = allProjects.get(i);
+            Object[] rowData = {
+                (i + 1),                           // Número
+                //p.getCompanyName(),               // Nombre Empresa
+                p.getName(),                      // Nombre Proyecto
+                p.getSummary(),                   // Resumen Proyecto
+                "Ver detalles"                    // Botón o texto
+            };
+            tableModel.addRow(rowData);
+        }
+
+        // Actualizar el botón de número de página
+        btnPage.setText(String.valueOf(currentPage));
+
+        // Habilitar o deshabilitar botones de navegación
         btnPrevious.setEnabled(currentPage > 1);
+        int totalPages = (int) Math.ceil((double) allProjects.size() / PROJECTS_PER_PAGE);
         btnNext.setEnabled(currentPage < totalPages);
-
-        // Mostrar proyectos para esta página
-        for (int i = startIndex; i < endIndex; i++) {
-            Project project = allProjects.get(i);
-            tableModel.addRow(new Object[]{
-                project.getId(),
-                project.getCompany().getName(),
-                project.getName(),
-                project.getDescription(),
-                ">"
-            });
-        }*/
+    }
+    
+    // Método para obtener el nombre de la empresa a partir del companyId
+    private String getCompanyNameById(Long companyId) {
+        return CompanyAPIClient.getCompanyNameById(companyId);
     }
     
     private void addSampleData() {
@@ -610,9 +625,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
     }
     
     private void btnCloseSessionStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSessionStudentActionPerformed
-        AuthService authService = new AuthService(null); // Crear la instancia del servicio de autenticación
-        GUILogin login = new GUILogin(authService); // Pasar la instancia al constructor
-        login.setVisible(true); // Mostrar la ventana
+        //HAY QUE COLOCAR LA LOGICA DE LLAMADA AL MICROSERVICIO DE LOGIN
         this.dispose();
     }//GEN-LAST:event_btnCloseSessionStudentActionPerformed
 
@@ -659,21 +672,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame implements IObserv
     private javax.swing.JLabel lblUser;
     private javax.swing.JSeparator sepUserCoord;
     // End of variables declaration//GEN-END:variables
-   
-    @Override
-    public void update(Object obj) {
-        if (obj instanceof List<?>) {
-            allProjects = (List<Project>) obj; // Actualiza la lista completa de proyectos
-            displayCurrentPage(); // Refresca la tabla con los nuevos proyectos
-        }
-    }
+
     
-    // Método para actualizar toda la lista de proyectos
-    public void updateProjectList(List<Project> projects) {
-        // Actualizar la lista completa
-        allProjects = new ArrayList<>(projects);
-        
-        // Actualizar la vista
-        displayCurrentPage();
-    }
+    
 }

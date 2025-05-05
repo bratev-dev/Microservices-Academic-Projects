@@ -1,7 +1,9 @@
 package com.unicauca.CompanyService.controller;
 
+import com.unicauca.CompanyService.dto.ProjectDTO;
 import com.unicauca.CompanyService.entity.Project;
 import com.unicauca.CompanyService.service.ProjectService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +20,8 @@ public class ProjectController {
 
     // Crear proyecto
     @PostMapping
-    public Project createProject(@RequestBody Project project) {
-        return service.createProject(project);
+    public Project createProject(@RequestBody ProjectDTO projectDTO) {
+        return service.createProject(projectDTO);
     }
 
     // Listar todos los proyectos
@@ -28,51 +30,43 @@ public class ProjectController {
         return service.getAllProjects();
     }
 
-    // Buscar proyecto por ID
     @GetMapping("/{id}")
-    public Optional<Project> getProjectById(@PathVariable int id) {
-        System.out.println("Controller");
+    public Optional<Project> getProjectById(@PathVariable Long id) {  // Cambiar a Long
         return service.getProjectById(id);
     }
 
-    // Actualizar proyecto
     @PutMapping("/{id}")
-    public Optional<Project> updateProject(@PathVariable int id, @RequestBody Project updatedProject) {
-        return service.updateProject(id, updatedProject);
+    public Project updateProject(@PathVariable Long id, @RequestBody ProjectDTO updatedProjectDTO) {  // Cambiar a Long
+        return service.updateProject(id, updatedProjectDTO);
     }
 
-    // Eliminar proyecto
     @DeleteMapping("/{id}")
-    public boolean deleteProject(@PathVariable int id) {
+    public boolean deleteProject(@PathVariable Long id) {  // Cambiar a Long
         return service.deleteProject(id);
     }
 
-    // Aprobar un proyecto
     @PostMapping("/{id}/approve")
-    public String approveProject(@PathVariable int id) {
-        System.out.println("================================================================================\n" +
-                "                                CONTROLLER                                       \n" +
-                "================================================================================");
+    public String approveProject(@PathVariable Long id) {  // Cambiar a Long
         return service.approveProject(id);
     }
 
-    // Rechazar un proyecto
     @PostMapping("/{id}/reject")
-    public String rejectProject(@PathVariable int id) {
-    System.out.println("Filtro UNO");
+    public String rejectProject(@PathVariable Long id) {  // Cambiar a Long
         return service.rejectProject(id);
     }
 
-    // Asignar un proyecto
     @PostMapping("/{id}/assign")
-    public String assignProject(@PathVariable int id) {
+    public String assignProject(@PathVariable Long id) {  // Cambiar a Long
         return service.assignProject(id);
     }
 
-    // Completar un proyecto
     @PostMapping("/{id}/complete")
-    public String completeProject(@PathVariable int id) {
+    public String completeProject(@PathVariable Long id) {  // Cambiar a Long
         return service.completeProject(id);
     }
-
+    // En ProjectController.java
+    @PostMapping("/{id}/markAsReceived") // Cambia la ruta del endpoint
+    public String markProjectAsReceived(@PathVariable Long id) {
+        return service.markProjectAsReceived(id); // Llama al método renombrado
+    }
 }

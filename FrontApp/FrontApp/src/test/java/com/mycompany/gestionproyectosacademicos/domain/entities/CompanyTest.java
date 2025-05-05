@@ -8,8 +8,8 @@ public class CompanyTest {
 
     @Test
     void testCompanyConstructorAndGetters() {
-        Company company = new Company("Tech Corp", "123456789", "info@techcorp.com", "TECHNOLOGY", 
-                                      "John", "Doe", "555-1234", "CEO");
+        Company company = new Company("Tech Corp", Long.valueOf(123456789), "info@techcorp.com", "TECHNOLOGY", 
+                                      "John", "Doe", "555-1234", "CEO","1234");
 
         assertThat(company.getName()).isEqualTo("Tech Corp");
         assertThat(company.getNit()).isEqualTo("123456789");
@@ -23,10 +23,10 @@ public class CompanyTest {
 
     @Test
     void testSetters() {
-        Company company = new Company("", "", "", "", "", "", "", "");
+        Company company = new Company("", Long.valueOf(""), "", "", "", "", "", "","");
 
         company.setName("Health Corp");
-        company.setNit("987654321");
+        company.setNit(Long.valueOf(987654321));
         company.setEmail("info@healthcorp.com");
         company.setSector("HEALTH");
         company.setContactNames("Jane");

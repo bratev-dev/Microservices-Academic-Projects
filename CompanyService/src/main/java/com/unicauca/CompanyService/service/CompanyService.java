@@ -20,6 +20,11 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
     private final AuthFeignClient authFeignClient;
 
+
+    public boolean existsCompany(Long id, String email) {
+        return companyRepository.existsByIdAndEmail(id, email);
+    }
+
     @Transactional
     // Crear una nueva empresa
     public Company createCompany(Company company) {
@@ -30,7 +35,7 @@ public class CompanyService {
                 .password(company.getPassword())
                 .role("COMPANY")
                 .build();
-        authFeignClient.register(userRegisterRequest);
+        //authFeignClient.register(userRegisterRequest);
 
         return saveCompany;
 

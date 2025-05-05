@@ -4,7 +4,6 @@
  */
 package com.mycompany.gestionproyectosacademicos.presentation;
 
-import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
 import com.mycompany.gestionproyectosacademicos.entities.Student;
@@ -409,7 +408,7 @@ public class GUICompany extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseSessionCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSessionCompanyActionPerformed
-        AuthService authService = new AuthService(new UserRepositoryMS()); // Crear la instancia del servicio de autenticación
+        AuthService authService = new AuthService(null); // Crear la instancia del servicio de autenticación
         GUILogin login = new GUILogin(authService); // Pasar la instancia al constructor
         login.setVisible(true); // Mostrar la ventana
         this.dispose();
@@ -475,7 +474,7 @@ public class GUICompany extends javax.swing.JFrame {
     }
 
 
-    private void btnPublish1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPublish1ActionPerformed
+    private void btnPublish1ActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             String name = jTextNameProject.getText().trim();
             String summary = jTextSummary.getText().trim();
@@ -500,9 +499,10 @@ public class GUICompany extends javax.swing.JFrame {
                 }
             }
 
-            if (hayError) {
-                throw new IllegalArgumentException("Todos los campos obligatorios deben estar llenos.");
-            }
+            // 6. Mostrar confirmación y limpiar formulario
+            JOptionPane.showMessageDialog(this,
+                    "Proyecto guardado exitosamente!\nID: " + savedProject.getId(),
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
             int maxTimeValue = Integer.parseInt(maxTime);
             double budgetValue = Double.parseDouble(budgetText);
@@ -535,12 +535,31 @@ public class GUICompany extends javax.swing.JFrame {
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(this, "La fecha debe tener el formato yyyy-MM-dd.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            jTextDay.setBackground(new Color(255, 200, 200));
+            jTextMonth.setBackground(new Color(255, 200, 200));
+            jTextYear.setBackground(new Color(255, 200, 200));
+            throw e;
         }
     }//GEN-LAST:event_btnPublish1ActionPerformed
 
+
+    private void limpiarFormulario() {
+        jTextNameProject.setText("");
+        jTextSummary.setText("");
+        jTextObjetives.setText("");
+        jTextDescription.setText("");
+        jTextMaxTime.setText("");
+        jTextBudget.setText("");
+        jTextDay.setText("dd");
+        jTextMonth.setText("mm");
+        jTextYear.setText("yyyy");
+
+        // Restaurar colores
+        for (JTextField campo : new JTextField[]{jTextNameProject, jTextSummary, jTextObjetives,
+                jTextDescription, jTextMaxTime, jTextBudget, jTextDay, jTextMonth, jTextYear}) {
+            campo.setBackground(Color.WHITE);
+        }
+    }
     private void jTextMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMonthActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextMonthActionPerformed

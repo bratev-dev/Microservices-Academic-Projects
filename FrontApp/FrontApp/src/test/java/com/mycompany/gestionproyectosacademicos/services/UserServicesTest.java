@@ -28,6 +28,7 @@ public class UserServicesTest {
         User user = new User(1, "test@example.com", "password", "ADMIN");
         when(userRepository.authenticate("test@example.com", "password")).thenReturn(user); // Simula autenticación exitosa
 
+
         // Ejecución del método
         boolean result = userServices.autenticarUsuario("test@example.com", "password");
 

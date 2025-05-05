@@ -6,6 +6,7 @@ import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
 import com.mycompany.gestionproyectosacademicos.access.IProjectRepository;
 import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
 import com.mycompany.gestionproyectosacademicos.access.ProjectRepositoryMS;
+
 import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 import com.mycompany.gestionproyectosacademicos.entities.Coordinator;
@@ -1025,7 +1026,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         Company company = companyService.getCompany(String.valueOf(project.getCompanyId()));
         if (company != null) {
             lblCompanyName.setText("<html>" + company.getName() + "</html>");
-            lblCompanyNit.setText(company.getNit());
+            lblCompanyNit.setText(company.getNit() != null ? String.valueOf(company.getNit()) : "");
             lblCompanyEmail.setText(company.getEmail());
             lblCompanySector.setText(company.getSector());
             lblCompanyContactPhone.setText(company.getContactPhoneNumber());

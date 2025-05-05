@@ -15,7 +15,7 @@ public class CompanyService {
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
     }
-
+  
     public CompanyService(ICompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
@@ -23,7 +23,7 @@ public class CompanyService {
     /**
      * Registra una nueva empresa y su usuario asociado.
      *
-     * @param company La empresa a registrar.
+     * @param company  La empresa a registrar.
      * @param password La contraseña del usuario asociado.
      * @return true si el registro fue exitoso, false en caso contrario.
      */
@@ -45,7 +45,6 @@ public class CompanyService {
 
         return true;
     }
-
     // Método privado para validar que los datos no estén vacíos
     private boolean validarEmpresa(Company company) {
         if (company.getNit() == null) {
@@ -75,7 +74,6 @@ public class CompanyService {
 
         return true; // Si todo está correcto, devuelve true
     }
-
     public Company getCompany(String idCompany) {
         return companyRepository.findByNIT(idCompany);
     }

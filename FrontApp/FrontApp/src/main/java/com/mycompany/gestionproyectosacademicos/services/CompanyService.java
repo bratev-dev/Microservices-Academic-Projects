@@ -74,7 +74,7 @@ public class CompanyService {
 
         return true; // Si todo está correcto, devuelve true
     }
-    public Company getCompany(String idCompany) {
+    public Company getCompany(Long idCompany) {
         return companyRepository.findByNIT(idCompany);
     }
 

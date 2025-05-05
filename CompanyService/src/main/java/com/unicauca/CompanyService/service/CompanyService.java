@@ -17,10 +17,8 @@ import java.util.Optional;
 public class CompanyService {
 
     @Autowired
-    private CompanyRepository companyRepository;
-    private  AuthFeignClient authFeignClient;
-
-
+    private final CompanyRepository companyRepository;
+    private final AuthFeignClient authFeignClient;
 
     @Transactional
     // Crear una nueva empresa

@@ -59,7 +59,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
     private GUIProjectDetails currentDetailsFrame = null;
     
     private static final String API_URLProjects = "http://localhost:8080/api/projects";
-    private static final String API_URLStudents = "http://localhost:8081/api/students/1";
+    private static final String API_URLStudents = "http://localhost:8084/api/students";
     
     
     //Metodo para las peticiones HTTP a la API y obtener los proyectos
@@ -292,7 +292,6 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         btnProjectList = new javax.swing.JButton();
         btnMyProjects = new javax.swing.JButton();
         btnCloseSessionStudent = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jPanelProjectList = new javax.swing.JPanel();
         lblTitleProjectList = new javax.swing.JLabel();
 
@@ -362,13 +361,6 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelDashboardLayout = new javax.swing.GroupLayout(jPanelDashboard);
         jPanelDashboard.setLayout(jPanelDashboardLayout);
         jPanelDashboardLayout.setHorizontalGroup(
@@ -391,10 +383,6 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
                     .addComponent(lblUser)
                     .addComponent(btnCloseSessionStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(86, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDashboardLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
         );
         jPanelDashboardLayout.setVerticalGroup(
             jPanelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,9 +401,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
                 .addComponent(btnMyProjects, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
                 .addComponent(btnCloseSessionStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         lblTitleProjectList.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -647,30 +633,6 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnProfileStudentActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-            //BORRAR LUEGO DE PRUEBA
-        try {
-            URL url = new URL("http://localhost:8081/api/students/2"); // Usa el puerto real
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("Accept", "application/json");
-
-            int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                InputStreamReader reader = new InputStreamReader(con.getInputStream());
-                BufferedReader br = new BufferedReader(reader);
-                String response = br.lines().collect(Collectors.joining());
-                JOptionPane.showMessageDialog(this, "Conexión exitosa con StudentService. Respuesta: " + response);
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al conectar. Código: " + responseCode);
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Excepción: " + e.getMessage());
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -702,7 +664,6 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
     private javax.swing.JButton btnMyProjects;
     private javax.swing.JButton btnProfileStudent;
     private javax.swing.JButton btnProjectList;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelDashboard;
     private javax.swing.JPanel jPanelProjectList;

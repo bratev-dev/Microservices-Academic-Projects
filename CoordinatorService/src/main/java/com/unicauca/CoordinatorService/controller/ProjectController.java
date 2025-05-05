@@ -27,7 +27,7 @@ public class ProjectController {
 
     @GetMapping("/inprogress")
     public List<Project> getInProgressProjects() {
-        return projectService.getInProgessProjects();
+        return projectService.getPendingProjects();
     }
 
     @GetMapping("/evaluated")

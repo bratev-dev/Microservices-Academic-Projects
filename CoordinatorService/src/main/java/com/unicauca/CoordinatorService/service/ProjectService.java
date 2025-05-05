@@ -35,12 +35,12 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public List<Project> getInProgessProjects() {
-        return projectRepository.findByStatus(ProjectStatus.IN_PROGRESS);
+    public List<Project> getPendingProjects() {
+        return projectRepository.findByStatus(ProjectStatus.PENDING);
     }
 
     public List<Project> getEvaluatedProjects() {
-        return projectRepository.findByStatusNot(ProjectStatus.IN_PROGRESS);
+        return projectRepository.findByStatusNot(ProjectStatus.PENDING);
     }
 
 }

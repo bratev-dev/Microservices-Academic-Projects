@@ -30,7 +30,7 @@ public class DataLoader implements CommandLineRunner {
         project1.setDescription("Es un proyecto para controlar inventarios de manera eficiente");
         project1.setMaxtimeMonths(6);
         project1.setDate(LocalDate.parse("2024-05-04", formatter));
-        project1.setStatus(ProjectStatus.RECEIVED);
+        project1.setStatus(ProjectStatus.PENDING);
         project1.setComments("Proyecto inicial");
         projectRepository.save(project1);
 
@@ -43,7 +43,7 @@ public class DataLoader implements CommandLineRunner {
         project2.setDescription("Ofrecer cursos interactivos y seguimiento del progreso");
         project2.setMaxtimeMonths(12);
         project2.setDate(LocalDate.parse("2024-08-01", formatter));
-        project2.setStatus(ProjectStatus.ACCEPTED);
+        project2.setStatus(ProjectStatus.PENDING);
         project2.setComments("En revisión técnica");
         projectRepository.save(project2);
 
@@ -56,7 +56,7 @@ public class DataLoader implements CommandLineRunner {
         project3.setDescription("Permitir a los usuarios reservar mesas en línea");
         project3.setMaxtimeMonths(4);
         project3.setDate(LocalDate.parse("2024-12-15", formatter));
-        project3.setStatus(ProjectStatus.RECEIVED);
+        project3.setStatus(ProjectStatus.PENDING);
         project3.setComments("Proyecto pequeño");
         projectRepository.save(project3);
 
@@ -69,7 +69,7 @@ public class DataLoader implements CommandLineRunner {
         project4.setDescription("Facilitar la gestión de personal y pagos");
         project4.setMaxtimeMonths(8);
         project4.setDate(LocalDate.parse("2024-08-10", formatter));
-        project4.setStatus(ProjectStatus.IN_PROGRESS);
+        project4.setStatus(ProjectStatus.PENDING);
         project4.setComments("En desarrollo");
         projectRepository.save(project4);
 
@@ -82,7 +82,7 @@ public class DataLoader implements CommandLineRunner {
         project5.setDescription("Ofrecer a los vendedores una manera fácil de vender sus productos");
         project5.setMaxtimeMonths(18);
         project5.setDate(LocalDate.parse("2024-09-05", formatter));
-        project5.setStatus(ProjectStatus.ACCEPTED);
+        project5.setStatus(ProjectStatus.PENDING);
         project5.setComments("Proyecto grande");
         projectRepository.save(project5);
 
@@ -95,7 +95,7 @@ public class DataLoader implements CommandLineRunner {
         project6.setDescription("Permitir a los usuarios organizar sus tareas de manera eficiente");
         project6.setMaxtimeMonths(6);
         project6.setDate(LocalDate.parse("2024-10-01", formatter));
-        project6.setStatus(ProjectStatus.CLOSED);
+        project6.setStatus(ProjectStatus.PENDING);
         project6.setComments("Proyecto completado con éxito");
         projectRepository.save(project6);
 
@@ -108,7 +108,7 @@ public class DataLoader implements CommandLineRunner {
         project7.setDescription("Facilitar la gestión de libros y préstamos");
         project7.setMaxtimeMonths(9);
         project7.setDate(LocalDate.parse("2024-11-15", formatter));
-        project7.setStatus(ProjectStatus.IN_PROGRESS);
+        project7.setStatus(ProjectStatus.PENDING);
         project7.setComments("En fase de implementación");
         projectRepository.save(project7);
 
@@ -121,7 +121,7 @@ public class DataLoader implements CommandLineRunner {
         project8.setDescription("Permitir a los organizadores gestionar eventos de manera eficiente");
         project8.setMaxtimeMonths(12);
         project8.setDate(LocalDate.parse("2024-12-10", formatter));
-        project8.setStatus(ProjectStatus.ACCEPTED);
+        project8.setStatus(ProjectStatus.PENDING);
         project8.setComments("En espera de inicio");
         projectRepository.save(project8);
 
@@ -134,7 +134,7 @@ public class DataLoader implements CommandLineRunner {
         project9.setDescription("Permitir a los usuarios monitorear su salud desde cualquier lugar");
         project9.setMaxtimeMonths(6);
         project9.setDate(LocalDate.parse("2025-01-05", formatter));
-        project9.setStatus(ProjectStatus.CLOSED);
+        project9.setStatus(ProjectStatus.PENDING);
         project9.setComments("Proyecto finalizado");
         projectRepository.save(project9);
 
@@ -147,7 +147,7 @@ public class DataLoader implements CommandLineRunner {
         project10.setDescription("Facilitar la gestión de rutas y horarios");
         project10.setMaxtimeMonths(12);
         project10.setDate(LocalDate.parse("2025-02-01", formatter));
-        project10.setStatus(ProjectStatus.IN_PROGRESS);
+        project10.setStatus(ProjectStatus.PENDING);
         project10.setComments("En desarrollo activo");
         projectRepository.save(project10);
 
@@ -161,7 +161,7 @@ public class DataLoader implements CommandLineRunner {
         project11.setDescription("Permitir a los usuarios gestionar sus contenidos digitales");
         project11.setMaxtimeMonths(18);
         project11.setDate(LocalDate.parse("2025-03-15", formatter));
-        project11.setStatus(ProjectStatus.ACCEPTED);
+        project11.setStatus(ProjectStatus.PENDING);
         project11.setComments("En fase de planificación");
         projectRepository.save(project11);
 
@@ -174,7 +174,7 @@ public class DataLoader implements CommandLineRunner {
         project12.setDescription("Permitir a los usuarios gestionar sus finanzas de manera eficiente");
         project12.setMaxtimeMonths(6);
         project12.setDate(LocalDate.parse("2025-04-10", formatter));
-        project12.setStatus(ProjectStatus.CLOSED);
+        project12.setStatus(ProjectStatus.PENDING);
         project12.setComments("Proyecto exitoso");
         projectRepository.save(project12);
 
@@ -187,7 +187,7 @@ public class DataLoader implements CommandLineRunner {
         project13.setDescription("Facilitar la gestión de inventarios en almacenes");
         project13.setMaxtimeMonths(9);
         project13.setDate(LocalDate.parse("2025-05-05", formatter));
-        project13.setStatus(ProjectStatus.IN_PROGRESS);
+        project13.setStatus(ProjectStatus.PENDING);
         project13.setComments("Implementación en curso");
         projectRepository.save(project13);
 
@@ -200,7 +200,7 @@ public class DataLoader implements CommandLineRunner {
         project14.setDescription("Permitir a los usuarios gestionar sus redes sociales de manera eficiente");
         project14.setMaxtimeMonths(12);
         project14.setDate(LocalDate.parse("2025-06-01", formatter));
-        project14.setStatus(ProjectStatus.ACCEPTED);
+        project14.setStatus(ProjectStatus.PENDING);
         project14.setComments("En espera de recursos");
         projectRepository.save(project14);
 
@@ -213,7 +213,7 @@ public class DataLoader implements CommandLineRunner {
         project15.setDescription("Permitir a los usuarios planificar y gestionar sus viajes");
         project15.setMaxtimeMonths(6);
         project15.setDate(LocalDate.parse("2025-07-15", formatter));
-        project15.setStatus(ProjectStatus.CLOSED);
+        project15.setStatus(ProjectStatus.PENDING);
         project15.setComments("Proyecto completado");
         projectRepository.save(project15);
 
@@ -226,7 +226,7 @@ public class DataLoader implements CommandLineRunner {
         project16.setDescription("Facilitar la gestión de clientes");
         project16.setMaxtimeMonths(12);
         project16.setDate(LocalDate.parse("2025-08-10", formatter));
-        project16.setStatus(ProjectStatus.IN_PROGRESS);
+        project16.setStatus(ProjectStatus.PENDING);
         project16.setComments("Fase de desarrollo avanzada");
         projectRepository.save(project16);
 
@@ -239,7 +239,7 @@ public class DataLoader implements CommandLineRunner {
         project17.setDescription("Permitir a los usuarios gestionar su aprendizaje de manera eficiente");
         project17.setMaxtimeMonths(18);
         project17.setDate(LocalDate.parse("2025-09-05", formatter));
-        project17.setStatus(ProjectStatus.ACCEPTED);
+        project17.setStatus(ProjectStatus.PENDING);
         project17.setComments("Proyecto estratégico");
         projectRepository.save(project17);
 
@@ -252,7 +252,7 @@ public class DataLoader implements CommandLineRunner {
         project18.setDescription("Permitir a los usuarios monitorear sus hogares desde cualquier lugar");
         project18.setMaxtimeMonths(6);
         project18.setDate(LocalDate.parse("2025-10-01", formatter));
-        project18.setStatus(ProjectStatus.CLOSED);
+        project18.setStatus(ProjectStatus.PENDING);
         project18.setComments("Implementación exitosa");
         projectRepository.save(project18);
 
@@ -265,7 +265,7 @@ public class DataLoader implements CommandLineRunner {
         project19.setDescription("Permitir a los equipos gestionar proyectos de manera colaborativa");
         project19.setMaxtimeMonths(12);
         project19.setDate(LocalDate.parse("2025-11-15", formatter));
-        project19.setStatus(ProjectStatus.IN_PROGRESS);
+        project19.setStatus(ProjectStatus.PENDING);
         project19.setComments("En desarrollo");
         projectRepository.save(project19);
 
@@ -278,7 +278,7 @@ public class DataLoader implements CommandLineRunner {
         project20.setDescription("Facilitar la creación y gestión de contratos digitales");
         project20.setMaxtimeMonths(9);
         project20.setDate(LocalDate.parse("2025-12-10", formatter));
-        project20.setStatus(ProjectStatus.ACCEPTED);
+        project20.setStatus(ProjectStatus.PENDING);
         project20.setComments("En fase de diseño");
         projectRepository.save(project20);
 
@@ -291,7 +291,7 @@ public class DataLoader implements CommandLineRunner {
         project21.setDescription("Es un proyecto para controlar inventarios de manera eficiente usando IA");
         project21.setMaxtimeMonths(12);
         project21.setDate(LocalDate.parse("2026-01-05", formatter));
-        project21.setStatus(ProjectStatus.RECEIVED);
+        project21.setStatus(ProjectStatus.PENDING);
         project21.setComments("Propuesta innovadora");
         projectRepository.save(project21);
 
@@ -304,7 +304,7 @@ public class DataLoader implements CommandLineRunner {
         project22.setDescription("Ofrecer cursos interactivos y seguimiento del progreso con IA");
         project22.setMaxtimeMonths(18);
         project22.setDate(LocalDate.parse("2026-02-01", formatter));
-        project22.setStatus(ProjectStatus.ACCEPTED);
+        project22.setStatus(ProjectStatus.PENDING);
         project22.setComments("Proyecto con IA");
         projectRepository.save(project22);
 
@@ -317,7 +317,7 @@ public class DataLoader implements CommandLineRunner {
         project23.setDescription("Permitir a los usuarios reservar habitaciones en línea");
         project23.setMaxtimeMonths(6);
         project23.setDate(LocalDate.parse("2026-03-15", formatter));
-        project23.setStatus(ProjectStatus.RECEIVED);
+        project23.setStatus(ProjectStatus.PENDING);
         project23.setComments("Nueva propuesta");
         projectRepository.save(project23);
 
@@ -330,7 +330,7 @@ public class DataLoader implements CommandLineRunner {
         project24.setDescription("Facilitar la gestión de personal y pagos con IA");
         project24.setMaxtimeMonths(12);
         project24.setDate(LocalDate.parse("2026-04-10", formatter));
-        project24.setStatus(ProjectStatus.IN_PROGRESS);
+        project24.setStatus(ProjectStatus.PENDING);
         project24.setComments("Implementando IA");
         projectRepository.save(project24);
 
@@ -343,7 +343,7 @@ public class DataLoader implements CommandLineRunner {
         project25.setDescription("Ofrecer a los vendedores una manera fácil de vender sus productos con IA");
         project25.setMaxtimeMonths(24);
         project25.setDate(LocalDate.parse("2026-05-05", formatter));
-        project25.setStatus(ProjectStatus.ACCEPTED);
+        project25.setStatus(ProjectStatus.PENDING);
         project25.setComments("Proyecto grande con IA");
         projectRepository.save(project25);
 
@@ -356,7 +356,7 @@ public class DataLoader implements CommandLineRunner {
         project26.setDescription("Permitir a los usuarios organizar sus tareas de manera eficiente con IA");
         project26.setMaxtimeMonths(9);
         project26.setDate(LocalDate.parse("2026-06-01", formatter));
-        project26.setStatus(ProjectStatus.CLOSED);
+        project26.setStatus(ProjectStatus.PENDING);
         project26.setComments("Proyecto IA completado");
         projectRepository.save(project26);
 
@@ -369,7 +369,7 @@ public class DataLoader implements CommandLineRunner {
         project27.setDescription("Facilitar la gestión de libros y préstamos con IA");
         project27.setMaxtimeMonths(12);
         project27.setDate(LocalDate.parse("2026-07-15", formatter));
-        project27.setStatus(ProjectStatus.IN_PROGRESS);
+        project27.setStatus(ProjectStatus.PENDING);
         project27.setComments("Implementando IA en biblioteca");
         projectRepository.save(project27);
 
@@ -382,7 +382,7 @@ public class DataLoader implements CommandLineRunner {
         project28.setDescription("Permitir a los organizadores gestionar eventos de manera eficiente con IA");
         project28.setMaxtimeMonths(18);
         project28.setDate(LocalDate.parse("2026-08-10", formatter));
-        project28.setStatus(ProjectStatus.ACCEPTED);
+        project28.setStatus(ProjectStatus.PENDING);
         project28.setComments("Proyecto IA para eventos");
         projectRepository.save(project28);
 
@@ -395,7 +395,7 @@ public class DataLoader implements CommandLineRunner {
         project29.setDescription("Permitir a los usuarios monitorear su salud desde cualquier lugar con IA");
         project29.setMaxtimeMonths(12);
         project29.setDate(LocalDate.parse("2026-09-05", formatter));
-        project29.setStatus(ProjectStatus.CLOSED);
+        project29.setStatus(ProjectStatus.PENDING);
         project29.setComments("Salud con IA completado");
         projectRepository.save(project29);
 
@@ -408,7 +408,7 @@ public class DataLoader implements CommandLineRunner {
         project30.setDescription("Facilitar la gestión de rutas y horarios con IA");
         project30.setMaxtimeMonths(18);
         project30.setDate(LocalDate.parse("2026-10-01", formatter));
-        project30.setStatus(ProjectStatus.IN_PROGRESS);
+        project30.setStatus(ProjectStatus.PENDING);
         project30.setComments("Transporte inteligente en desarrollo");
         projectRepository.save(project30);
     }

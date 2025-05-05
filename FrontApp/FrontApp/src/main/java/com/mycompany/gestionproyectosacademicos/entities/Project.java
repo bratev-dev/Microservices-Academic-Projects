@@ -50,4 +50,34 @@ public class Project {
             return year + "-2"; // Segundo semestre
         }
     }
+    
+    /*public Project evaluateProject(String proId, String proStatusStr) {
+        Optional<Project> optionalProject = projectRepository.findById(proId);
+        if (optionalProject.isPresent()) {
+            Project project = optionalProject.get();
+            project.syncState(); // Sincroniza con el estado actual
+
+            EnumProjectState newState;
+            try {
+                newState = EnumProjectState.valueOf(proStatusStr.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new InvalidStateTransitionException("Estado inválido: " + proStatusStr);
+            }
+
+            // Ejecutar transición de estado usando el patrón State
+            switch (newState) {
+                case ACEPTADO -> project.getCurrentState().accept(project);
+                case RECHAZADO -> project.getCurrentState().reject(project);
+                case EJECUCION -> project.getCurrentState().execute(project);
+                case CERRADO -> project.getCurrentState().close(project);
+                case RECIBIDO -> project.getCurrentState().receive(project);
+            }
+
+            projectRepository.save(project);
+            rabbitTemplate.convertAndSend(RabbitMQConfig.UPDATEPROJECT_QUEUE, projectService.projectToDto(project));
+            return project;
+        } else {
+            throw new InvalidStateTransitionException("Proyecto no encontrado con ID: " + proId);
+        }
+    }*/
 }

@@ -4,6 +4,7 @@
  */
 package com.mycompany.gestionproyectosacademicos.presentation;
 
+import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
 import com.mycompany.gestionproyectosacademicos.entities.Student;
@@ -410,7 +411,7 @@ public class GUICompany extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseSessionCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSessionCompanyActionPerformed
-        AuthService authService = new AuthService(null); // Crear la instancia del servicio de autenticación
+        AuthService authService = new AuthService(new UserRepositoryMS()); // Crear la instancia del servicio de autenticación
         GUILogin login = new GUILogin(authService); // Pasar la instancia al constructor
         login.setVisible(true); // Mostrar la ventana
         this.dispose();

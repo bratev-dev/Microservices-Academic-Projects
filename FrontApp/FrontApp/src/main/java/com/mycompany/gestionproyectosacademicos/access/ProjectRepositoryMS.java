@@ -111,72 +111,72 @@ public class ProjectRepositoryMS implements IProjectRepository {
     public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    */
-    
+     */
     @Override
-public void saveProject(Project project) {
-    try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-        // Configurar la petición POST
-        HttpPost request = new HttpPost("http://localhost:8081/api/projects");
-        request.setHeader("Content-Type", "application/json");
-        
-        // Crear DTO compatible con el microservicio
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
-        
-        // Convertir el proyecto a JSON compatible
-        String jsonProject = createProjectJson(project);
-        request.setEntity(new StringEntity(jsonProject));
-        
-        // Ejecutar la petición
-        org.apache.http.HttpResponse response = httpClient.execute(request);
-        
-        // Procesar la respuesta
-        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_CREATED) {
-            String responseBody = EntityUtils.toString(response.getEntity());
-            Project savedProject = mapper.readValue(responseBody, Project.class);
-            
-            // Actualizar la lista local
-            if (projects == null) {
-                projects = new ArrayList<>();
-            }
-            projects.add(savedProject);
-            
-            Logger.getLogger(ProjectRepositoryMS.class.getName())
-                .log(Level.INFO, "Proyecto guardado exitosamente con ID: {0}", savedProject.getId());
-        } else {
-            String errorResponse = EntityUtils.toString(response.getEntity());
-            Logger.getLogger(ProjectRepositoryMS.class.getName())
-                .log(Level.SEVERE, "Error al guardar proyecto. Código: {0}, Respuesta: {1}", 
-                    new Object[]{response.getStatusLine().getStatusCode(), errorResponse});
-            throw new RuntimeException("Error al guardar proyecto: " + errorResponse);
-        }
-    } catch (IOException ex) {
-        Logger.getLogger(ProjectRepositoryMS.class.getName())
-            .log(Level.SEVERE, "Error de conexión al guardar proyecto", ex);
-        throw new RuntimeException("Error de conexión con el microservicio", ex);
-    }
-}
+    public void saveProject(Project project) {
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            // Configurar la petición POST
+            HttpPost request = new HttpPost("http://localhost:8081/api/projects");
+            request.setHeader("Content-Type", "application/json");
 
-private String createProjectJson(Project project) throws JsonProcessingException {
-    ObjectMapper mapper = new ObjectMapper();
-    Map<String, Object> projectMap = new HashMap<>();
-    
-    // Mapear campos compatibles
-    projectMap.put("name", project.getName());
-    projectMap.put("summary", project.getSummary());
-    projectMap.put("goals", project.getGoals());
-    projectMap.put("description", project.getDescription());
-    projectMap.put("maxtimeMonths", project.getMaxTimeInMonths());
-    projectMap.put("budget", project.getBudget());
-    projectMap.put("date", project.getDate()); // Ya está en formato "yyyy-MM-dd"
-    projectMap.put("status", project.getStatus());
-    projectMap.put("comments", project.getComments());
-    projectMap.put("companyId", project.getCompanyId());
-    projectMap.put("assignedTo", project.getAssignedTo());
-    
-    return mapper.writeValueAsString(projectMap);
-}
+            // Crear DTO compatible con el microservicio
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+
+            // Convertir el proyecto a JSON compatible
+            String jsonProject = createProjectJson(project);
+            request.setEntity(new StringEntity(jsonProject));
+
+            // Ejecutar la petición
+            org.apache.http.HttpResponse response = httpClient.execute(request);
+
+            // Procesar la respuesta
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_CREATED
+                    || response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                String responseBody = EntityUtils.toString(response.getEntity());
+                Project savedProject = mapper.readValue(responseBody, Project.class);
+
+                // Actualizar la lista local
+                if (projects == null) {
+                    projects = new ArrayList<>();
+                }
+                projects.add(savedProject);
+
+                Logger.getLogger(ProjectRepositoryMS.class.getName())
+                        .log(Level.INFO, "Proyecto guardado exitosamente con ID: {0}", savedProject.getId());
+            } else {
+                String errorResponse = EntityUtils.toString(response.getEntity());
+                Logger.getLogger(ProjectRepositoryMS.class.getName())
+                        .log(Level.SEVERE, "Error al guardar proyecto. Código: {0}, Respuesta: {1}",
+                                new Object[]{response.getStatusLine().getStatusCode(), errorResponse});
+                throw new RuntimeException("Error al guardar proyecto: " + errorResponse);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ProjectRepositoryMS.class.getName())
+                    .log(Level.SEVERE, "Error de conexión al guardar proyecto", ex);
+            throw new RuntimeException("Error de conexión con el microservicio", ex);
+        }
+    }
+
+    private String createProjectJson(Project project) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> projectMap = new HashMap<>();
+
+        // Mapear campos compatibles
+        projectMap.put("name", project.getName());
+        projectMap.put("summary", project.getSummary());
+        projectMap.put("goals", project.getGoals());
+        projectMap.put("description", project.getDescription());
+        projectMap.put("maxtimeMonths", project.getMaxtimeMonths());
+        projectMap.put("budget", project.getBudget());
+        projectMap.put("date", project.getDate()); // Ya está en formato "yyyy-MM-dd"
+        projectMap.put("status", project.getStatus());
+        projectMap.put("comments", project.getComments());
+        projectMap.put("companyId", project.getCompanyId());
+        projectMap.put("assignedTo", project.getAssignedTo());
+
+        return mapper.writeValueAsString(projectMap);
+    }
 
     @Override
     public List<Project> getProjectsByAcademicPeriod(String academicPeriod) {

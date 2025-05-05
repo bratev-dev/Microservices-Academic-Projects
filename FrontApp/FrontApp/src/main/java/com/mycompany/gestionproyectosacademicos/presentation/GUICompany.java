@@ -4,6 +4,7 @@
  */
 package com.mycompany.gestionproyectosacademicos.presentation;
 
+import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
 import com.mycompany.gestionproyectosacademicos.entities.Student;
@@ -408,7 +409,7 @@ public class GUICompany extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseSessionCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSessionCompanyActionPerformed
-        AuthService authService = new AuthService(null); // Crear la instancia del servicio de autenticación
+        AuthService authService = new AuthService(new UserRepositoryMS()); // Crear la instancia del servicio de autenticación
         GUILogin login = new GUILogin(authService); // Pasar la instancia al constructor
         login.setVisible(true); // Mostrar la ventana
         this.dispose();
@@ -437,7 +438,7 @@ public class GUICompany extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextSummaryActionPerformed
     public static LocalDate convertStringToLocalDate(String dateString) {
         // Definir el formato de la fecha
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         try {
             // Convertir String a LocalDate
@@ -458,23 +459,22 @@ public class GUICompany extends javax.swing.JFrame {
     }
 
     public void validateDate(String date) throws ParseException {
-        // Expresión regular para validar el formato dd-MM-yyyy
-        String regex = "^(0[1-9]|[12]\\d|3[01])-(0[1-9]|1[0-2])-(\\d{4})$";
+        // Expresión regular para validar el formato yyyy-MM-dd
+        String regex = "^(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$";
         Pattern pattern = Pattern.compile(regex);
 
         if (!pattern.matcher(date).matches()) {
-            throw new ParseException("Formato de fecha incorrecto. Usa dd-MM-yyyy", 0);
+            throw new ParseException("Formato de fecha incorrecto. Usa yyyy-MM-dd", 0);
         }
 
         // Verificar si la fecha es válida
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        sdf.setLenient(false); // No permite fechas inválidas como 30-02-2024
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false); // No permite fechas inválidas como 2024-02-30
 
         sdf.parse(date); // Si la fecha es inválida, lanzará ParseException
     }
 
-
-    private void btnPublish1ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnPublish1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPublish1ActionPerformed
         try {
             String name = jTextNameProject.getText().trim();
             String summary = jTextSummary.getText().trim();
@@ -499,10 +499,9 @@ public class GUICompany extends javax.swing.JFrame {
                 }
             }
 
-            // 6. Mostrar confirmación y limpiar formulario
-            JOptionPane.showMessageDialog(this,
-                    "Proyecto guardado exitosamente!\n" ,
-                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            if (hayError) {
+                throw new IllegalArgumentException("Todos los campos obligatorios deben estar llenos.");
+            }
 
             int maxTimeValue = Integer.parseInt(maxTime);
             double budgetValue = Double.parseDouble(budgetText);
@@ -519,7 +518,7 @@ public class GUICompany extends javax.swing.JFrame {
             project.setSummary(summary);
             project.setGoals(goals);
             project.setDescription(description);
-            project.setMaxTimeInMonths(maxTimeValue);
+            project.setMaxtimeMonths(maxTimeValue);
             project.setBudget(budgetValue);
             project.setDate(date);
             project.setStatus(status);
@@ -535,13 +534,11 @@ public class GUICompany extends javax.swing.JFrame {
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(this, "La fecha debe tener el formato yyyy-MM-dd.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException e) {
-            jTextDay.setBackground(new Color(255, 200, 200));
-            jTextMonth.setBackground(new Color(255, 200, 200));
-            jTextYear.setBackground(new Color(255, 200, 200));
-            throw e;
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }                                           
-
+    }
 
     private void limpiarFormulario() {
         jTextNameProject.setText("");
@@ -556,7 +553,7 @@ public class GUICompany extends javax.swing.JFrame {
 
         // Restaurar colores
         for (JTextField campo : new JTextField[]{jTextNameProject, jTextSummary, jTextObjetives,
-                jTextDescription, jTextMaxTime, jTextBudget, jTextDay, jTextMonth, jTextYear}) {
+            jTextDescription, jTextMaxTime, jTextBudget, jTextDay, jTextMonth, jTextYear}) {
             campo.setBackground(Color.WHITE);
         }
     }

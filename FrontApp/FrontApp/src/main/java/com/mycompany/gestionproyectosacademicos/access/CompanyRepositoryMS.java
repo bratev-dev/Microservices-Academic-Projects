@@ -4,6 +4,7 @@
  */
 package com.mycompany.gestionproyectosacademicos.access;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
@@ -26,9 +27,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CompanyRepositoryMS implements ICompanyRepository {
+
     private static final String apiUrl = "http://localhost:8081/api/companies/";
     private final ObjectMapper mapper = new ObjectMapper();
-    
+
     @Override
     public boolean save(Company company) {
         try {
@@ -111,27 +113,40 @@ public class CompanyRepositoryMS implements ICompanyRepository {
     public Company findByNIT(Long idCompany) {
         // Construir la URL completa para obtener la compañía
         String url = apiUrl + idCompany;
-
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(url);
+            request.setHeader("Accept", "application/json");
 
             // Ejecutar la solicitud GET
             HttpResponse response = httpClient.execute(request);
+            int statusCode = response.getStatusLine().getStatusCode();
 
             // Comprobar si la respuesta es exitosa (código 200)
-            if (response.getStatusLine().getStatusCode() == 200) {
+            if (statusCode == 200) {
                 String jsonResponse = EntityUtils.toString(response.getEntity());
                 ObjectMapper mapper = new ObjectMapper();
+
+                // Configurar ObjectMapper para manejar posibles problemas
+                mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
                 // Mapear la respuesta JSON a un objeto Company
                 return mapper.readValue(jsonResponse, Company.class);
-            } else {
+            } else if (statusCode == 404) {
+                // La compañía no fue encontrada
                 Logger.getLogger(CompanyRepositoryMS.class.getName())
-                        .log(Level.SEVERE, "Error al obtener la compañía. Código: {0}", response.getStatusLine().getStatusCode());
+                        .log(Level.INFO, "No se encontró la compañía con ID: {0}", idCompany);
+                return null;
+            } else {
+                // Otros errores
+                String errorResponse = EntityUtils.toString(response.getEntity());
+                Logger.getLogger(CompanyRepositoryMS.class.getName())
+                        .log(Level.SEVERE, "Error al obtener la compañía. Código: {0}, Respuesta: {1}",
+                                new Object[]{statusCode, errorResponse});
             }
         } catch (IOException ex) {
-            Logger.getLogger(CompanyRepositoryMS.class.getName()).log(Level.SEVERE, "Error en la conexión", ex);
+            Logger.getLogger(CompanyRepositoryMS.class.getName())
+                    .log(Level.SEVERE, "Error en la conexión al buscar compañía con ID: " + idCompany, ex);
         }
-
         return null; // Retorna null si ocurre un error
     }
 

@@ -1,5 +1,6 @@
 package com.mycompany.gestionproyectosacademicos.presentation;
 
+import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.access.Factory;
 import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
 import com.mycompany.gestionproyectosacademicos.access.IProjectRepository;
@@ -46,6 +47,7 @@ import javax.swing.table.DefaultTableModel;
 public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
     ProjectService projectService = new ProjectService(new ProjectRepositoryMS());
+    CompanyService companyService = new CompanyService(new CompanyRepositoryMS());
     private final AcademicPeriodGeneratorService periodGenerator;
 
     // Colores personalizados
@@ -1020,7 +1022,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         lblState.setText(project.getStatus());
 
         // Configurar los detalles de la empresa
-        /*Company company = project.getCompany();
+        Company company = companyService.getCompany(String.valueOf(project.getCompanyId()));
         if (company != null) {
             lblCompanyName.setText("<html>" + company.getName() + "</html>");
             lblCompanyNit.setText(company.getNit());
@@ -1032,7 +1034,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
             lblCompanyContactPosition.setText(company.getContactPosition());
         } else {
             System.out.println("No hay información de la empresa asociada al proyecto.");
-        }*/
+        }
         GUISeeDetails.pack();
         // Mostrar la ventana GUISeeDetails
         GUISeeDetails.setVisible(true);

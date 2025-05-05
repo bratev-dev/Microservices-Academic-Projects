@@ -13,4 +13,5 @@ public class ProjectDTO {
     private String description;
     private String status;
     private Long companyId;
+    private String date;
 }

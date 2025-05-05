@@ -3,6 +3,7 @@ package com.unicauca.CoordinatorService.service;
 import com.unicauca.CoordinatorService.entity.Project;
 import com.unicauca.CoordinatorService.entity.ProjectStatus;
 import com.unicauca.CoordinatorService.infra.dto.EvaluationRequest;
+import com.unicauca.CoordinatorService.infra.dto.ProjectDTO;
 import com.unicauca.CoordinatorService.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +15,19 @@ public class ProjectService {
 
     private final ProjectRepository projectRepository;
 
-    public ProjectService(ProjectRepository projectRepository) {
+    private final CompanyServiceClient companyServiceClient;
+
+    public ProjectService(ProjectRepository projectRepository, CompanyServiceClient companyServiceClient) {
         this.projectRepository = projectRepository;
+        this.companyServiceClient = companyServiceClient;
     }
 
-    public List<Project> getAllProjects() {
-        return projectRepository.findAll();
+    public List<ProjectDTO> getAllProjects() {
+        return companyServiceClient.getAllProjects();
     }
 
-    public Optional<Project> getProjectById(String id) {
-        return projectRepository.findById(Long.valueOf(id));
+    public ProjectDTO getProjectById(String id) {
+        return companyServiceClient.getProjectById(Long.valueOf(id));
     }
 
     public Project evaluateProject(Long id, EvaluationRequest req) {

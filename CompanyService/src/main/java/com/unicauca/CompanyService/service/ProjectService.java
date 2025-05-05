@@ -61,7 +61,6 @@ public class ProjectService {
     @Transactional
     public Project createProject(ProjectDTO projectDTO) {
         Project project = new Project();
-        // ... (copiar mapeo de DTO a Project como estaba antes)
         project.setName(projectDTO.getName());
         project.setSummary(projectDTO.getSummary());
         project.setGoals(projectDTO.getGoals());
@@ -69,13 +68,11 @@ public class ProjectService {
         project.setMaxtimeMonths(projectDTO.getMaxtimeMonths());
         project.setBudget(projectDTO.getBudget());
         project.setDate(projectDTO.getDate());
-        // Asegurarse de que el estado inicial sea válido y se establezca
-        try {
-            project.setStatus(ProjectStatus.valueOf(projectDTO.getStatus().toUpperCase()));
-        } catch (IllegalArgumentException e) {
-            System.err.println("Estado inválido recibido en DTO: " + projectDTO.getStatus() + ". Estableciendo a RECEIVED.");
-            project.setStatus(ProjectStatus.RECEIVED); // Estado por defecto seguro
-        }
+        // Elimina el bloque try-catch para el status del DTO
+
+        // Asigna SIEMPRE el estado RECEIVED al crear
+        project.setStatus(ProjectStatus.RECEIVED); // Estado inicial fijo
+
         project.setComments(projectDTO.getComments());
         project.setCompanyId(projectDTO.getCompanyId());
         project.setAssignedTo(projectDTO.getAssignedTo());
@@ -105,9 +102,37 @@ public class ProjectService {
         if (updatedProjectDTO.getName() != null) {
             existingProject.setName(updatedProjectDTO.getName());
         }
-        // ... (otros campos como en tu implementación actual)
+        if (updatedProjectDTO.getSummary() != null) {
+            existingProject.setSummary(updatedProjectDTO.getSummary());
+        }
+        if (updatedProjectDTO.getGoals() != null) {
+            existingProject.setGoals(updatedProjectDTO.getGoals());
+        }
+        if (updatedProjectDTO.getDescription() != null) {
+            existingProject.setDescription(updatedProjectDTO.getDescription());
+        }
+        if (updatedProjectDTO.getMaxtimeMonths() != null) {
+            existingProject.setMaxtimeMonths(updatedProjectDTO.getMaxtimeMonths());
+        }
+        // Asegúrate de verificar null para todos los campos que pueden actualizarse
+        if (updatedProjectDTO.getBudget() != 0) { // O la condición apropiada para budget
+            existingProject.setBudget(updatedProjectDTO.getBudget());
+        }
+        if (updatedProjectDTO.getDate() != null) {
+            existingProject.setDate(updatedProjectDTO.getDate());
+        }
+        if (updatedProjectDTO.getComments() != null) {
+            existingProject.setComments(updatedProjectDTO.getComments());
+        }
+        if (updatedProjectDTO.getCompanyId() != null) {
+            existingProject.setCompanyId(updatedProjectDTO.getCompanyId());
+        }
+        if (updatedProjectDTO.getAssignedTo() != null) {
+            existingProject.setAssignedTo(updatedProjectDTO.getAssignedTo());
+        }
 
-        // Manejo especial para el estado
+
+        // Manejo simplificado para el estado con PUT
         if (updatedProjectDTO.getStatus() != null) {
             try {
                 ProjectStatus requestedStatus = ProjectStatus.valueOf(updatedProjectDTO.getStatus().toUpperCase());
@@ -115,32 +140,21 @@ public class ProjectService {
                 if (requestedStatus != currentStatus) {
                     ProjectState currentState = getState(currentStatus);
 
-                    // Validar transición usando el patrón State
+                    // Validar si la transición directa a 'requestedStatus' es válida desde 'currentState'
                     if (currentState.isValidNextState(requestedStatus)) {
-                        // Ejecutar la transición según el estado actual
-                        switch (requestedStatus) {
-                            case ACCEPTED:
-                                currentState.approve(existingProject);
-                                break;
-                            case REJECTED:
-                                currentState.reject(existingProject);
-                                break;
-                            case IN_PROGRESS:
-                                currentState.assign(existingProject);
-                                break;
-                            case CLOSED:
-                                currentState.complete(existingProject);
-                                break;
-                            case RECEIVED:
-                                currentState.markAsReceived(existingProject);
-                                break;
-                        }
+                        // Si la transición es válida, simplemente cambia el estado
+                        existingProject.setStatus(requestedStatus);
+                        System.out.println("Estado del proyecto " + id + " cambiado directamente a " + requestedStatus + " vía PUT.");
                     } else {
-                        throw new IllegalStateException("Invalid state transition from " + currentStatus + " to " + requestedStatus);
+                        // Si no es válida, lanza una excepción
+                        throw new IllegalStateException("Transición de estado inválida desde " + currentStatus + " a " + requestedStatus + " mediante PUT.");
                     }
                 }
             } catch (IllegalArgumentException e) {
-                throw new RuntimeException("Invalid status value: " + updatedProjectDTO.getStatus());
+                throw new RuntimeException("Valor de estado inválido proporcionado: " + updatedProjectDTO.getStatus());
+            } catch (IllegalStateException e) {
+                // Re-lanzar la excepción de estado inválido para que sea manejada (o loggeada)
+                throw e;
             }
         }
 

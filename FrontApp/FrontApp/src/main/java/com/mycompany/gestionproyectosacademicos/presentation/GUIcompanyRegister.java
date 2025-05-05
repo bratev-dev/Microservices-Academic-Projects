@@ -4,9 +4,11 @@
  */
 
 package com.mycompany.gestionproyectosacademicos.presentation;
+import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.access.Factory;
 import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
 import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
+import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 
 import com.mycompany.gestionproyectosacademicos.entities.Sector;
@@ -505,16 +507,12 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
                 JContactPosition.getText().trim()
         );
 
-        // Obtener el repositorio de usuarios desde la fábrica
-        IUserRepository userRepo = Factory.getInstance().getRepository(IUserRepository.class, "POSTGRE");
+        UserRepositoryMS userRepo = new UserRepositoryMS();
 
         // Crear el servicio de usuarios inyectando el repositorio
         UserServices userService = new UserServices(userRepo);
 
-        // Crear el servicio de empresas inyectando el repositorio
-        
-        
-        ICompanyRepository compRepo = Factory.getInstance().getRepository(ICompanyRepository.class, "POSTGRE");
+        CompanyRepositoryMS compRepo = new CompanyRepositoryMS();
         CompanyService companyService = new CompanyService(compRepo, userRepo);
 
         // Guardar la empresa
@@ -546,7 +544,7 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "✅ Empresa y usuario registrados con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         // Crear el servicio de autenticación
-        AuthService authService = new AuthService(null); // Crear la instancia del servicio de autenticación
+        AuthService authService = new AuthService(userRepo); // Crear la instancia del servicio de autenticación
         GUILogin login = new GUILogin(authService, userService, companyService); // Pasar la instancia al constructor
         login.setVisible(true); // Mostrar la ventana
         this.dispose();

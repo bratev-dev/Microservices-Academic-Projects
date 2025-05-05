@@ -1,5 +1,6 @@
 package com.mycompany.gestionproyectosacademicos.main;
 
+import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.presentation.GUIStudentProjectList;
 import com.mycompany.gestionproyectosacademicos.access.Factory;
 
@@ -20,7 +21,7 @@ import javax.swing.JFrame;
 public class Main {
     public static void main(String[] args) {
         UserRepositoryMS userRepo = new UserRepositoryMS();
-        ICompanyRepository compRepo = Factory.getInstance().getRepository(ICompanyRepository.class, "POSTGRE");
+        CompanyRepositoryMS compRepo = new CompanyRepositoryMS();
         UserServices userService = new UserServices(userRepo);
         CompanyService companyService = new CompanyService(compRepo, userRepo);
         AuthService authService = new AuthService(userRepo); // Crear la instancia del servicio de autenticación

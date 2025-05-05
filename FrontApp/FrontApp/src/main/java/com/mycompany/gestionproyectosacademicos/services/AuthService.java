@@ -1,12 +1,14 @@
 
 package com.mycompany.gestionproyectosacademicos.services;
 
+import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.filter.IFilter;
 import com.mycompany.gestionproyectosacademicos.access.Factory;
 import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
 import com.mycompany.gestionproyectosacademicos.access.ICoordinatorRepository;
 import com.mycompany.gestionproyectosacademicos.entities.User;
 import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
+import com.mycompany.gestionproyectosacademicos.access.ProjectRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.infra.Messages;
 import com.mycompany.gestionproyectosacademicos.presentation.GUICompany;
 import com.mycompany.gestionproyectosacademicos.presentation.GUICoordinator;
@@ -43,18 +45,17 @@ public class AuthService {
                 student.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 return student;
             case "COMPANY":
-                ICompanyRepository companyRepo = Factory.getInstance().getRepository(ICompanyRepository.class, "POSTGRE");
+                CompanyRepositoryMS companyRepo = new CompanyRepositoryMS();
+                ProjectRepositoryMS projectRepo = new ProjectRepositoryMS();
 
                 if (companyRepo == null) {
                     Messages.showMessageDialog("❌ Error: No se encontró el repositorio de Company en Factory", "Error");
                     return null;
                 }
-                
                 CompanyService companyService = new CompanyService(companyRepo);
+                ProjectService projectService = new ProjectService(projectRepo);
+                GUICompany guiCompany = new GUICompany(companyService, projectService, String.valueOf(user.getId()));
                 
-                GUICompany guiCompany = new GUICompany(companyService, String.valueOf(user.getId()));
-                
-                //GUICompany guiCompany = new GUICompany(user, companyService);
                 guiCompany.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 return guiCompany;
                    

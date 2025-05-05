@@ -20,8 +20,7 @@ public class Project {
     private Integer maxTimeInMonths;
     private double budget;
     
-
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private String date;
     
     private String status;
@@ -41,9 +40,7 @@ public class Project {
 
     // Método para calcular el período académico
     public String getAcademicPeriod() {
-
-        LocalDate postulationDate = LocalDate.parse(this.date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
+        LocalDate postulationDate = LocalDate.parse(this.date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         int year = postulationDate.getYear();
         int month = postulationDate.getMonthValue();
 
@@ -53,5 +50,6 @@ public class Project {
             return year + "-2"; // Segundo semestre
         }
     }
-   
+    
+    
 }

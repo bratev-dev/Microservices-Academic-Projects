@@ -26,27 +26,27 @@ public class UserServicesTest {
     void testAutenticarUsuario_Success() {
         // Configuración del mock
         User user = new User(1, "test@example.com", "password", "ADMIN");
-        when(userRepository.validarUsuario("test@example.com", "password")).thenReturn(user); // Simula autenticación exitosa
+        when(userRepository.authenticate("test@example.com", "password")).thenReturn(user); // Simula autenticación exitosa
 
         // Ejecución del método
         boolean result = userServices.autenticarUsuario("test@example.com", "password");
 
         // Verificaciones
         assertTrue(result);
-        verify(userRepository, times(1)).validarUsuario("test@example.com", "password");
+        verify(userRepository, times(1)).authenticate("test@example.com", "password");
     }
 
     @Test
     void testAutenticarUsuario_Failure() {
         // Configuración del mock
-        when(userRepository.validarUsuario("test@example.com", "wrongpassword")).thenReturn(null); // Simula autenticación fallida
+        when(userRepository.authenticate("test@example.com", "wrongpassword")).thenReturn(null); // Simula autenticación fallida
 
         // Ejecución del método
         boolean result = userServices.autenticarUsuario("test@example.com", "wrongpassword");
 
         // Verificaciones
         assertFalse(result);
-        verify(userRepository, times(1)).validarUsuario("test@example.com", "wrongpassword");
+        verify(userRepository, times(1)).authenticate("test@example.com", "wrongpassword");
     }
 
     @Test

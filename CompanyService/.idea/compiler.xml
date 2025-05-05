@@ -19,9 +19,4 @@
       <module name="CompanyService" options="-parameters" />
     </option>
   </component>
-  <component name="TypeScriptCompiler">
-    <option name="recompileOnChanges" value="true" />
-    <option name="typeScriptCompilerParams" value="--sourceMap true" />
-    <option name="useConfig" value="true" />
-  </component>
 </project>

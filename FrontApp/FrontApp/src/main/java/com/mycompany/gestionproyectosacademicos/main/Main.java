@@ -6,6 +6,7 @@ import com.mycompany.gestionproyectosacademicos.access.Factory;
 import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
 import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
 import com.mycompany.gestionproyectosacademicos.access.UserArrayRepository;
+import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.presentation.GUICompany;
 import com.mycompany.gestionproyectosacademicos.presentation.GUICoordinator;
 import com.mycompany.gestionproyectosacademicos.presentation.GUILogin;
@@ -18,7 +19,7 @@ import javax.swing.JFrame;
 
 public class Main {
     public static void main(String[] args) {
-        IUserRepository userRepo = Factory.getInstance().getRepository(IUserRepository.class, "POSTGRE");
+        UserRepositoryMS userRepo = new UserRepositoryMS();
         ICompanyRepository compRepo = Factory.getInstance().getRepository(ICompanyRepository.class, "POSTGRE");
         UserServices userService = new UserServices(userRepo);
         CompanyService companyService = new CompanyService(compRepo, userRepo);

@@ -26,6 +26,18 @@ public class CompanyController {
         return ResponseEntity.created(URI.create("/api/companies/" + createdCompany.getId())).body(createdCompany);
     }
 
+    @Autowired
+    private CompanyService empresaService;
+
+    @GetMapping("/buscar")
+    public ResponseEntity<Boolean> existeEmpresaPorIdYEmail(
+            @RequestParam Long id,
+            @RequestParam String email) {
+
+        boolean existe = empresaService.existsCompany(id, email);
+        return ResponseEntity.ok(existe);
+    }
+
     // Obtener todas las empresas
     @GetMapping
     public List<Company> getAllCompanies() {

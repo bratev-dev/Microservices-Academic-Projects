@@ -2,6 +2,7 @@ package com.unicauca.CoordinatorService.controller;
 
 import com.unicauca.CoordinatorService.entity.Project;
 import com.unicauca.CoordinatorService.infra.dto.EvaluationRequest;
+import com.unicauca.CoordinatorService.infra.dto.ProjectDTO;
 import com.unicauca.CoordinatorService.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,13 @@ public class ProjectController {
     }
 
     @GetMapping
-    public List<Project> getAllProjects() {
+    public List<ProjectDTO> getAllProjects() {
         return projectService.getAllProjects();
     }
 
     @GetMapping("/inprogress")
     public List<Project> getInProgressProjects() {
-        return projectService.getInProgessProjects();
+        return projectService.getPendingProjects();
     }
 
     @GetMapping("/evaluated")

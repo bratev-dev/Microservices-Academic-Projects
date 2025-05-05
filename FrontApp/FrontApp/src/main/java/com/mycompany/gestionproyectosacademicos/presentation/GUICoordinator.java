@@ -1,10 +1,13 @@
 package com.mycompany.gestionproyectosacademicos.presentation;
 
+import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.access.Factory;
 import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
 import com.mycompany.gestionproyectosacademicos.access.IProjectRepository;
 import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
 import com.mycompany.gestionproyectosacademicos.access.ProjectRepositoryMS;
+
+import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 import com.mycompany.gestionproyectosacademicos.entities.Coordinator;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
@@ -45,6 +48,7 @@ import javax.swing.table.DefaultTableModel;
 public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
     ProjectService projectService = new ProjectService(new ProjectRepositoryMS());
+    CompanyService companyService = new CompanyService(new CompanyRepositoryMS());
     private final AcademicPeriodGeneratorService periodGenerator;
 
     // Colores personalizados
@@ -134,11 +138,11 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         btnComment = new javax.swing.JButton();
         GUIChangeState = new javax.swing.JFrame();
         lblChangeState = new javax.swing.JLabel();
-        rBtnReceived = new javax.swing.JRadioButton();
-        rBtnAccepted = new javax.swing.JRadioButton();
-        rBtnRejected = new javax.swing.JRadioButton();
-        rBtnInProgress = new javax.swing.JRadioButton();
-        rBtnClosed = new javax.swing.JRadioButton();
+        rBtnApprove = new javax.swing.JRadioButton();
+        rBtnAssign = new javax.swing.JRadioButton();
+        rBtnComplete = new javax.swing.JRadioButton();
+        rBtnPending = new javax.swing.JRadioButton();
+        rBtnReject = new javax.swing.JRadioButton();
         btnSaveState = new javax.swing.JToggleButton();
         bgStateOptions = new javax.swing.ButtonGroup();
         jpLeft = new javax.swing.JPanel();
@@ -568,25 +572,25 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         lblChangeState.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblChangeState.setText("Cambiar estado");
 
-        bgStateOptions.add(rBtnReceived);
-        rBtnReceived.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rBtnReceived.setText("Recibido");
+        bgStateOptions.add(rBtnApprove);
+        rBtnApprove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rBtnApprove.setText("Aprobado");
 
-        bgStateOptions.add(rBtnAccepted);
-        rBtnAccepted.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rBtnAccepted.setText("Aceptado");
+        bgStateOptions.add(rBtnAssign);
+        rBtnAssign.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rBtnAssign.setText("Asignado");
 
-        bgStateOptions.add(rBtnRejected);
-        rBtnRejected.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rBtnRejected.setText("Rechazado");
+        bgStateOptions.add(rBtnComplete);
+        rBtnComplete.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rBtnComplete.setText("Completado");
 
-        bgStateOptions.add(rBtnInProgress);
-        rBtnInProgress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rBtnInProgress.setText("En ejecución");
+        bgStateOptions.add(rBtnPending);
+        rBtnPending.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rBtnPending.setText("Pendiente");
 
-        bgStateOptions.add(rBtnClosed);
-        rBtnClosed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rBtnClosed.setText("Cerrado");
+        bgStateOptions.add(rBtnReject);
+        rBtnReject.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rBtnReject.setText("Rechazado");
 
         btnSaveState.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnSaveState.setText("Guardar");
@@ -608,12 +612,12 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
                     .addGroup(GUIChangeStateLayout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addGroup(GUIChangeStateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rBtnInProgress)
+                            .addComponent(rBtnPending)
                             .addGroup(GUIChangeStateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(rBtnRejected, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(rBtnAccepted, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(rBtnReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(rBtnClosed, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rBtnComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rBtnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rBtnApprove, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(rBtnReject, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSaveState, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
@@ -623,15 +627,15 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
                 .addGap(26, 26, 26)
                 .addComponent(lblChangeState)
                 .addGap(32, 32, 32)
-                .addComponent(rBtnReceived)
+                .addComponent(rBtnApprove)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rBtnAccepted)
+                .addComponent(rBtnAssign)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rBtnRejected)
+                .addComponent(rBtnComplete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rBtnInProgress)
+                .addComponent(rBtnPending)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rBtnClosed)
+                .addComponent(rBtnReject)
                 .addGap(38, 38, 38)
                 .addComponent(btnSaveState)
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -853,7 +857,10 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSessionActionPerformed
-
+        AuthService authService = new AuthService(new UserRepositoryMS()); // Crear la instancia del servicio de autenticación
+        GUILogin login = new GUILogin(authService); // Pasar la instancia al constructor
+        login.setVisible(true); // Mostrar la ventana
+        this.dispose();
     }//GEN-LAST:event_btnCloseSessionActionPerformed
 
     private void btnRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestsActionPerformed
@@ -907,23 +914,23 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         // Configurar el estado actual del proyecto en los radio buttons
         switch (selectedProject.getStatus()) {
-            case "RECEIVED":
-                rBtnReceived.setSelected(true);
+            case "APPROVED":
+                rBtnApprove.setSelected(true);
                 break;
-            case "ACCEPTED":
-                rBtnAccepted.setSelected(true);
+            case "ASSIGNED":
+                rBtnAssign.setSelected(true);
+                break;
+            case "COMPLETED":
+                rBtnComplete.setSelected(true);
+                break;
+            case "PENDING":
+                rBtnPending.setSelected(true);
                 break;
             case "REJECTED":
-                rBtnRejected.setSelected(true);
-                break;
-            case "IN_PROGRESS":
-                rBtnInProgress.setSelected(true);
-                break;
-            case "CLOSED":
-                rBtnClosed.setSelected(true);
+                rBtnReject.setSelected(true);
                 break;
             default:
-                rBtnReceived.setSelected(true);
+                rBtnApprove.setSelected(true);
         }
     }//GEN-LAST:event_btnChangeStateActionPerformed
 
@@ -937,16 +944,16 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         Project selectedProject = projectService.getProjects().get(selectedRow);
         String newStatus = "";
 
-        if (rBtnReceived.isSelected()) {
-            newStatus = "RECEIVED";
-        } else if (rBtnAccepted.isSelected()) {
-            newStatus = "ACCEPTED";
-        } else if (rBtnRejected.isSelected()) {
+        if (rBtnApprove.isSelected()) {
+            newStatus = "APPROVED";
+        } else if (rBtnAssign.isSelected()) {
+            newStatus = "ASSIGNED";
+        } else if (rBtnComplete.isSelected()) {
+            newStatus = "COMPLETED";
+        } else if (rBtnPending.isSelected()) {
+            newStatus = "PENDING";
+        } else if (rBtnReject.isSelected()) {
             newStatus = "REJECTED";
-        } else if (rBtnInProgress.isSelected()) {
-            newStatus = "IN_PROGRESS";
-        } else if (rBtnClosed.isSelected()) {
-            newStatus = "CLOSED";
         }
 
         boolean success = projectService.evaluateProject(selectedProject.getId(), newStatus);
@@ -1016,10 +1023,10 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         lblState.setText(project.getStatus());
 
         // Configurar los detalles de la empresa
-        /*Company company = project.getCompany();
+        Company company = companyService.getCompany(String.valueOf(project.getCompanyId()));
         if (company != null) {
             lblCompanyName.setText("<html>" + company.getName() + "</html>");
-            lblCompanyNit.setText(company.getNit());
+            lblCompanyNit.setText(company.getNit() != null ? String.valueOf(company.getNit()) : "");
             lblCompanyEmail.setText(company.getEmail());
             lblCompanySector.setText(company.getSector());
             lblCompanyContactPhone.setText(company.getContactPhoneNumber());
@@ -1028,7 +1035,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
             lblCompanyContactPosition.setText(company.getContactPosition());
         } else {
             System.out.println("No hay información de la empresa asociada al proyecto.");
-        }*/
+        }
         GUISeeDetails.pack();
         // Mostrar la ventana GUISeeDetails
         GUISeeDetails.setVisible(true);
@@ -1155,11 +1162,11 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     private javax.swing.JPanel pnlReports;
     private javax.swing.JPanel pnlRequests;
     private javax.swing.JPanel pnlRight;
-    private javax.swing.JRadioButton rBtnAccepted;
-    private javax.swing.JRadioButton rBtnClosed;
-    private javax.swing.JRadioButton rBtnInProgress;
-    private javax.swing.JRadioButton rBtnReceived;
-    private javax.swing.JRadioButton rBtnRejected;
+    private javax.swing.JRadioButton rBtnApprove;
+    private javax.swing.JRadioButton rBtnAssign;
+    private javax.swing.JRadioButton rBtnComplete;
+    private javax.swing.JRadioButton rBtnPending;
+    private javax.swing.JRadioButton rBtnReject;
     private javax.swing.JSeparator sepUserCoord;
     private javax.swing.JTable tblRequests;
     private javax.swing.JTextArea txtAreaComments;

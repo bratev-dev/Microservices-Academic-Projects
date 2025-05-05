@@ -1,12 +1,7 @@
 package com.mycompany.gestionproyectosacademicos.presentation;
 
-import com.mycompany.gestionproyectosacademicos.access.Factory;
-import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
-import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
-import com.mycompany.gestionproyectosacademicos.entities.Project;
-import com.mycompany.gestionproyectosacademicos.services.AuthService;
-import com.mycompany.gestionproyectosacademicos.services.CompanyService;
-import com.mycompany.gestionproyectosacademicos.services.UserServices;
+import com.mycompany.gestionproyectosacademicos.client.StudentAPIClient;
+import com.mycompany.gestionproyectosacademicos.dto.ProjectDTO;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -16,7 +11,7 @@ import javax.swing.*;
  */
 public class GUIProjectDetails extends javax.swing.JFrame {
 
-    private Project project;
+    private ProjectDTO project;
     
     public GUIProjectDetails() {
         this(null); // Constructor por defecto
@@ -26,14 +21,12 @@ public class GUIProjectDetails extends javax.swing.JFrame {
      * Constructor que inicializa la ventana con un proyecto específico.
      * @param project El proyecto a mostrar
      */
-    public GUIProjectDetails(Project project) {
-        this.project = project;
+    public GUIProjectDetails(ProjectDTO project) {
         initComponents();
-        setLocationRelativeTo(null);
-        if (project != null) {
-            loadProjectData();
-        }
+        this.project = project;
+        loadProjectData();
     }
+
     
     
     //Personalizacion de los botones del sidebar.
@@ -79,15 +72,14 @@ public class GUIProjectDetails extends javax.swing.JFrame {
             JLabel companyLabel = new JLabel("Nombre Empresa");
             companyLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
-            /*JTextArea companyDetails = new JTextArea(project.getCompany().getName());
+            JTextArea companyDetails = new JTextArea(project.getCompanyName());
             companyDetails.setEditable(false);
             companyDetails.setLineWrap(true);
             companyDetails.setWrapStyleWord(true);
             companyDetails.setBackground(new Color(236, 236, 236));
             companyDetails.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
             companyDetails.setPreferredSize(new Dimension(100, 20));
-            */
-            
+
             JLabel companyDetailsLabel = new JLabel("Detalles Empresa");
             companyDetailsLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
@@ -103,13 +95,11 @@ public class GUIProjectDetails extends javax.swing.JFrame {
             JScrollPane companyScroll = new JScrollPane(companyDescription);
             companyScroll.setBorder(BorderFactory.createEmptyBorder());
 
-            /*
             companyPanel.add(companyLabel, BorderLayout.NORTH);
             companyPanel.add(companyDetails, BorderLayout.CENTER);
             companyPanel.add(companyDetailsLabel, BorderLayout.SOUTH);
             companyPanel.add(companyScroll, BorderLayout.AFTER_LAST_LINE); 
-            */
-            
+
             // Panel de detalles del proyecto
             JPanel projectPanel = new JPanel(new BorderLayout(10, 10));
             projectPanel.setBackground(Color.WHITE);
@@ -181,11 +171,19 @@ public class GUIProjectDetails extends javax.swing.JFrame {
     
     //Método que se invoca cuando se presiona el botón Postularse.
     private void btnPostulateActionPerformed(ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, 
-            "Postulación enviada con éxito", 
-            "Postulación", 
-            JOptionPane.INFORMATION_MESSAGE);
+        int studentId = 1; // Luego lo obtendrás del login
+        int projectId = project.getId(); // Asegúrate de tener el ID en ProjectDTO
+
+        boolean success = StudentAPIClient.applyToProject(studentId, projectId);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Postulación enviada con éxito");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al enviar la postulación", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
+
+
     
     //Método que se invoca cuando se presiona el botón Atrás.
     private void btnBackActionPerformed(ActionEvent evt) {
@@ -347,14 +345,10 @@ public class GUIProjectDetails extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseSessionStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSessionStudentActionPerformed
-        IUserRepository userRepo = Factory.getInstance().getRepository(IUserRepository.class, "POSTGRE");
-        ICompanyRepository compRepo = Factory.getInstance().getRepository(ICompanyRepository.class, "POSTGRE");
-        UserServices userService = new UserServices(userRepo);
-        CompanyService companyService = new CompanyService(compRepo, userRepo);
-        AuthService authService = new AuthService(null); // Crear la instancia del servicio de autenticación
-        GUILogin login = new GUILogin(authService, userService, companyService); // Pasar la instancia al constructor
-        login.setVisible(true); // Mostrar la ventana
-        this.dispose();
+        // Abre la ventana de login y cierra la actual
+        //GUILogin login = new GUILogin();
+        //login.setVisible(true);
+        this.dispose(); // Cierra la ventana actual (panel estudiante)
     }//GEN-LAST:event_btnCloseSessionStudentActionPerformed
  
     /**
@@ -377,6 +371,7 @@ public class GUIProjectDetails extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUIProjectDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

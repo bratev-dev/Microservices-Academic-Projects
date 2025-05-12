@@ -17,7 +17,7 @@ public class Project {
     private String summary;
     private String goals;
     private String description;
-    private Integer maxTimeInMonths;
+    private Integer maxtimeMonths;
     private double budget;
     
     @JsonFormat(pattern = "yyyy-MM-dd")

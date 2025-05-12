@@ -1017,12 +1017,13 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         lblSummary.setText("<html>" + project.getSummary() + "</html>");
         lblGoals.setText("<html>" + project.getGoals() + "</html>");
         lblDescription.setText("<html>" + project.getDescription() + "</html>");
-        lblMaxTimeInMonths.setText(String.valueOf(project.getMaxTimeInMonths()));
+        lblMaxTimeInMonths.setText(String.valueOf(project.getMaxtimeMonths()));
         lblBudget.setText(String.valueOf(project.getBudget()));
         lblDate.setText(project.getDate().toString());
         lblState.setText(project.getStatus());
 
         // Configurar los detalles de la empresa
+        
         Company company = companyService.getCompany(project.getCompanyId());
         if (company != null) {
             lblCompanyName.setText("<html>" + company.getName() + "</html>");

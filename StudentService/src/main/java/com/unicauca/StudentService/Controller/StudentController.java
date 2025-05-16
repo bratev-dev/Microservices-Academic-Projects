@@ -8,8 +8,11 @@ import com.unicauca.StudentService.command.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import com.unicauca.StudentService.Repository.StudentRepository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -25,6 +28,9 @@ public class StudentController {
     
     private final StudentService studentService;
     private final RestTemplate restTemplate;
+    @Autowired
+    private StudentRepository studentRepository;
+
     
     @Autowired
     public StudentController(StudentService studentService, RestTemplate restTemplate){
@@ -146,5 +152,16 @@ public class StudentController {
         invoker.executeCommand();
         return ResponseEntity.ok("Postulación ejecutada exitosamente.");
     }
+    
+    @PostMapping("/login")
+    public ResponseEntity<Student> login(@RequestBody Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+
+        Optional<Student> student = studentRepository.findByEmailAndPassword(email, password);
+        return student.map(ResponseEntity::ok)
+                      .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    }
+
     
 }

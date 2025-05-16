@@ -15,8 +15,8 @@ public class DataLoader {
 
     @PostConstruct
     public void loadData() {
-            studentService.saveStudent(new Student("Jhonatan", "9", "Java, Spring Boot, Git"));
-            studentService.saveStudent(new Student("Natalia", "10", "Node.js, Express, MongoDB"));
-            studentService.saveStudent(new Student("Juan", "8", "Python, Django, PostgreSQL"));
+        Student s1 = new Student("Jhonatan", "9", "Java, Spring Boot, Git", "jhonatan@email.com", "1234");
+        Student s2 = new Student("Natalia", "10", "Node.js, Express, MongoDB", "natalia@email.com", "1234");
+        Student s3 = new Student("Juan", "8", "Python, Django, PostgreSQL", "juan@email.com", "1234");
     }
 }

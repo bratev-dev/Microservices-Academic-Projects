@@ -21,4 +21,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer>{
     public Optional<Student> findById(int id);
 
     public void deleteById(int id);
+    Optional<Student> findByEmailAndPassword(String email, String password);
+
 }

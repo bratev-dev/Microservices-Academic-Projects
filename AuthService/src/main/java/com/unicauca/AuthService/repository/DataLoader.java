@@ -31,5 +31,26 @@ public class DataLoader implements CommandLineRunner {
         } else {
             System.out.println("El usuario Coordinador ya existe");
         }
+        
+        // Usuarios estudiantes (agregar si no existen)
+        crearUsuarioSiNoExiste("jhonatan@email.com", "1234", Role.STUDENT);
+        crearUsuarioSiNoExiste("natalia@email.com", "1234", Role.STUDENT);
+        crearUsuarioSiNoExiste("juan@email.com", "1234", Role.STUDENT);
+    }
+    
+    //Esto es para probar, en la tercera iteracion de ser necesario se elimina
+    private void crearUsuarioSiNoExiste(String email, String password, Role role) {
+        if (!userRepository.existsByEmail(email)) {
+            String encodedPassword = passwordEncoder.encode(password);
+            User user = User.builder()
+                    .email(email)
+                    .password(encodedPassword)
+                    .role(role)
+                    .build();
+            userRepository.save(user);
+            System.out.println("Usuario estudiante " + email + " creado");
+        } else {
+            System.out.println("El usuario estudiante " + email + " ya existe");
+        }
     }
 }

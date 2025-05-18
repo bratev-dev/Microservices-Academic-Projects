@@ -15,6 +15,7 @@ com\unicauca\CompanyService\entity\Company.class
 com\unicauca\CompanyService\state\ReceivedState.class
 com\unicauca\CompanyService\dto\ProjectDTO.class
 com\unicauca\CompanyService\service\ProjectService$1.class
+com\unicauca\CompanyService\repository\DataLoader.class
 com\unicauca\CompanyService\state\RejectedState.class
 com\unicauca\CompanyService\state\AcceptedState.class
 com\unicauca\CompanyService\event\ProjectPublishedEvent.class

@@ -33,7 +33,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.gestionproyectosacademicos.client.CompanyAPIClient;
-import com.mycompany.gestionproyectosacademicos.client.ProjectAPIClient;
+import com.mycompany.gestionproyectosacademicos.client.CoordinatorAPIClient;
 import com.mycompany.gestionproyectosacademicos.dto.ProjectDTO;
 import java.io.*; //BORRAR LUEGO DE PRUEBA
 import java.net.*; //BORRAR LUEGO DE PRUEBA
@@ -59,11 +59,12 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
     private GUIProjectDetails currentDetailsFrame = null;
     
     private static final String API_URLProjects = "http://localhost:8082/api/projects";
-    private static final String API_URLStudents = "http://localhost:8083/api/students";
+    private static final String API_URLStudents = "http://localhost:8084/api/students";
     
     
     //Metodo para las peticiones HTTP a la API y obtener los proyectos
     public void loadProjectsFromAPI() {
+        System.out.println("Cargando proyectos desde API...");
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URLProjects)) // URL de la API
@@ -175,45 +176,49 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value,
-                                                     boolean isSelected, int row, int column) {
-            label = "›";
-            button.setText(label);
-            projectId = Integer.parseInt(table.getValueAt(row, 0).toString());
-            isPushed = true;
+                                                    boolean isSelected, int row, int column) {
+           label = "›";
+           button.setText(label);
+           projectId = Integer.parseInt(table.getValueAt(row, 0).toString());
+           System.out.println("Proyecto seleccionado ID: " + projectId);
+           isPushed = true;
 
-            // Obtener la ventana padre que contiene la tabla
-            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(table);
+           JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(table);
 
-            // Crear y mostrar la ventana de detalles
-            SwingUtilities.invokeLater(() -> {
-                try {
-                    ProjectDTO project = ProjectAPIClient.getProjectById(projectId);
-                    if (project == null) {
-                        JOptionPane.showMessageDialog(parentFrame, 
-                            "No se encontró el proyecto con ID: " + projectId,
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
+           // Ejecutar llamada API en hilo aparte para no bloquear UI
+           new Thread(() -> {
+               try {
+                   ProjectDTO project = CoordinatorAPIClient.getProjectById(projectId);
+                   if (project == null) {
+                       SwingUtilities.invokeLater(() -> {
+                           JOptionPane.showMessageDialog(parentFrame, 
+                               "No se encontró el proyecto con ID: " + projectId,
+                               "Error", JOptionPane.ERROR_MESSAGE);
+                       });
+                       return;
+                   }
 
-                    // Mostrar detalles directamente con el DTO obtenido
-                    GUIProjectDetails detailsWindow = new GUIProjectDetails(project);
-                    detailsWindow.setVisible(true);
+                   SwingUtilities.invokeLater(() -> {
+                       GUIProjectDetails detailsWindow = new GUIProjectDetails(project);
+                       detailsWindow.setVisible(true);
+                       if (parentFrame != null) {
+                           parentFrame.setVisible(false);
+                       }
+                   });
 
-                    // Ocultar la ventana padre, si es necesario
-                    if (parentFrame != null) {
-                        parentFrame.setVisible(false);
-                    }
+               } catch (Exception ex) {
+                   ex.printStackTrace();
+                   SwingUtilities.invokeLater(() -> {
+                       JOptionPane.showMessageDialog(parentFrame, 
+                           "Error al cargar los detalles del proyecto: " + ex.getMessage(),
+                           "Error", JOptionPane.ERROR_MESSAGE);
+                   });
+               }
+           }).start();
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(parentFrame, 
-                        "Error al cargar los detalles del proyecto: " + ex.getMessage(),
-                        "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            });
+           return button;
+       }
 
-            return button;
-        }
 
 
         @Override
@@ -225,7 +230,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
 
         private void showProjectDetails(int projectId) {
             try {
-                ProjectDTO project = ProjectAPIClient.getProjectById(projectId);
+                ProjectDTO project = CoordinatorAPIClient.getProjectById(projectId);
 
                 if (project == null) {
                     JOptionPane.showMessageDialog(null, 
@@ -498,7 +503,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         // Configurar renderizador para la columna de botones
         TableColumn buttonColumn = projectTable.getColumnModel().getColumn(4);
         buttonColumn.setCellRenderer(new DetailsButton());
-        //buttonColumn.setCellEditor(new ButtonEditorDetails(new JCheckBox()));
+        buttonColumn.setCellEditor(new ButtonEditorDetails(new JCheckBox()));
         buttonColumn.setMaxWidth(70);
         
         // Configurar anchos de columnas
@@ -585,7 +590,8 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         tableModel.setRowCount(0);
 
         if (allProjects == null || allProjects.isEmpty()) {
-            return; // Si no hay proyectos, no hacemos nada
+            System.out.println("No hay proyectos para mostrar.");
+            return;
         }
 
         int start = (currentPage - 1) * PROJECTS_PER_PAGE;
@@ -594,11 +600,11 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         for (int i = start; i < end; i++) {
             Project p = allProjects.get(i);
             Object[] rowData = {
-                (i + 1),                           // Número
-                //p.getCompanyName(),               // Nombre Empresa
-                p.getName(),                      // Nombre Proyecto
-                p.getSummary(),                   // Resumen Proyecto
-                "Ver detalles"                    // Botón o texto
+                p.getId(),            // Columna oculta: ID real del proyecto
+                (i + 1),              // Número visible (columna 1)
+                p.getName(),          // Nombre Proyecto (columna 2)
+                p.getSummary(),       // Resumen Proyecto (columna 3)
+                "Ver detalles"        // Botón o texto (columna 4)
             };
             tableModel.addRow(rowData);
         }
@@ -673,6 +679,4 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
     private javax.swing.JSeparator sepUserCoord;
     // End of variables declaration//GEN-END:variables
 
-    
-    
 }

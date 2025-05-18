@@ -35,7 +35,8 @@ public class ProjectService {
         project.setStatus(req.getStatus());
         System.out.println("decisión tomada: " + req.getStatus());
         project.setComments(req.getComments());
-        project.setAssignedTo(req.assignedTo);
+        //project.setAssignedTo(req.assignedTo);
+        project.setAssignedTo(req.getAssignedTo());
         return projectRepository.save(project);
     }
 

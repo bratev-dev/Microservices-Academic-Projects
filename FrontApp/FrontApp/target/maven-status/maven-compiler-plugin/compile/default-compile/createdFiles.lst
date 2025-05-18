@@ -61,7 +61,6 @@ com\mycompany\gestionproyectosacademicos\presentation\GUILogin$4.class
 com\mycompany\gestionproyectosacademicos\presentation\GUIStudentProjectList$NonEditableTableModel.class
 com\mycompany\gestionproyectosacademicos\services\AcademicPeriodGeneratorService.class
 com\mycompany\gestionproyectosacademicos\presentation\GUIcompanyRegister$4.class
-com\mycompany\gestionproyectosacademicos\client\ProjectAPIClient.class
 com\mycompany\gestionproyectosacademicos\entities\RegisterRequest.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICoordinator$2.class
 com\mycompany\gestionproyectosacademicos\client\CompanyAPIClient.class
@@ -91,6 +90,7 @@ com\mycompany\gestionproyectosacademicos\presentation\GUICoordinator$1.class
 com\mycompany\gestionproyectosacademicos\observer\Subject.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICompany$7.class
 com\mycompany\gestionproyectosacademicos\services\CoordinatorService.class
+com\mycompany\gestionproyectosacademicos\client\CoordinatorAPIClient.class
 com\mycompany\gestionproyectosacademicos\state\Rejected.class
 com\mycompany\gestionproyectosacademicos\filter\IFilter.class
 com\mycompany\gestionproyectosacademicos\entities\Company.class

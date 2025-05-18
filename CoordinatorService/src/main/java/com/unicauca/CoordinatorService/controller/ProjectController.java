@@ -14,7 +14,6 @@ import java.util.List;
 @RequestMapping("/api/projects")
 @CrossOrigin
 public class ProjectController {
-    @Autowired
     private final ProjectService projectService;
 
     public ProjectController(ProjectService projectService) {
@@ -25,7 +24,7 @@ public class ProjectController {
     public List<ProjectDTO> getAllProjects() {
         return projectService.getAllProjects();
     }
-
+    
     @GetMapping("/inprogress")
     public List<Project> getInProgressProjects() {
         return projectService.getPendingProjects();
@@ -40,5 +39,15 @@ public class ProjectController {
     public ResponseEntity<Project> evaluateProject(@PathVariable Long id, @RequestBody EvaluationRequest request) {
         Project updated = projectService.evaluateProject(id, request);
         return ResponseEntity.ok(updated);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProjectDTO> getProjectById(@PathVariable Long id) {
+        ProjectDTO projectDTO = projectService.getProjectById(String.valueOf(id));
+        if (projectDTO != null) {
+            return ResponseEntity.ok(projectDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

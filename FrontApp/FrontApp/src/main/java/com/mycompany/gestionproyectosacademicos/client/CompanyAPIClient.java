@@ -1,9 +1,16 @@
 package com.mycompany.gestionproyectosacademicos.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mycompany.gestionproyectosacademicos.dto.ProjectDTO;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class CompanyAPIClient {
 
@@ -38,5 +45,25 @@ public class CompanyAPIClient {
             System.err.println("Error al obtener la empresa: " + e.getMessage());
             return "Error al conectar con el servicio de empresas";
         }
+    }
+    
+    public static ProjectDTO getProjectById(int id) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(BASE_URL + "/" + id))
+            .header("Accept", "application/json")
+            .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println("Status code: " + response.statusCode());
+        System.out.println("Response body: " + response.body());
+
+        if (response.statusCode() == 200) {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(response.body(), ProjectDTO.class);
+        }
+
+        return null;
     }
 }

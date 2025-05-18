@@ -18,6 +18,11 @@ public class ProjectController {
     @Autowired
     private ProjectService service;
 
+    @Autowired
+    public ProjectController(ProjectService projectService) {
+        this.service = projectService;
+    }
+    
     // Crear proyecto
     @PostMapping
     public Project createProject(@RequestBody ProjectDTO projectDTO) {

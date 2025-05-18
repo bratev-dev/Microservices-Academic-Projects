@@ -4,8 +4,10 @@ package com.mycompany.gestionproyectosacademicos.dto;
  *
  * @author jpala
  */
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDate;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectDTO {
     private String name;
     private int id;
@@ -13,6 +15,10 @@ public class ProjectDTO {
     private String summary;
     private String companyName;
     private String status;
+    
+    // Constructor vacío necesario para Jackson
+    public ProjectDTO() {
+    }
     
     public ProjectDTO(String name, int id, String description, String summary, String companyName, String status) {
         this.name = name;

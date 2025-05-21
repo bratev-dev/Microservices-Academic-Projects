@@ -1,7 +1,8 @@
 package com.unicauca.CoordinatorService.repository;
 
-import com.unicauca.CoordinatorService.entity.Project;
-import com.unicauca.CoordinatorService.entity.ProjectStatus;
+import com.unicauca.CoordinatorService.application.port.out.ProjectRepository;
+import com.unicauca.CoordinatorService.domain.model.Project;
+import com.unicauca.CoordinatorService.domain.model.ProjectStatus;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

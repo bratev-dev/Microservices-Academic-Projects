@@ -1,14 +1,13 @@
 package com.unicauca.CoordinatorService.service;
 
-import com.unicauca.CoordinatorService.entity.Project;
-import com.unicauca.CoordinatorService.entity.ProjectStatus;
-import com.unicauca.CoordinatorService.infra.dto.EvaluationRequest;
-import com.unicauca.CoordinatorService.infra.dto.ProjectDTO;
-import com.unicauca.CoordinatorService.repository.ProjectRepository;
+import com.unicauca.CoordinatorService.domain.model.Project;
+import com.unicauca.CoordinatorService.domain.model.ProjectStatus;
+import com.unicauca.CoordinatorService.presentation.dto.EvaluationRequest;
+import com.unicauca.CoordinatorService.presentation.dto.ProjectDTO;
+import com.unicauca.CoordinatorService.application.port.out.ProjectRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProjectService {

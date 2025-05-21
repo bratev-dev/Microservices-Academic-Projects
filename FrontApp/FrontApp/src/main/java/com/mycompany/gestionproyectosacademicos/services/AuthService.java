@@ -1,0 +1,70 @@
+
+package com.mycompany.gestionproyectosacademicos.services;
+
+import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
+import com.mycompany.gestionproyectosacademicos.filter.IFilter;
+import com.mycompany.gestionproyectosacademicos.access.Factory;
+import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
+import com.mycompany.gestionproyectosacademicos.access.ICoordinatorRepository;
+import com.mycompany.gestionproyectosacademicos.entities.User;
+import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
+import com.mycompany.gestionproyectosacademicos.access.ProjectRepositoryMS;
+import com.mycompany.gestionproyectosacademicos.infra.Messages;
+import com.mycompany.gestionproyectosacademicos.presentation.GUICompany;
+import com.mycompany.gestionproyectosacademicos.presentation.GUICoordinator;
+import com.mycompany.gestionproyectosacademicos.presentation.GUIStudentProjectList;
+//import com.mycompany.gestionproyectosacademicos.presentacion.GUIStudent;
+import javax.swing.JFrame;
+
+/**
+ * Servicio de autenticación
+ */
+public class AuthService {
+    private User authenticatedUser; 
+    private final IUserRepository userRepository;
+    //private ICompanyRepository companyRepository;
+    //private final IProjectRepository projectRepository = Factory.getInstance().getRepository(IProjectRepository.class, "ARRAYS");
+
+    public AuthService(IUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+     public JFrame login(String email, String password) {
+        User user = userRepository.authenticate(email, password);
+        
+        if (user == null) {
+            return null;
+        }
+        return getGUIForRole(user);
+    }
+
+    private JFrame getGUIForRole(User user) {
+        switch (user.getRole()) {
+            case "STUDENT":
+                GUIStudentProjectList student = new GUIStudentProjectList();
+                student.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                return student;
+            case "COMPANY":
+                CompanyRepositoryMS companyRepo = new CompanyRepositoryMS();
+                ProjectRepositoryMS projectRepo = new ProjectRepositoryMS();
+
+                if (companyRepo == null) {
+                    Messages.showMessageDialog("❌ Error: No se encontró el repositorio de Company en Factory", "Error");
+                    return null;
+                }
+                CompanyService companyService = new CompanyService(companyRepo);
+                ProjectService projectService = new ProjectService(projectRepo);
+                GUICompany guiCompany = new GUICompany(companyService, projectService, String.valueOf(user.getId()));
+                
+                guiCompany.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                return guiCompany;
+                   
+            case "COORDINATOR":
+                GUICoordinator instance = new GUICoordinator();
+                instance.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                return instance;
+            default:
+                return null;
+        }
+    }
+}

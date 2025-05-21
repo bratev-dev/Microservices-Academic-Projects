@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.unicauca.CoordinatorService.CoordinatorServiceApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.840 s -- in com.unicauca.CoordinatorService.CoordinatorServiceApplicationTests

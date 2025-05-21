@@ -146,7 +146,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         btnSaveState = new javax.swing.JToggleButton();
         bgStateOptions = new javax.swing.ButtonGroup();
         jpLeft = new javax.swing.JPanel();
-        btnPerfil = new javax.swing.JButton();
+        btnStatisticalControl = new javax.swing.JButton();
         btnRequests = new javax.swing.JButton();
         btnCloseSession = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -162,16 +162,8 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         jPanel2 = new javax.swing.JPanel();
         cmbAcademicPeriod = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        pnlMonitoring = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        pnlAssingment = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        pnlReports = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        pnlConnections = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        pnlPerfil = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        pnlStatisticalControl = new javax.swing.JPanel();
+        lblSolicitudes1 = new javax.swing.JLabel();
 
         GUISeeDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         GUISeeDetails.setResizable(false);
@@ -649,14 +641,14 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         jpLeft.setAlignmentX(0.0F);
         jpLeft.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        btnPerfil.setBackground(new java.awt.Color(98, 114, 129));
-        btnPerfil.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        btnPerfil.setForeground(new java.awt.Color(255, 255, 255));
-        btnPerfil.setText("Perfil");
-        btnPerfil.setBorder(null);
-        btnPerfil.addActionListener(new java.awt.event.ActionListener() {
+        btnStatisticalControl.setBackground(new java.awt.Color(98, 114, 129));
+        btnStatisticalControl.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnStatisticalControl.setForeground(new java.awt.Color(255, 255, 255));
+        btnStatisticalControl.setText("Control Estadístico");
+        btnStatisticalControl.setBorder(null);
+        btnStatisticalControl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPerfilActionPerformed(evt);
+                btnStatisticalControlActionPerformed(evt);
             }
         });
 
@@ -703,7 +695,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         jpLeft.setLayout(jpLeftLayout);
         jpLeftLayout.setHorizontalGroup(
             jpLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnPerfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnStatisticalControl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnRequests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeftLayout.createSequentialGroup()
                 .addGap(6, 96, Short.MAX_VALUE)
@@ -716,7 +708,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
             .addGroup(jpLeftLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnStatisticalControl, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 315, Short.MAX_VALUE)
@@ -821,35 +813,14 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         pnlRight.add(pnlRequests, "card2");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel1.setText("Monitoreo");
-        pnlMonitoring.add(jLabel1);
+        pnlStatisticalControl.setLayout(new java.awt.BorderLayout());
 
-        pnlRight.add(pnlMonitoring, "card4");
+        lblSolicitudes1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblSolicitudes1.setText("Estadísticas de proyectos");
+        lblSolicitudes.setBorder(new EmptyBorder(70, 50, 20, 20)); // Margen superior, izquierdo, inferior, derecho
+        pnlStatisticalControl.add(lblSolicitudes1, java.awt.BorderLayout.NORTH);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel3.setText("Asignación de proyectos");
-        pnlAssingment.add(jLabel3);
-
-        pnlRight.add(pnlAssingment, "card5");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel4.setText("Reportes");
-        pnlReports.add(jLabel4);
-
-        pnlRight.add(pnlReports, "card6");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel5.setText("Conexiones");
-        pnlConnections.add(jLabel5);
-
-        pnlRight.add(pnlConnections, "card7");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel2.setText("Perfil");
-        pnlPerfil.add(jLabel2);
-
-        pnlRight.add(pnlPerfil, "card3");
+        pnlRight.add(pnlStatisticalControl, "card6");
 
         getContentPane().add(pnlRight, java.awt.BorderLayout.CENTER);
 
@@ -872,11 +843,11 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         this.projectService.notifyObservers();
     }//GEN-LAST:event_btnRequestsActionPerformed
 
-    private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
+    private void btnStatisticalControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticalControlActionPerformed
         CardLayout cl = (CardLayout) pnlRight.getLayout();
-        cl.show(pnlRight, "card3");
-        changeColorBtn(btnPerfil);
-    }//GEN-LAST:event_btnPerfilActionPerformed
+        cl.show(pnlRight, "card6");
+        changeColorBtn(btnStatisticalControl);
+    }//GEN-LAST:event_btnStatisticalControlActionPerformed
 
     private void cmbAcademicPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAcademicPeriodActionPerformed
         List<Project> projects = projectService.getProjects();
@@ -976,7 +947,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
     private void changeColorBtn(JButton botonSeleccionado) {
         // Restaurar el estilo de todos los botones
-        for (JButton boton : new JButton[]{btnPerfil, btnRequests}) {
+        for (JButton boton : new JButton[]{btnStatisticalControl, btnRequests}) {
             boton.setBackground(colorBackOrigin);
             boton.setForeground(colorTxtOrigin);
         }
@@ -1098,15 +1069,10 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     private javax.swing.JButton btnChangeState;
     private javax.swing.JButton btnCloseSession;
     private javax.swing.JButton btnComment;
-    private javax.swing.JButton btnPerfil;
     private javax.swing.JButton btnRequests;
     private javax.swing.JToggleButton btnSaveState;
+    private javax.swing.JButton btnStatisticalControl;
     private javax.swing.JComboBox<String> cmbAcademicPeriod;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1149,20 +1115,17 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     private javax.swing.JLabel lblProjectName;
     private javax.swing.JLabel lblProyecto;
     private javax.swing.JLabel lblSolicitudes;
+    private javax.swing.JLabel lblSolicitudes1;
     private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblSummary;
     private javax.swing.JLabel lblUser;
     private javax.swing.JPanel pnl;
-    private javax.swing.JPanel pnlAssingment;
     private javax.swing.JPanel pnlCom;
     private javax.swing.JScrollPane pnlCompanyData;
-    private javax.swing.JPanel pnlConnections;
-    private javax.swing.JPanel pnlMonitoring;
-    private javax.swing.JPanel pnlPerfil;
     private javax.swing.JScrollPane pnlProjectData;
-    private javax.swing.JPanel pnlReports;
     private javax.swing.JPanel pnlRequests;
     private javax.swing.JPanel pnlRight;
+    private javax.swing.JPanel pnlStatisticalControl;
     private javax.swing.JRadioButton rBtnApprove;
     private javax.swing.JRadioButton rBtnAssign;
     private javax.swing.JRadioButton rBtnComplete;

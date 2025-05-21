@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+
 @Service
 public class ProjectService {
 
@@ -36,6 +38,17 @@ public class ProjectService {
                 default: throw new IllegalArgumentException("Unknown project status: " + s);
             }
         });
+    }
+
+    public Map<String, Long> countProjectsByState() {
+        List<Project> allProjects = getAllProjects(); // Aquí se hace la petición al microservicio Company
+
+        // Agrupar por el nombre del estado (puede depender de cómo implementaste el patrón State)
+        return allProjects.stream()
+                .collect(Collectors.groupingBy(
+                        project -> project.getStatus().toString(), // o .toString() si no tienes getName()
+                        Collectors.counting()
+                ));
     }
 
     // Método genérico para aplicar una acción de estado

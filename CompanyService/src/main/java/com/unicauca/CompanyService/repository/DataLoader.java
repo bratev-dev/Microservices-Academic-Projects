@@ -30,7 +30,7 @@ public class DataLoader implements CommandLineRunner {
         project1.setDescription("Es un proyecto para controlar inventarios de manera eficiente");
         project1.setMaxtimeMonths(6);
         project1.setDate(LocalDate.parse("2024-05-04", formatter));
-        project1.setStatus(ProjectStatus.IN_PROGRESS);
+        project1.setStatus(ProjectStatus.ACCEPTED);
         project1.setComments("Proyecto inicial");
         projectRepository.save(project1);
 
@@ -43,7 +43,7 @@ public class DataLoader implements CommandLineRunner {
         project2.setDescription("Ofrecer cursos interactivos y seguimiento del progreso");
         project2.setMaxtimeMonths(12);
         project2.setDate(LocalDate.parse("2024-08-01", formatter));
-        project2.setStatus(ProjectStatus.IN_PROGRESS);
+        project2.setStatus(ProjectStatus.CLOSED);
         project2.setComments("En revisión técnica");
         projectRepository.save(project2);
 
@@ -69,7 +69,7 @@ public class DataLoader implements CommandLineRunner {
         project4.setDescription("Facilitar la gestión de personal y pagos");
         project4.setMaxtimeMonths(8);
         project4.setDate(LocalDate.parse("2024-08-10", formatter));
-        project4.setStatus(ProjectStatus.IN_PROGRESS);
+        project4.setStatus(ProjectStatus.RECEIVED);
         project4.setComments("En desarrollo");
         projectRepository.save(project4);
 
@@ -82,7 +82,7 @@ public class DataLoader implements CommandLineRunner {
         project5.setDescription("Ofrecer a los vendedores una manera fácil de vender sus productos");
         project5.setMaxtimeMonths(18);
         project5.setDate(LocalDate.parse("2024-09-05", formatter));
-        project5.setStatus(ProjectStatus.IN_PROGRESS);
+        project5.setStatus(ProjectStatus.REJECTED);
         project5.setComments("Proyecto grande");
         projectRepository.save(project5);
 

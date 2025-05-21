@@ -5,6 +5,7 @@ import com.unicauca.StudentService.Entities.Postulation;
 import com.unicauca.StudentService.Entities.Student;
 import com.unicauca.StudentService.Repository.PostulationRepository;
 import com.unicauca.StudentService.Repository.StudentRepository;
+import com.unicauca.StudentService.strategy.StudentFilterStrategy;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -91,6 +92,12 @@ public class StudentService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    //Servicio para la implemetacion del patron Strategy
+    public List<Student> getFilteredStudents(StudentFilterStrategy strategy) {
+        List<Student> allStudents = studentRepository.findAll();
+        return strategy.filter(allStudents);
     }
 
     

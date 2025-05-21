@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.unicauca.StudentService.Repository.StudentRepository;
+import com.unicauca.StudentService.strategy.SemesterFilterStrategy;
 
 import java.util.List;
 import java.util.Map;
@@ -162,6 +163,10 @@ public class StudentController {
         return student.map(ResponseEntity::ok)
                       .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
-
     
+    //End Point para la implemetacion del patron Strategy (Filtrar estudiantes por Semestre)
+    @GetMapping("/filter/semester/{semester}")
+    public List<Student> filterBySemester(@PathVariable String semester) {
+        return studentService.getFilteredStudents(new SemesterFilterStrategy(semester));
+    }
 }

@@ -17,7 +17,7 @@ public class DataLoader {
     public void loadData() {
         Student s1 = new Student("Jhonatan", "9", "Java, Spring Boot, Git", "jhonatan@email.com", "1234");
         Student s2 = new Student("Natalia", "10", "Node.js, Express, MongoDB", "natalia@email.com", "1234");
-        Student s3 = new Student("Juan", "8", "Python, Django, PostgreSQL", "juan@email.com", "1234");
+        Student s3 = new Student("Juan", "4", "Python, Django, PostgreSQL", "juan@email.com", "1234");
 
         studentService.saveStudent(s1);
         studentService.saveStudent(s2);

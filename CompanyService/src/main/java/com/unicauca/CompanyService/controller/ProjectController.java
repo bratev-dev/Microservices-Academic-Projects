@@ -5,9 +5,11 @@ import com.unicauca.CompanyService.entity.Project;
 import com.unicauca.CompanyService.service.ProjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -22,7 +24,14 @@ public class ProjectController {
     public ProjectController(ProjectService projectService) {
         this.service = projectService;
     }
-    
+
+    // Traer cantidad de proyectos por estado
+    @GetMapping("/count-by-state")
+    public ResponseEntity<Map<String, Long>> countProjectsByState() {
+        Map<String, Long> counts = service.countProjectsByState();
+        return ResponseEntity.ok(counts);
+    }
+
     // Crear proyecto
     @PostMapping
     public Project createProject(@RequestBody ProjectDTO projectDTO) {

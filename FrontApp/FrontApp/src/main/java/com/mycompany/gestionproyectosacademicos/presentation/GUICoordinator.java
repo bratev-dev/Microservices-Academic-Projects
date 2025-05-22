@@ -1,39 +1,38 @@
 package com.mycompany.gestionproyectosacademicos.presentation;
 
 import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
-import com.mycompany.gestionproyectosacademicos.access.Factory;
-import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
-import com.mycompany.gestionproyectosacademicos.access.IProjectRepository;
-import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
 import com.mycompany.gestionproyectosacademicos.access.ProjectRepositoryMS;
-
 import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
-import com.mycompany.gestionproyectosacademicos.entities.Coordinator;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
 import com.mycompany.gestionproyectosacademicos.observer.IObserver;
 import com.mycompany.gestionproyectosacademicos.services.AcademicPeriodGeneratorService;
-import com.mycompany.gestionproyectosacademicos.services.CoordinatorService;
 import com.mycompany.gestionproyectosacademicos.services.ProjectService;
 import com.mycompany.gestionproyectosacademicos.services.AuthService;
 
-import com.mycompany.gestionproyectosacademicos.state.Accepted;
-import com.mycompany.gestionproyectosacademicos.state.Closed;
-import com.mycompany.gestionproyectosacademicos.state.InProgress;
-import com.mycompany.gestionproyectosacademicos.state.ProjectState;
-import com.mycompany.gestionproyectosacademicos.state.Received;
-import com.mycompany.gestionproyectosacademicos.state.Rejected;
-
 import com.mycompany.gestionproyectosacademicos.services.CompanyService;
-import com.mycompany.gestionproyectosacademicos.services.UserServices;
+import java.awt.BorderLayout;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.axis.NumberAxis;
 
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.List;
+import java.util.Map;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 import javax.swing.JButton;
@@ -41,12 +40,27 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.axis.CategoryAxis;
 
 public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
+    // Colores para los gráficos de barras y pastel
+    private static final Color[] STATE_COLORS = {
+        new Color(140, 148, 164),    // #00039d
+        new Color(20, 44, 68),  // #1514b0
+        new Color(112, 152, 116),  // #2a24c4
+        new Color(48, 100, 116),  // #3e35d7
+        new Color(48, 44, 120)   // #5345ea
+    };
+
+    private static final String[] STATE_ORDER = {
+        "RECEIVED", "IN_PROGRESS", "ACCEPTED", "CLOSED", "REJECTED"
+    };
+    
     ProjectService projectService = new ProjectService(new ProjectRepositoryMS());
     CompanyService companyService = new CompanyService(new CompanyRepositoryMS());
     private final AcademicPeriodGeneratorService periodGenerator;
@@ -163,7 +177,8 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         cmbAcademicPeriod = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         pnlStatisticalControl = new javax.swing.JPanel();
-        lblSolicitudes1 = new javax.swing.JLabel();
+        lblStatisticalControl = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
 
         GUISeeDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         GUISeeDetails.setResizable(false);
@@ -815,10 +830,13 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         pnlStatisticalControl.setLayout(new java.awt.BorderLayout());
 
-        lblSolicitudes1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        lblSolicitudes1.setText("Estadísticas de proyectos");
-        lblSolicitudes.setBorder(new EmptyBorder(70, 50, 20, 20)); // Margen superior, izquierdo, inferior, derecho
-        pnlStatisticalControl.add(lblSolicitudes1, java.awt.BorderLayout.NORTH);
+        lblStatisticalControl.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblStatisticalControl.setText("Estadísticas de proyectos");
+        lblStatisticalControl.setBorder(new EmptyBorder(70, 50, 20, 20)); // Margen superior, izquierdo, inferior, derecho
+        pnlStatisticalControl.add(lblStatisticalControl, java.awt.BorderLayout.NORTH);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+        pnlStatisticalControl.add(jPanel5, java.awt.BorderLayout.CENTER);
 
         pnlRight.add(pnlStatisticalControl, "card6");
 
@@ -843,10 +861,142 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         this.projectService.notifyObservers();
     }//GEN-LAST:event_btnRequestsActionPerformed
 
+    private JFreeChart createPieChart(Map<String, Long> data) {
+        // Crear dataset para el gráfico de pastel
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        // Traducir los estados a español para mejor presentación
+        Map<String, String> stateTranslations = Map.of(
+            "RECEIVED", "Recibidos",
+            "IN_PROGRESS", "En progreso",
+            "ACCEPTED", "Aceptados",
+            "CLOSED", "Cerrados",
+            "REJECTED", "Rechazados"
+        );
+
+        // Agregar datos al dataset
+        data.forEach((state, count) -> {
+            String translatedState = stateTranslations.getOrDefault(state, state);
+            dataset.setValue(translatedState, count);
+        });
+
+        // Crear el gráfico de pastel
+        JFreeChart chart = ChartFactory.createPieChart(
+            "Proyectos por Estado",  // Título
+            dataset,                 // Dataset
+            true,                    // Mostrar leyenda
+            true,                    // Mostrar tooltips
+            false                    // No URLs
+        );
+
+        // Personalizar el gráfico
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setSectionOutlinesVisible(false);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}: {1} ({2})"));
+
+        // Agregar márgenes internos al gráfico
+        plot.setInteriorGap(0.1); // 10% de espacio alrededor del pastel
+        plot.setLabelGap(0.02);   // Espacio entre etiquetas y gráfico
+        
+        // Asignar colores personalizados
+        for (int i = 0; i < STATE_ORDER.length; i++) {
+            String translatedState = stateTranslations.get(STATE_ORDER[i]);
+            if (dataset.getIndex(translatedState) >= 0) {
+                plot.setSectionPaint(translatedState, STATE_COLORS[i]);
+            }
+        }
+        
+        return chart;
+    }
+
+    private JFreeChart createBarChart(Map<String, Long> data) {
+        // Crear dataset para el gráfico de barras
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        // Traducir los estados a español para mejor presentación
+        Map<String, String> stateTranslations = Map.of(
+            "RECEIVED", "Recibidos",
+            "IN_PROGRESS", "En progreso",
+            "ACCEPTED", "Aceptados",
+            "CLOSED", "Cerrados",
+            "REJECTED", "Rechazados"
+        );
+
+        // Agregar datos al dataset
+        data.forEach((state, count) -> {
+            String translatedState = stateTranslations.getOrDefault(state, state);
+            dataset.addValue(count, "Proyectos", translatedState);
+        });
+
+        // Crear el gráfico de barras
+        JFreeChart chart = ChartFactory.createBarChart(
+            "Proyectos por Estado",  // Título
+            "Estado",                 // Etiqueta eje X
+            "Cantidad",               // Etiqueta eje Y
+            dataset                   // Dataset
+        );
+
+        // Personalizar el gráfico
+        CategoryPlot plot = chart.getCategoryPlot();
+
+        // Configurar colores personalizados para las barras
+        BarRenderer renderer = (BarRenderer) plot.getRenderer();
+        for (int i = 0; i < STATE_ORDER.length; i++) {
+            renderer.setSeriesPaint(i, STATE_COLORS[i]);
+        }
+        
+        // Configurar márgenes en el eje X
+        CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setLowerMargin(0.1); // 10% de margen izquierdo
+        domainAxis.setUpperMargin(0.1); // 10% de margen derecho
+
+        // Configurar márgenes en el eje Y
+        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        rangeAxis.setLowerMargin(0.1);  // 10% de margen inferior
+        rangeAxis.setUpperMargin(0.1);  // 10% de margen superior
+        
+        return chart;
+    }
+    
     private void btnStatisticalControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticalControlActionPerformed
         CardLayout cl = (CardLayout) pnlRight.getLayout();
         cl.show(pnlRight, "card6");
         changeColorBtn(btnStatisticalControl);
+        
+        // Obtener los datos de proyectos por estado desde Project Service
+        Map<String, Long> lista = projectService.countProjectsByState();
+        
+        // Limpiar el panel antes de agregar nuevos gráficos
+        jPanel5.removeAll();
+        jPanel5.setLayout(new BorderLayout());
+        
+        // Crear un panel contenedor para ambos gráficos
+        JPanel chartsContainer = new JPanel(new GridLayout(1, 2, 20, 20)); // Espacio horizontal y vertical de 20px
+        chartsContainer.setBorder(new EmptyBorder(30, 30, 30, 30)); // Márgenes: arriba, izquierda, abajo, derecha
+        
+        // Crear el gráfico de pastel
+        JFreeChart pieChart = createPieChart(lista);
+        ChartPanel pieChartPanel = new ChartPanel(pieChart);
+        pieChartPanel.setPreferredSize(new Dimension(400, 300));
+        pieChartPanel.setBorder(new EmptyBorder(10, 10, 10, 10)); // Márgenes internos
+        
+        // Crear el gráfico de barras
+        JFreeChart barChart = createBarChart(lista);
+        ChartPanel barChartPanel = new ChartPanel(barChart);
+        barChartPanel.setPreferredSize(new Dimension(400, 300));
+        barChartPanel.setBorder(new EmptyBorder(10, 10, 10, 10)); // Márgenes internos
+        
+        // Agregar los gráficos al contenedor
+        chartsContainer.add(pieChartPanel);
+        chartsContainer.add(barChartPanel);
+
+        // Agregar el contenedor al panel principal
+        jPanel5.add(chartsContainer, BorderLayout.CENTER);
+
+        // Actualizar la interfaz
+        jPanel5.revalidate();
+        jPanel5.repaint();
     }//GEN-LAST:event_btnStatisticalControlActionPerformed
 
     private void cmbAcademicPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAcademicPeriodActionPerformed
@@ -1079,6 +1229,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpLeft;
@@ -1115,8 +1266,8 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     private javax.swing.JLabel lblProjectName;
     private javax.swing.JLabel lblProyecto;
     private javax.swing.JLabel lblSolicitudes;
-    private javax.swing.JLabel lblSolicitudes1;
     private javax.swing.JLabel lblState;
+    private javax.swing.JLabel lblStatisticalControl;
     private javax.swing.JLabel lblSummary;
     private javax.swing.JLabel lblUser;
     private javax.swing.JPanel pnl;

@@ -3,11 +3,21 @@ package com.mycompany.gestionproyectosacademicos.access;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 /**
  * Interfaz para repositorio de Proyectos.
  * Define las operaciones que se pueden realizar sobre los proyectos.
  */
 public interface IProjectRepository {
+    
+    /**
+    * @brief Obtiene un mapa con la cantidad de proyectos agrupados por estado.
+    * 
+    * @return Mapa donde la clave es el nombre del estado y el valor es la cantidad de proyectos en ese estado.
+    */
+    Map<String, Long> countProjectsByState();
+
+    
     List<Project> getAllProjects();
     /**
      * @brief Obtiene una lista de proyectos correspondientes a un período académico específico.

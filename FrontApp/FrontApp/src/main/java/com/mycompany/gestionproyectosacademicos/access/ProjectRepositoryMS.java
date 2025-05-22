@@ -8,8 +8,14 @@ package com.mycompany.gestionproyectosacademicos.access;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.http.HttpResponse;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -62,7 +68,32 @@ public class ProjectRepositoryMS implements IProjectRepository {
 
         return new ArrayList<>(); // Retorna lista vacía si hay error
     }
+    
+    @Override
+    public Map<String, Long> countProjectsByState() {
+        Map<String, Long> result = new HashMap<>();
+        try {
+            URL url = new URL("http://localhost:8081/api/projects/count-by-state"); // Ajusta la URL según el microservicio Company
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
 
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = in.readLine()) != null) {
+                response.append(line);
+            }
+            in.close();
+
+            Gson gson = new Gson();
+            result = gson.fromJson(response.toString(), new TypeToken<Map<String, Long>>() {}.getType());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
     @Override
     public boolean evaluateProject(Long projectId, String newStatus) {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
@@ -96,22 +127,7 @@ public class ProjectRepositoryMS implements IProjectRepository {
     public Project getProjectById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    /*@Override
-    public void create(Project product) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void edit(int id, Project productUpdated) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-     */
+    
     @Override
     public void saveProject(Project project) {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
@@ -208,4 +224,5 @@ public class ProjectRepositoryMS implements IProjectRepository {
     public boolean existsCompany(String nit, String email) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }

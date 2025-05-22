@@ -7,6 +7,7 @@ import com.mycompany.gestionproyectosacademicos.observer.IObservable;
 import com.mycompany.gestionproyectosacademicos.observer.Subject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ProjectService implements Subject {
 
@@ -18,6 +19,15 @@ public class ProjectService implements Subject {
         this.repo = repository;
     }
 
+    /**
+    * @brief Obtiene el conteo de proyectos agrupados por su estado.
+    * 
+    * @return Mapa donde la clave es el nombre del estado y el valor es la cantidad de proyectos en ese estado.
+    */
+    public Map<String, Long> countProjectsByState() {
+        return repo.countProjectsByState();
+    }
+    
     public void addProject(Project project) {
         repo.saveProject(project); // Agrega al repositorio
         notifyObservers(); // Notifica a todos los observers que la lista cambió

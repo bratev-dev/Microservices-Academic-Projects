@@ -13,21 +13,35 @@ public class StudentAPIClient {
     // Método para enviar la postulación
     public static boolean applyToProject(int studentId, int projectId) {
         try {
-            // Llama al endpoint correcto del controlador
             URL url = new URL(BASE_URL + "/" + studentId + "/postulate/" + projectId);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
             conn.setRequestMethod("POST");
-            conn.setDoOutput(true); // Aunque no envíes un body, es necesario en algunos servidores
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
 
             int responseCode = conn.getResponseCode();
-            return responseCode >= 200 && responseCode < 300;
+            System.out.println("Respuesta POST /postulate: " + responseCode);
 
-        } catch (Exception e) {
-            System.err.println("Error al aplicar al proyecto: " + e.getMessage());
+            if (responseCode != 200) {
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()))) {
+                    String line;
+                    StringBuilder response = new StringBuilder();
+                    while ((line = br.readLine()) != null) {
+                        response.append(line);
+                    }
+                    System.err.println("Error response body: " + response.toString());
+                } catch (Exception e) {
+                    // Ignorar si no hay cuerpo de error
+                }
+            }
+
+            return responseCode == 200;
+        } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }
+
     
     public Student login(String email, String password) {
         try {

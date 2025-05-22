@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.unicauca.StudentService.Repository.StudentRepository;
 import com.unicauca.StudentService.strategy.SemesterFilterStrategy;
+import com.unicauca.StudentService.Entities.Postulation;
 
 import java.util.List;
 import java.util.Map;
@@ -146,14 +147,17 @@ public class StudentController {
     
     //Implementacion para el Patron Command
     @PostMapping("/{studentId}/postulate/{projectId}")
-    public ResponseEntity<String> postulateToProject(@PathVariable int studentId, @PathVariable int projectId) {
-        Command command = new ApplyToProjectCommand(studentService, studentId, projectId);
-        CommandInvoker invoker = new CommandInvoker();
-        invoker.setCommand(command);
-        invoker.executeCommand();
-        return ResponseEntity.ok("Postulación ejecutada exitosamente.");
+    public ResponseEntity<?> postulateToProject(@PathVariable int studentId, @PathVariable int projectId) {
+        try {
+            Postulation postulation = studentService.applyToProject(studentId, projectId);
+            return ResponseEntity.ok(postulation);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en la postulación");
+        }
     }
-    
+
     @PostMapping("/login")
     public ResponseEntity<Student> login(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");

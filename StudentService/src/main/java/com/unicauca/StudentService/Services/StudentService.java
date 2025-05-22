@@ -61,13 +61,18 @@ public class StudentService {
         }
 
         Student student = studentOpt.get();
+
         Postulation postulation = new Postulation();
         postulation.setStudent(student);
         postulation.setProjectId(projectId);
         postulation.setState("Pendiente");
         postulation.setApplicationDate(LocalDateTime.now());
 
-        return postulationRepository.save(postulation);
+        student.getPostulations().add(postulation); // Asegura la relación
+
+        Postulation saved = postulationRepository.save(postulation);
+        System.out.println("Postulación guardada: " + saved);
+        return saved;
     }
     
     public void notifyCoordinatorPostulation(Long studentId, Long projectId) {

@@ -1,0 +1,13 @@
+com\unicauca\AuthService\controller\AuthController.class
+com\unicauca\AuthService\infra\dto\RegisterRequest.class
+com\unicauca\AuthService\infra\dto\AuthResponse$AuthResponseBuilder.class
+com\unicauca\AuthService\entity\User.class
+com\unicauca\AuthService\infra\dto\AuthRequest.class
+com\unicauca\AuthService\repository\DataLoader.class
+com\unicauca\AuthService\infra\dto\AuthResponse.class
+com\unicauca\AuthService\repository\UserRepository.class
+com\unicauca\AuthService\config\SecurityConfig.class
+com\unicauca\AuthService\AuthServiceApplication.class
+com\unicauca\AuthService\entity\User$UserBuilder.class
+com\unicauca\AuthService\service\AuthService.class
+com\unicauca\AuthService\entity\Role.class

@@ -1,0 +1,72 @@
+package com.unicauca.CoordinatorService.domain.model;
+
+import com.unicauca.CoordinatorService.domain.state.ProjectState;
+import java.time.LocalDate;
+import java.util.Objects;
+/**
+ *
+ * @author jpala
+ */
+public class Project {
+    private Long id;
+    private String name;
+    private String summary;
+    private String goals;
+    private String description;
+    private Integer maxtimeMonths;
+    private double budget;
+    private LocalDate date;
+    private String comments;
+
+    private Long companyId;
+    private Long assignedTo;
+
+    private ProjectStatus status; // Valor serializable
+    private ProjectState state;   // Comportamiento
+
+    public Project(Long id, String name, String summary, String goals, String description,
+                   Integer maxtimeMonths, double budget, LocalDate date, String comments,
+                   Long companyId, Long assignedTo, ProjectStatus status) {
+        this.id = id;
+        this.name = name;
+        this.summary = summary;
+        this.goals = goals;
+        this.description = description;
+        this.maxtimeMonths = maxtimeMonths;
+        this.budget = budget;
+        this.date = date;
+        this.comments = comments;
+        this.companyId = companyId;
+        this.assignedTo = assignedTo;
+        this.setStatus(status);
+    }
+
+    public void approve() {
+        state.approve(this);
+    }
+
+    public void reject() {
+        state.reject(this);
+    }
+
+    public void assign() {
+        state.assign(this);
+    }
+
+    public void complete() {
+        state.complete(this);
+    }
+
+    public void setStatus(ProjectStatus status) {
+        this.status = status;
+        this.state = status.getState(); // Aquí conectamos enum con objeto de estado
+    }
+
+    public ProjectStatus getStatus() {
+        return status;
+    }
+
+    public ProjectState getState() {
+        return state;
+    }
+}

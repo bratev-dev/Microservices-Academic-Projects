@@ -2,7 +2,7 @@ package com.unicauca.CoordinatorService.domain.state;
 
 import com.unicauca.CoordinatorService.domain.model.Project;
 import com.unicauca.CoordinatorService.domain.model.ProjectStatus;
-import com.unicauca.CoordinatorService.infra.exceptions.InvalidStateTransitionException;
+import com.unicauca.CoordinatorService.oldCode.infra.exceptions.InvalidStateTransitionException;
 
 /**
  *

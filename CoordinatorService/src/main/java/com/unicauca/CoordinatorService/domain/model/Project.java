@@ -62,6 +62,50 @@ public class Project {
         this.state = status.getState(); // Aquí conectamos enum con objeto de estado
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public String getGoals() {
+        return goals;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getMaxtimeMonths() {
+        return maxtimeMonths;
+    }
+
+    public double getBudget() {
+        return budget;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public Long getAssignedTo() {
+        return assignedTo;
+    }
+
     public ProjectStatus getStatus() {
         return status;
     }

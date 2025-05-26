@@ -1,6 +1,6 @@
 package com.unicauca.CoordinatorService.domain.port;
 
-import com.unicauca.CoordinatorService.infra.dto.ProjectDTO;
+import com.unicauca.CoordinatorService.oldCode.infra.dto.ProjectDTO;
 import java.util.List;
 
 public interface CompanyServicePort {

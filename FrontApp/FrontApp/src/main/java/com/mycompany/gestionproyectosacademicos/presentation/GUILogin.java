@@ -318,14 +318,14 @@ public class GUILogin extends javax.swing.JFrame {
             txtEmail.requestFocus();
             return false;
         }
-
+/*
         String regExEmail = "^[A-Za-z0-9+_.-]+@(.+)\\.com$";
         if (!Pattern.matches(regExEmail, email)) {
             Messages.showMessageDialog("El email ingresado no es válido.", "Atención");
             txtEmail.requestFocus();
             return false;
         }
-
+*/
         if (password.isEmpty()) {
             Messages.showMessageDialog("Debe ingresar la contraseña", "Atención");
             txtPassword.requestFocus();

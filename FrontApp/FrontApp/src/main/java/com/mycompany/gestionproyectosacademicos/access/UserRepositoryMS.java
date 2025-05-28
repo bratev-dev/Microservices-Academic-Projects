@@ -2,119 +2,109 @@ package com.mycompany.gestionproyectosacademicos.access;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.mycompany.gestionproyectosacademicos.entities.AuthResponse;
 import com.mycompany.gestionproyectosacademicos.entities.User;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-/**
- *
- * @author juand
- */
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class UserRepositoryMS implements IUserRepository {
 
-    @Override
-    public User authenticate(String email, String password) {
-        HttpClient httpClient = HttpClients.createDefault();
-        ObjectMapper mapper = new ObjectMapper();
-        User user = null;
+    private static final String TOKEN_URL = "http://localhost:8080/realms/sistema/protocol/openid-connect/token";
+    private static final String CLIENT_ID = "sistema-desktop"; //
+    private static final String GRANT_TYPE = "password";
 
-        try {
-            String apiUrl = "http://localhost:8080/api/auth/login";
-            String jsonBody = String.format("{\"email\":\"%s\", \"password\":\"%s\"}", email, password);
+    private final ObjectMapper mapper = new ObjectMapper();
 
-            HttpPost request = new HttpPost(apiUrl);
-            request.setEntity(new StringEntity(jsonBody));
-            request.setHeader("Content-type", "application/json");
+   @Override
+public User authenticate(String email, String password) {
+    HttpClient httpClient = HttpClients.createDefault();
 
-            HttpResponse response = httpClient.execute(request);
-            int statusCode = response.getStatusLine().getStatusCode();
+    try {
+        String body = "grant_type=" + GRANT_TYPE
+                + "&client_id=" + CLIENT_ID
+                + "&username=" + email
+                + "&password=" + password;
 
-            String jsonResponse = EntityUtils.toString(response.getEntity());
+        System.out.println("[DEBUG] Request Body: " + body);
 
-            // Mapea directamente a AuthResponse
-            AuthResponse authResponse = mapper.readValue(jsonResponse, AuthResponse.class);
-            if (!authResponse.isSuccess()) {
-                return null;
-            }
+        HttpPost request = new HttpPost(TOKEN_URL);
+        request.setEntity(new StringEntity(body));
+        request.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
-            user = new User();
-            user.setId(authResponse.getUserId().intValue());
-            user.setEmail(authResponse.getEmail());
-            user.setPassword(password); // En general no se recomienda guardar esto en cliente
-            user.setRole(authResponse.getRole());
+        System.out.println("[DEBUG] Sending request to: " + TOKEN_URL);
 
-        } catch (Exception e) {
-            Logger.getLogger(UserRepositoryMS.class.getName()).log(Level.SEVERE, null, e);
+        HttpResponse response = httpClient.execute(request);
+        int statusCode = response.getStatusLine().getStatusCode();
+
+        System.out.println("[DEBUG] Response Status Code: " + statusCode);
+
+        if (statusCode != 200) {
+            System.out.println("[ERROR] Error al autenticar en Keycloak. Código: " + statusCode);
+            return null;
         }
 
+        String json = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+        System.out.println("[DEBUG] Raw Token Response: " + json);
+
+        JsonNode tokenResponse = mapper.readTree(json);
+        String accessToken = tokenResponse.get("access_token").asText();
+
+        System.out.println("[DEBUG] Access Token: " + accessToken);
+
+        // Decodifica el JWT para extraer los claims (email, roles)
+        String[] tokenParts = accessToken.split("\\.");
+        if (tokenParts.length != 3) {
+            System.out.println("[ERROR] Token malformado. No tiene 3 partes.");
+            return null;
+        }
+
+        String payloadJson = new String(Base64.getUrlDecoder().decode(tokenParts[1]), StandardCharsets.UTF_8);
+        System.out.println("[DEBUG] JWT Payload Decodificado: " + payloadJson);
+
+        JsonNode payload = mapper.readTree(payloadJson);
+
+        String username = payload.get("preferred_username").asText();
+        System.out.println("[DEBUG] Username en token: " + username);
+
+        JsonNode rolesNode = payload.path("resource_access").path("sistema-desktop").path("roles");
+
+        String role = rolesNode.isArray() && rolesNode.size() > 0 ? rolesNode.get(0).asText().toUpperCase() : "UNKNOWN";
+        System.out.println("[DEBUG] Rol extraído: " + role);
+
+        User user = new User();
+        user.setEmail(username);
+        user.setPassword(password);
+        user.setRole(role);
+        user.setId(0);
+
+        System.out.println("[DEBUG] Usuario autenticado: " + user.getEmail() + ", Rol: " + user.getRole());
+
         return user;
+
+    } catch (Exception e) {
+        Logger.getLogger(UserRepositoryMS.class.getName()).log(Level.SEVERE, null, e);
+        System.out.println("[EXCEPTION] Error al procesar autenticación: " + e.getMessage());
+        return null;
     }
+}
 
     @Override
     public boolean saveUser(int id, String email, String password, String role) {
-        HttpClient httpClient = HttpClients.createDefault();
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            String apiUrl = "http://localhost:8080/api/auth/register";
-
-            // Construir el JSON manualmente
-            String jsonBody = String.format(
-                    "{\"email\":\"%s\", \"password\":\"%s\", \"role\":\"%s\"}",
-                    email, password, role
-            );
-
-            HttpPost request = new HttpPost(apiUrl);
-            request.setEntity(new StringEntity(jsonBody, "UTF-8"));
-            request.setHeader("Content-type", "application/json");
-
-            HttpResponse response = httpClient.execute(request);
-            int statusCode = response.getStatusLine().getStatusCode();
-
-            return statusCode == 200 || statusCode == 201; // éxito
-
-        } catch (Exception e) {
-            Logger.getLogger(UserRepositoryMS.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
+        // Ya no se maneja aquí el registro si estás usando Keycloak como IdP
+        return false;
     }
 
     @Override
     public int getUserIdByEmail(String email) {
-        HttpClient httpClient = HttpClients.createDefault();
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            String apiUrl = "http://localhost:8080/api/auth/user/" + email;
-
-            HttpGet request = new HttpGet(apiUrl);
-            request.setHeader("Content-type", "application/json");
-
-            HttpResponse response = httpClient.execute(request);
-            int statusCode = response.getStatusLine().getStatusCode();
-
-            if (statusCode == 200) {
-                String jsonResponse = EntityUtils.toString(response.getEntity());
-                JsonNode node = mapper.readTree(jsonResponse);
-
-                return node.get("id").asInt(); // Asume que el JSON tiene un campo "id"
-            }
-
-        } catch (Exception e) {
-            Logger.getLogger(UserRepositoryMS.class.getName()).log(Level.SEVERE, null, e);
-        }
-
-        return -1; // No encontrado o error
+        // Podrías consultar otro microservicio si deseas, o dejar sin implementar
+        return -1;
     }
-
 }

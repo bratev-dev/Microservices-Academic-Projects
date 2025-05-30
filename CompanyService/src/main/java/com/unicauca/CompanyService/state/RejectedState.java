@@ -24,7 +24,8 @@ public class RejectedState implements ProjectState {
 
     @Override
     public void complete(Project project) {
-        throw new IllegalStateException("Cannot complete a REJECTED project.");
+        System.out.println("Project " + project.getId() + " closed.");
+        project.setStatus(ProjectStatus.CLOSED);
     }
 
     @Override
@@ -38,7 +39,7 @@ public class RejectedState implements ProjectState {
     @Override
     public boolean isValidNextState(ProjectStatus nextStatus) {
         // Estado final, no se debería poder cambiar (excepto quizás a RECEIVED si hay re-evaluación)
-        return nextStatus == ProjectStatus.REJECTED;
+        return nextStatus == ProjectStatus.REJECTED || nextStatus == ProjectStatus.CLOSED;
         // || nextStatus == ProjectStatus.RECEIVED; // Descomenta si permites re-evaluar
     }
 }

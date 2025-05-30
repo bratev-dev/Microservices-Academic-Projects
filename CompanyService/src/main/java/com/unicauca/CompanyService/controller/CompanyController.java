@@ -63,7 +63,7 @@ public class CompanyController {
             return ResponseEntity.notFound().build(); // 404 si no existe
         }
     }
-
+    @GetMapping("/{id}")
     public ResponseEntity<Company> getCompanyById(@PathVariable long id) {
         Optional<Company> company = companyService.getCompanyById(id);
         if (company.isPresent()) {

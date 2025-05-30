@@ -884,24 +884,25 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         GUIChangeState.setVisible(true);
 
         // Configurar el estado actual del proyecto en los radio buttons
+        // Configurar el estado actual del proyecto en los radio buttons
         switch (selectedProject.getStatus()) {
-            case "APPROVED":
+            case "ACCEPTED":  // Nuevo estado equivalente a APPROVED
                 rBtnApprove.setSelected(true);
                 break;
-            case "ASSIGNED":
+            case "IN_PROGRESS":  // Nuevo estado equivalente a ASSIGNED
                 rBtnAssign.setSelected(true);
                 break;
-            case "COMPLETED":
+            case "CLOSED":  // Nuevo estado equivalente a COMPLETED
                 rBtnComplete.setSelected(true);
                 break;
-            case "PENDING":
+            case "RECEIVED":  // Nuevo estado equivalente a PENDING
                 rBtnPending.setSelected(true);
                 break;
-            case "REJECTED":
+            case "REJECTED":  // Se mantiene igual
                 rBtnReject.setSelected(true);
                 break;
             default:
-                rBtnApprove.setSelected(true);
+                rBtnPending.setSelected(true);  // Por defecto RECEIVED/PENDING
         }
     }//GEN-LAST:event_btnChangeStateActionPerformed
 
@@ -916,15 +917,15 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         String newStatus = "";
 
         if (rBtnApprove.isSelected()) {
-            newStatus = "APPROVED";
+            newStatus = "ACCEPTED";  // Cambiado de APPROVED a ACCEPTED
         } else if (rBtnAssign.isSelected()) {
-            newStatus = "ASSIGNED";
+            newStatus = "IN_PROGRESS";  // Cambiado de ASSIGNED a IN_PROGRESS
         } else if (rBtnComplete.isSelected()) {
-            newStatus = "COMPLETED";
+            newStatus = "CLOSED";  // Cambiado de COMPLETED to CLOSED
         } else if (rBtnPending.isSelected()) {
-            newStatus = "PENDING";
+            newStatus = "RECEIVED";  // Cambiado de PENDING to RECEIVED
         } else if (rBtnReject.isSelected()) {
-            newStatus = "REJECTED";
+            newStatus = "REJECTED";  // Se mantiene igual
         }
 
         boolean success = projectService.evaluateProject(selectedProject.getId(), newStatus);

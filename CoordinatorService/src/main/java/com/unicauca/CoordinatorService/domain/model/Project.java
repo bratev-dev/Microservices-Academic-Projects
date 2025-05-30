@@ -41,20 +41,24 @@ public class Project {
         this.setStatus(status);
     }
 
-    public void approve() {
-        state.approve(this);
+    public void markAsReceived() {
+        state.received(this);
+    }
+
+    public void accept() {
+        state.accepted(this);
     }
 
     public void reject() {
-        state.reject(this);
+        state.rejected(this);
     }
 
-    public void assign() {
-        state.assign(this);
+    public void startProgress() {
+        state.inProgress(this);
     }
 
-    public void complete() {
-        state.complete(this);
+    public void close() {
+        state.closed(this);
     }
 
     public void setStatus(ProjectStatus status) {

@@ -24,14 +24,12 @@ public class ProjectMapper {
                 .comments(project.getComments())
                 .companyId(project.getCompanyId())
                 .assignedTo(project.getAssignedTo())
-                .status(project.getStatus() != null ? toJpaStatus(project.getStatus()) : null) // Validación para null
+                .status(project.getStatus() != null ? StatusMapper.toJpaStatus(project.getStatus()) : null) // Validación para null
                 .build();
     }
 
     public static Project toDomainEntity(JpaProjectEntity jpaProject) {
-        if (jpaProject == null) {
-            return null;
-        }
+        if (jpaProject == null) return null;
 
         return new Project(
                 jpaProject.getId(),
@@ -45,21 +43,9 @@ public class ProjectMapper {
                 jpaProject.getComments(),
                 jpaProject.getCompanyId(),
                 jpaProject.getAssignedTo(),
-                jpaProject.getStatus() != null ? toDomainStatus(jpaProject.getStatus()) : null // Validación para null
+                StatusMapper.toDomainStatus(jpaProject.getStatus())
         );
     }
 
-    private static JpaProjectStatusEntity toJpaStatus(ProjectStatus status) {
-        if (status == null) {
-            return null; // Si el dominio tiene un status null, se devuelve null
-        }
-        return JpaProjectStatusEntity.valueOf(status.name());
-    }
 
-    private static ProjectStatus toDomainStatus(JpaProjectStatusEntity jpaStatus) {
-        if (jpaStatus == null) {
-            return null; // Si el nivel JPA tiene un status null, se devuelve null
-        }
-        return ProjectStatus.valueOf(jpaStatus.name());
-    }
 }

@@ -7,34 +7,34 @@ import com.unicauca.CoordinatorService.domain.state.ProjectState;
  * @author jpala
  */
 public enum ProjectStatus {
-    APPROVED {
+    RECEIVED {
         @Override
         public ProjectState getState() {
-            return new ApprovedState();
+            return new Received();
         }
     },
-    ASSIGNED {
+    ACCEPTED {
         @Override
         public ProjectState getState() {
-            return new AssignedState();
-        }
-    },
-    COMPLETED {
-        @Override
-        public ProjectState getState() {
-            return new CompletedState();
-        }
-    },
-    PENDING {
-        @Override
-        public ProjectState getState() {
-            return new PendingState();
+            return new Accepted();
         }
     },
     REJECTED {
         @Override
         public ProjectState getState() {
-            return new RejectState();
+            return new Rejected();
+        }
+    },
+    IN_PROGRESS {
+        @Override
+        public ProjectState getState() {
+            return new InProgress();
+        }
+    },
+    CLOSED {
+        @Override
+        public ProjectState getState() {
+            return new Closed();
         }
     };
 

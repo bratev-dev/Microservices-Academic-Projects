@@ -1,10 +1,8 @@
 package com.unicauca.CoordinatorService.presentation.dto;
 
-import com.unicauca.CoordinatorService.oldCode.entity.ProjectStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import com.unicauca.CoordinatorService.infraestructure.persistence.entity.JpaProjectStatusEntity;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -12,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EvaluationRequest {
     private Long projectId;
-    private ProjectStatus status;
+    private JpaProjectStatusEntity status;
     private String comments;
     public Long assignedTo;
 }

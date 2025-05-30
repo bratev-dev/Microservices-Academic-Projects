@@ -1,21 +1,29 @@
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\config\RestTemplateConfig.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\controller\ProjectController.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\CoordinatorServiceApplication.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\domain\port\CompanyServicePort.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\entity\Project.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\entity\ProjectStatus.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infra\adapter\RestCompanyServiceClient.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infra\dto\EvaluationRequest.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infra\dto\ProjectDTO.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infra\exceptions\GlobalExceptionHandler.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infra\exceptions\InvalidStateTransitionException.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\Patterns\state\ApprovedState.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\Patterns\state\AssignedState.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\Patterns\state\CompletedState.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\Patterns\state\PendingState.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\Patterns\state\ProjectState.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\Patterns\state\RejectState.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\repository\DataLoader.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\repository\ProjectRepository.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\service\CompanyServiceClient.java
-C:\Users\jpala\Documents\NetBeansProjects\Microservices-Academic-Projects\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\service\ProjectService.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\adapter\in\rest\ProjectServicePortImpl.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\adapter\out\persistence\ProjectService.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\adapter\out\persistence\RestCompanyServiceClient.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\application\port\in\ProjectServicePort.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\application\port\out\CompanyServiceClient.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\application\port\out\CompanyServicePort.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\CoordinatorServiceApplication.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\domain\model\Project.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\domain\model\ProjectStatus.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\domain\state\Accepted.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\domain\state\Closed.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\domain\state\InProgress.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\domain\state\ProjectState.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\domain\state\Received.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\domain\state\Rejected.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infraestructure\config\RestTemplateConfig.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infraestructure\exceptions\GlobalExceptionHandler.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infraestructure\exceptions\InvalidStateTransitionException.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infraestructure\persistence\entity\JpaProjectEntity.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infraestructure\persistence\entity\JpaProjectStatusEntity.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infraestructure\persistence\repository\JpaProjectSpringDataRepository.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infraestructure\persistence\repository\ProjectMapper.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infraestructure\persistence\repository\StatusMapper.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\infraestructure\persistence\util\DataLoader.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\presentation\dto\EvaluationRequest.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\presentation\dto\PostulationNotificationDTO.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\presentation\dto\ProjectDTO.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\presentation\NotificationController.java
+D:\Universidad__del_Cauca\Ingeniería de software II\Teoría\Tercer Corte\ProjectGitHub\CoordinatorService\src\main\java\com\unicauca\CoordinatorService\presentation\ProjectController.java

@@ -5,14 +5,141 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="385a38cd-72e8-46ce-8cf8-09b81ed9c9ac" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CoordinatorService/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/adapter/out/persistence/ProjectService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/Accepted.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/Closed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/Received.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/Rejected.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/repository/StatusMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/util/DataLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontApp/FrontApp/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompanyService/src/main/java/com/unicauca/CompanyService/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyService/src/main/java/com/unicauca/CompanyService/service/ProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompanyService/target/classes/com/unicauca/CompanyService/repository/CompanyRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyService/target/classes/com/unicauca/CompanyService/repository/CompanyRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/AuthService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/AuthService-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/AuthService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/AuthService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/entity/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/entity/User$UserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/infra/dto/AuthRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/infra/dto/AuthRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/infra/dto/AuthResponse$AuthResponseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/infra/dto/AuthResponse$AuthResponseBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/infra/dto/AuthResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/infra/dto/AuthResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/infra/dto/RegisterRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/infra/dto/RegisterRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/repository/DataLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/classes/com/unicauca/AuthService/repository/DataLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/surefire-reports/TEST-com.unicauca.AuthService.AuthServiceApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/surefire-reports/TEST-com.unicauca.AuthService.AuthServiceApplicationTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthService/target/surefire-reports/com.unicauca.AuthService.AuthServiceApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AuthService/target/surefire-reports/com.unicauca.AuthService.AuthServiceApplicationTests.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompanyService/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyService/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompanyService/src/main/java/com/unicauca/CompanyService/entity/Company.java" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyService/src/main/java/com/unicauca/CompanyService/entity/Company.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompanyService/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyService/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompanyService/target/classes/com/unicauca/CompanyService/service/CompanyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyService/target/classes/com/unicauca/CompanyService/service/CompanyService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontApp/FrontApp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FrontApp/FrontApp/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/ProjectRepositoryMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/ProjectRepositoryMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICompany.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompanyService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompanyService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/HELP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/model/ProjectStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/model/ProjectStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/port/CompanyServicePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/application/port/out/CompanyServicePort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/repository/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/application/port/in/ProjectServicePort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/ApprovedState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/AssignedState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/CompletedState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/PendingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/InProgress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/ProjectState.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/ProjectState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/state/RejectState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectStatusEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectStatusEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/repository/JpaProjectSpringDataRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/repository/JpaProjectSpringDataRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/repository/ProjectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/repository/ProjectMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/repository/ProjectRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/adapter/in/rest/ProjectServicePortImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/Patterns/state/ApprovedState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/Patterns/state/AssignedState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/Patterns/state/CompletedState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/Patterns/state/PendingState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/Patterns/state/ProjectState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/Patterns/state/RejectState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/config/RestTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/config/RestTemplateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/controller/NotificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/presentation/NotificationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/presentation/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/entity/Project.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/entity/ProjectStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/infra/adapter/RestCompanyServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/adapter/out/persistence/RestCompanyServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/infra/dto/EvaluationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/infra/dto/PostulationNotificationDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/infra/dto/ProjectDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/infra/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/exceptions/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/infra/exceptions/InvalidStateTransitionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/exceptions/InvalidStateTransitionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/repository/DataLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/repository/ProjectRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/service/CompanyServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/application/port/out/CompanyServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/oldCode/service/ProjectService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/main/java/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/test/java/com/unicauca/CoordinatorService/infraestructure/ProjectMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/test/java/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/src/test/java/com/unicauca/CoordinatorService/infraestructure/ProjectRepositoryImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/src/test/java/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityRepositoryImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/model/ProjectStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/port/CompanyServicePort.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/repository/ProjectRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/state/ApprovedState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/state/AssignedState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/state/CompletedState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/state/PendingState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/state/ProjectState.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/state/ProjectState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/domain/state/RejectState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectStatusEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectStatusEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/repository/JpaProjectSpringDataRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/repository/JpaProjectSpringDataRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/repository/ProjectMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/repository/ProjectMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/repository/ProjectRepositoryImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/Patterns/state/ApprovedState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/Patterns/state/AssignedState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/Patterns/state/CompletedState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/Patterns/state/PendingState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/Patterns/state/ProjectState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/Patterns/state/RejectState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/config/RestTemplateConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/controller/NotificationController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/controller/ProjectController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/entity/Project.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/entity/ProjectStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/infra/adapter/RestCompanyServiceClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/infra/dto/EvaluationRequest$EvaluationRequestBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/infra/dto/EvaluationRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/infra/dto/PostulationNotificationDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/infra/dto/ProjectDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/infra/exceptions/GlobalExceptionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/infra/exceptions/InvalidStateTransitionException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/repository/DataLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/repository/ProjectRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/service/CompanyServiceClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/oldCode/service/ProjectService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest$EvaluationRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest$EvaluationRequestBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/CoordinatorService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/test-classes/com/unicauca/CoordinatorService/infraestructure/ProjectMapperTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoordinatorService/target/test-classes/com/unicauca/CoordinatorService/infraestructure/ProjectRepositoryImplTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" beforeDir="false" afterPath="$PROJECT_DIR$/FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/client/ProjectAPIClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/client/StudentAPIClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/client/StudentAPIClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.class" beforeDir="false" afterPath="$PROJECT_DIR$/FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentService/target/StudentService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/StudentService/target/StudentService-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentService/target/StudentService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/StudentService/target/StudentService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentService/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/StudentService/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentService/target/classes/com/unicauca/StudentService/Controller/StudentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/StudentService/target/classes/com/unicauca/StudentService/Controller/StudentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentService/target/classes/com/unicauca/StudentService/Entities/Postulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/StudentService/target/classes/com/unicauca/StudentService/Entities/Postulation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentService/target/classes/com/unicauca/StudentService/Entities/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/StudentService/target/classes/com/unicauca/StudentService/Entities/Student.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentService/target/classes/com/unicauca/StudentService/Services/StudentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/StudentService/target/classes/com/unicauca/StudentService/Services/StudentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/StudentService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/StudentService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +192,19 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ProjectGitHub" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ProjectGitHub" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -84,6 +224,9 @@
       <workItem from="1745779694121" duration="3317000" />
       <workItem from="1745786808709" duration="460000" />
       <workItem from="1746410464935" duration="9480000" />
+      <workItem from="1748279499459" duration="12000" />
+      <workItem from="1748451064187" duration="25000" />
+      <workItem from="1748499409500" duration="359000" />
     </task>
     <servers />
   </component>

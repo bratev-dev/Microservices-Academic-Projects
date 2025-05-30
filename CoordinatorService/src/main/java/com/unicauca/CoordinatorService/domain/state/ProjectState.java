@@ -6,8 +6,9 @@ import com.unicauca.CoordinatorService.domain.model.Project;
  * @author jpala
  */
 public interface ProjectState {
-    void approve(Project project);
-    void reject(Project project);
-    void assign(Project project);
-    void complete(Project project);
+    void received(Project project);
+    void accepted(Project project);
+    void rejected(Project project);
+    void inProgress(Project project);
+    void closed(Project project);
 }

@@ -7,6 +7,7 @@ import com.unicauca.StudentService.Services.StudentService;
 import com.unicauca.StudentService.command.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.unicauca.StudentService.Repository.StudentRepository;
 import com.unicauca.StudentService.strategy.SemesterFilterStrategy;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-/**
+/*
  *
  * @author jpala
  */
@@ -41,6 +42,7 @@ public class StudentController {
     }
     
     @GetMapping
+    @PreAuthorize("hasRole('student')")
     public ResponseEntity<List<StudentDTO>> getAllStudents() {
         List<Student> students = studentService.getAllStudents();
         List<StudentDTO> studentDTOs = students.stream()
@@ -51,15 +53,16 @@ public class StudentController {
 
     //@GetMapping("/api/students/{id}")
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('student')")
     public ResponseEntity<StudentDTO> getStudentById(@PathVariable int id) {
         return studentService.getStudentById(id)
                 .map(this::convertToDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
     
     @PostMapping
+    @PreAuthorize("hasRole('student')")
     public ResponseEntity<StudentDTO> createStudent(@RequestBody StudentDTO studentDTO) {
         Student student = convertToEntity(studentDTO);
         Student savedStudent = studentService.saveStudent(student);
@@ -67,6 +70,7 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('student')")
     public ResponseEntity<StudentDTO> updateStudent(@PathVariable int id, @RequestBody StudentDTO studentDTO) {
         if (!studentService.getStudentById(id).isPresent()) {
             return ResponseEntity.notFound().build();
@@ -79,6 +83,7 @@ public class StudentController {
     }
     
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('student')")
     public ResponseEntity<Void> deleteStudent(@PathVariable int id) {
         if (!studentService.getStudentById(id).isPresent()) {
             return ResponseEntity.notFound().build();
@@ -89,6 +94,7 @@ public class StudentController {
     }
     
     @GetMapping("/semester/{semester}")
+    @PreAuthorize("hasRole('student')")
     public ResponseEntity<List<StudentDTO>> getStudentsBySemester(@PathVariable String semester) {
         List<Student> students = studentService.findStudentsBySemester(semester);
         List<StudentDTO> studentDTOs = students.stream()
@@ -98,6 +104,7 @@ public class StudentController {
     }
     
     @GetMapping("/skills")
+    @PreAuthorize("hasRole('student')")
     public ResponseEntity<List<StudentDTO>> getStudentsBySkill(@RequestParam String skill) {
         List<Student> students = studentService.findStudentsBySkill(skill);
         List<StudentDTO> studentDTOs = students.stream()
@@ -108,6 +115,7 @@ public class StudentController {
     
      // Nuevo endpoint para obtener proyectos por companyId
     @GetMapping("/projects/{companyId}")
+    @PreAuthorize("hasRole('student')")
     public ResponseEntity<String> getProjectsByCompanyId(@PathVariable Long companyId) {
         // Llamada al microservicio de proyectos para obtener los proyectos de una empresa
         String projectServiceUrl = "http://project-service/api/projects/company/" + companyId;
@@ -147,6 +155,7 @@ public class StudentController {
     
     //Implementacion para el Patron Command
     @PostMapping("/{studentId}/postulate/{projectId}")
+    @PreAuthorize("hasRole('student')")
     public ResponseEntity<?> postulateToProject(@PathVariable int studentId, @PathVariable int projectId) {
         try {
             Postulation postulation = studentService.applyToProject(studentId, projectId);
@@ -170,6 +179,7 @@ public class StudentController {
     
     //End Point para la implemetacion del patron Strategy (Filtrar estudiantes por Semestre)
     @GetMapping("/filter/semester/{semester}")
+    @PreAuthorize("hasRole('student')")
     public List<Student> filterBySemester(@PathVariable String semester) {
         return studentService.getFilteredStudents(new SemesterFilterStrategy(semester));
     }

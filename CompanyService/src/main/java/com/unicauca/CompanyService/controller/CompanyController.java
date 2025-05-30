@@ -5,6 +5,7 @@ import com.unicauca.CompanyService.repository.CompanyRepository;
 import com.unicauca.CompanyService.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -20,6 +21,7 @@ public class CompanyController {
 
     // Crear una nueva empresa
     @PostMapping
+    @PreAuthorize("hasRole('company')")
     public ResponseEntity<Company> createCompany(@RequestBody Company company) {
         Company createdCompany = companyService.createCompany(company);
         System.out.println("Recibido ID: " + company.getId());
@@ -30,6 +32,7 @@ public class CompanyController {
     private CompanyService empresaService;
 
     @GetMapping("/buscar")
+    @PreAuthorize("hasRole('company')")
     public ResponseEntity<Boolean> existeEmpresaPorIdYEmail(
             @RequestParam Long id,
             @RequestParam String email) {
@@ -40,6 +43,7 @@ public class CompanyController {
 
     // Obtener todas las empresas
     @GetMapping
+    @PreAuthorize("hasRole('company') or hasRole('coordinator')")
     public List<Company> getAllCompanies() {
         return companyService.getAllCompanies();
     }
@@ -55,6 +59,7 @@ public class CompanyController {
 //    }
 
     @GetMapping("/nombre/{id}")
+    @PreAuthorize("hasRole('company')")
     public ResponseEntity<String> getNombreEmpresaById(@PathVariable long id) {
         Optional<Company> company = companyService.getCompanyById(id);
         if (company.isPresent()) {
@@ -75,6 +80,7 @@ public class CompanyController {
 
     // Actualizar una empresa
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('company')")
     public ResponseEntity<Company> updateCompany(@PathVariable long id, @RequestBody Company companyDetails) {
         Optional<Company> existingCompany = companyService.getCompanyById(id);
 
@@ -88,6 +94,7 @@ public class CompanyController {
 
     // Eliminar una empresa
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('company')")
     public ResponseEntity<Void> deleteCompany(@PathVariable long id) {
         Optional<Company> existingCompany = companyService.getCompanyById(id);
         if (existingCompany.isPresent()) {

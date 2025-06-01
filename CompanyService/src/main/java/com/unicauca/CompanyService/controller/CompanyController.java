@@ -59,7 +59,7 @@ public class CompanyController {
 //    }
 
     @GetMapping("/nombre/{id}")
-    @PreAuthorize("hasRole('company')")
+    @PreAuthorize("hasRole('company') or hasRole('coordinator')")
     public ResponseEntity<String> getNombreEmpresaById(@PathVariable long id) {
         Optional<Company> company = companyService.getCompanyById(id);
         if (company.isPresent()) {
@@ -69,6 +69,7 @@ public class CompanyController {
         }
     }
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('company') or hasRole('coordinator')")
     public ResponseEntity<Company> getCompanyById(@PathVariable long id) {
         Optional<Company> company = companyService.getCompanyById(id);
         if (company.isPresent()) {

@@ -92,6 +92,6 @@ public class ProjectController {
     @PostMapping("/{id}/markAsReceived") // Cambia la ruta del endpoint
     @PreAuthorize("hasRole('company') or hasRole('coordinator')")
     public String markProjectAsReceived(@PathVariable Long id) {
-        return service.markProjectAsReceived(id); // Llama al método renombrado
+        return service.markProjectAsReceived(id); // Llama al metodo renombrado
     }
 }

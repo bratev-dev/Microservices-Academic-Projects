@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "company-service", url = "http://localhost:8081")
+@FeignClient(name = "company-service", url = "http://localhost:8083/company")
 public interface CompanyServiceClient {
 
     @GetMapping("/api/projects")

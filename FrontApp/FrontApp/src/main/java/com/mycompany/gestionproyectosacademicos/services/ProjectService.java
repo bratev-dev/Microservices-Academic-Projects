@@ -33,11 +33,11 @@ public class ProjectService implements Subject {
         return repo.getProjectsByAcademicPeriod(academicPeriod);
     }
 
-    public void deleteProject(int projectId) {
+  /*  public void deleteProject(int projectId) {
         repo.deleteProject(projectId);
         notifyObservers();
     }
-
+*/
     public boolean evaluateProject(Long projectId, String newStatus) {
         boolean success = repo.evaluateProject(projectId, newStatus);
         if (success) {
@@ -63,9 +63,9 @@ public class ProjectService implements Subject {
             observer.update(projects); // Notificar a los observadores con la lista de proyectos
         }
     }
-
+/*
     public int getNextProjectId() {
         return repo.getNextProjectId();
-    }
+    }*/
 
 }

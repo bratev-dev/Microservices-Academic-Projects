@@ -90,7 +90,9 @@ public class ProjectService {
         project.setCompanyId(projectDTO.getCompanyId());
         project.setAssignedTo(projectDTO.getAssignedTo());
 
-        return repository.save(project);
+        Project savedProject = repository.save(project);
+        System.out.println("Proyecto guardado en BD con ID: " + savedProject.getId()); // Debug
+        return savedProject;
     }
 
     public List<Project> getAllProjects() {

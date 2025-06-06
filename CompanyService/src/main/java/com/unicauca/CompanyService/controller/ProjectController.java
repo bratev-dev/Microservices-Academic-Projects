@@ -36,7 +36,8 @@ public class ProjectController {
     // Crear proyecto
     @PostMapping
     @PreAuthorize("hasRole('company')")
-    public Project createProject(@RequestBody ProjectDTO projectDTO) {
+    public Project createProject(@RequestBody ProjectDTO projectDTO)
+    {
         return service.createProject(projectDTO);
     }
 

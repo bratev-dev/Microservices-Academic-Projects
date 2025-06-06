@@ -243,7 +243,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 
         return projects;
     }*/
-
+/*
     @Override
     public void deleteProject(int projectId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -352,6 +352,21 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+*/
 
+    @Override
+    public List<Project> getProjectsByAcademicPeriod(String academicPeriod) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void saveProject(Project project) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean evaluateProject(Long projectId, String newStatus) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

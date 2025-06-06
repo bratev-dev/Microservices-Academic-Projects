@@ -1,4 +1,3 @@
-com\mycompany\gestionproyectosacademicos\domain\entities\CompanyTest.class
 com\mycompany\gestionproyectosacademicos\domain\entities\ProjectTest.class
 com\mycompany\gestionproyectosacademicos\domain\entities\UserTest.class
 com\mycompany\gestionproyectosacademicos\services\UserServicesTest.class

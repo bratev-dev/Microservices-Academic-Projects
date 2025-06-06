@@ -39,7 +39,7 @@ public class ProjectServiceTest {
         */
     }
 
-    @Test
+  /*  @Test
     void testDeleteProject() {
         // Configuración del mock
         doNothing().when(projectRepository).deleteProject(1); // Simula eliminación exitosa
@@ -50,7 +50,7 @@ public class ProjectServiceTest {
         // Verificaciones
         verify(projectRepository, times(1)).deleteProject(1);
     }
-
+*/
     @Test
     void testGetProjects() {
         /*

@@ -3,6 +3,7 @@ package com.mycompany.gestionproyectosacademicos.access;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.gestionproyectosacademicos.entities.User;
+import com.mycompany.gestionproyectosacademicos.services.SessionContext;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -56,6 +57,11 @@ public User authenticate(String email, String password) {
 
         JsonNode tokenResponse = mapper.readTree(json);
         String accessToken = tokenResponse.get("access_token").asText();
+        String refreshToken = tokenResponse.get("refresh_token").asText();
+        int expiresIn = tokenResponse.get("expires_in").asInt();
+
+        SessionContext.initialize(accessToken, refreshToken, expiresIn);
+
 
         System.out.println("[DEBUG] Access Token: " + accessToken);
 

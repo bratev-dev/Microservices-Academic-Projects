@@ -32,15 +32,18 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
+import com.mycompany.gestionproyectosacademicos.client.ApiClient;
 import com.mycompany.gestionproyectosacademicos.client.CompanyAPIClient;
 import com.mycompany.gestionproyectosacademicos.client.CoordinatorAPIClient;
 import com.mycompany.gestionproyectosacademicos.dto.ProjectDTO;
+import com.mycompany.gestionproyectosacademicos.services.AuthService;
 import java.io.*; //BORRAR LUEGO DE PRUEBA
 import java.net.*; //BORRAR LUEGO DE PRUEBA
 import java.sql.SQLException;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import javax.swing.SwingUtilities;
-
 
 /**
  *
@@ -57,34 +60,34 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
     private JButton btnPrevious;
     private JButton btnNext;
     private GUIProjectDetails currentDetailsFrame = null;
-    
-    private static final String API_URLProjects = "http://localhost:8082/api/projects";
-    private static final String API_URLStudents = "http://localhost:8084/api/students";
-    
-    
-    //Metodo para las peticiones HTTP a la API y obtener los proyectos
+
+    private static final String API_URLProjects = "/coordinator/api/projects"; // Ruta relativa para ApiClient
+    private static final String API_URLStudents = "/student/api/students"; // Si luego la necesitas
+
+// Método para cargar proyectos desde el Gateway usando ApiClient
     public void loadProjectsFromAPI() {
         System.out.println("Cargando proyectos desde API...");
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URLProjects)) // URL de la API
-                .header("Accept", "application/json") // Cabecera para especificar que queremos JSON
-                .build();
 
-        // Enviar la solicitud asincrónicamente y manejar la respuesta
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-            .thenApply(HttpResponse::body) // Obtener el cuerpo de la respuesta
-            .thenApply(this::parseProjects) // Parsear los proyectos
-            .thenAccept(projects -> {
-                allProjects = projects; // Asignar los proyectos a la lista
-                displayCurrentPage(); // Mostrar la primera página de proyectos
-            })
-            .exceptionally(e -> {
-                e.printStackTrace(); // Manejar errores
-                return null;
-            });
+        CompletableFuture.runAsync(() -> {
+            try {
+                String responseJson = ApiClient.get(API_URLProjects);
+                System.out.println("Respuesta del API: " + responseJson);
+
+                if (responseJson == null || responseJson.trim().isEmpty()) {
+                    System.err.println("Respuesta vacía de proyectos");
+                    allProjects = new ArrayList<>();
+                } else {
+                    allProjects = parseProjects(responseJson);
+                }
+
+                SwingUtilities.invokeLater(this::displayCurrentPage); // Asegura que la UI se actualice en el hilo correcto
+            } catch (Exception e) {
+                e.printStackTrace();
+                allProjects = new ArrayList<>();
+                SwingUtilities.invokeLater(this::displayCurrentPage); // Incluso en error, limpiar la vista
+            }
+        });
     }
-
 
     private void updateProjectList(List<Project> projects) {
         if (projects == null) {
@@ -98,7 +101,6 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         displayCurrentPage(); // Mostrar los proyectos en la tabla
     }
 
-    
     //Metodo para convertir JSON en DTOProject
     private List<Project> parseProjects(String responseBody) {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -111,9 +113,9 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         }
     }
 
-    
     // Clase para el modelo de tabla que no permita edición
     class NonEditableTableModel extends DefaultTableModel {
+
         @Override
         public boolean isCellEditable(int row, int column) {
             return column == 4; // Solo la columna de detalles es editable (para los botones)
@@ -122,6 +124,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
 
     // Clase para el renderizador de los botones de detalles
     class DetailsButton extends JButton implements TableCellRenderer {
+
         public DetailsButton() {
             setOpaque(true);
             setBackground(new Color(176, 94, 69));
@@ -134,12 +137,12 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
-                                                      boolean isSelected, boolean hasFocus, int row, int column) {
+                boolean isSelected, boolean hasFocus, int row, int column) {
             setText("›");
             return this;
         }
     }
-    
+
     //Metodo que devuelve los proyectos de una pagina especifica
     private List<Project> getProjectsForCurrentPage() {
         int startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
@@ -148,9 +151,9 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         return allProjects.subList(startIndex, endIndex);
     }
 
-
     //Clase para el editor de los botones de detalles
     class ButtonEditorDetails extends DefaultCellEditor {
+
         private JButton button;
         private String label;
         private boolean isPushed;
@@ -165,7 +168,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
             button.setFocusPainted(false);
             button.setBorderPainted(false);
             button.setFont(new Font("Arial", Font.BOLD, 16));
-            
+
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -176,50 +179,48 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value,
-                                                    boolean isSelected, int row, int column) {
-           label = "›";
-           button.setText(label);
-           projectId = Integer.parseInt(table.getValueAt(row, 0).toString());
-           System.out.println("Proyecto seleccionado ID: " + projectId);
-           isPushed = true;
+                boolean isSelected, int row, int column) {
+            label = "›";
+            button.setText(label);
+            projectId = Integer.parseInt(table.getValueAt(row, 0).toString());
+            System.out.println("Proyecto seleccionado ID: " + projectId);
+            isPushed = true;
 
-           JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(table);
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(table);
 
-           // Ejecutar llamada API en hilo aparte para no bloquear UI
-           new Thread(() -> {
-               try {
-                   ProjectDTO project = CoordinatorAPIClient.getProjectById(projectId);
-                   if (project == null) {
-                       SwingUtilities.invokeLater(() -> {
-                           JOptionPane.showMessageDialog(parentFrame, 
-                               "No se encontró el proyecto con ID: " + projectId,
-                               "Error", JOptionPane.ERROR_MESSAGE);
-                       });
-                       return;
-                   }
+            // Ejecutar llamada API en hilo aparte para no bloquear UI
+            new Thread(() -> {
+                try {
+                    ProjectDTO project = CoordinatorAPIClient.getProjectById(projectId);
+                    if (project == null) {
+                        SwingUtilities.invokeLater(() -> {
+                            JOptionPane.showMessageDialog(parentFrame,
+                                    "No se encontró el proyecto con ID: " + projectId,
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                        });
+                        return;
+                    }
 
-                   SwingUtilities.invokeLater(() -> {
-                       GUIProjectDetails detailsWindow = new GUIProjectDetails(project);
-                       detailsWindow.setVisible(true);
-                       if (parentFrame != null) {
-                           parentFrame.setVisible(false);
-                       }
-                   });
+                    SwingUtilities.invokeLater(() -> {
+                        GUIProjectDetails detailsWindow = new GUIProjectDetails(project);
+                        detailsWindow.setVisible(true);
+                        if (parentFrame != null) {
+                            parentFrame.setVisible(false);
+                        }
+                    });
 
-               } catch (Exception ex) {
-                   ex.printStackTrace();
-                   SwingUtilities.invokeLater(() -> {
-                       JOptionPane.showMessageDialog(parentFrame, 
-                           "Error al cargar los detalles del proyecto: " + ex.getMessage(),
-                           "Error", JOptionPane.ERROR_MESSAGE);
-                   });
-               }
-           }).start();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    SwingUtilities.invokeLater(() -> {
+                        JOptionPane.showMessageDialog(parentFrame,
+                                "Error al cargar los detalles del proyecto: " + ex.getMessage(),
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    });
+                }
+            }).start();
 
-           return button;
-       }
-
-
+            return button;
+        }
 
         @Override
         public Object getCellEditorValue() {
@@ -233,29 +234,29 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
                 ProjectDTO project = CoordinatorAPIClient.getProjectById(projectId);
 
                 if (project == null) {
-                    JOptionPane.showMessageDialog(null, 
-                        "No se encontró el proyecto con ID: " + projectId,
-                        "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,
+                            "No se encontró el proyecto con ID: " + projectId,
+                            "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 // Convertir a DTO (mismo proceso que arriba)
                 ProjectDTO dto = new ProjectDTO(
-                    project.getName(),
-                    project.getId(),
-                    project.getDescription(),
-                    project.getSummary(),
-                    project.getCompanyName(),
-                    project.getStatus() != null ? project.getStatus().toString() : ""
+                        project.getName(),
+                        project.getId(),
+                        project.getDescription(),
+                        project.getSummary(),
+                        project.getCompanyName(),
+                        project.getStatus() != null ? project.getStatus().toString() : ""
                 );
 
                 GUIProjectDetails detailsWindow = new GUIProjectDetails(dto);
                 detailsWindow.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, 
-                    "Error al cargar los detalles del proyecto: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "Error al cargar los detalles del proyecto: " + e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -265,16 +266,16 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
             return super.stopCellEditing();
         }
     }
-    
+
     /**
      * Creates new form GUIStudentProjectList
      */
     public GUIStudentProjectList() {
         initComponents();
-        
+
         // Inicializar tabla
         initTable();
-        
+
         // Cargar proyectos desde la API
         loadProjectsFromAPI();
     }
@@ -456,22 +457,22 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         tableModel.addColumn("Nombre Proyecto");
         tableModel.addColumn("Resumen Proyecto");
         tableModel.addColumn("Detalles");
-        
+
         btnPage = new JButton("1");
         btnPage.setBackground(new Color(19, 45, 70));
         btnPage.setForeground(Color.WHITE);
         btnPage.setFocusPainted(false);
-        
+
         // Creacion de la tabla
         projectTable = new JTable(tableModel);
-        
+
         // Configuracion de apariencia de la tabla no modificable
         projectTable.setRowHeight(50);
         projectTable.setIntercellSpacing(new Dimension(0, 5));
         projectTable.setShowGrid(false);
         projectTable.setBackground(Color.WHITE);
         projectTable.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        
+
         // Configuracion de la cabecera de la tabla
         JTableHeader header = projectTable.getTableHeader();
         header.setBackground(new Color(19, 45, 70));
@@ -479,12 +480,12 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         header.setFont(new Font("Tahoma", Font.BOLD, 14));
         header.setBorder(BorderFactory.createEmptyBorder());
         header.setPreferredSize(new Dimension(header.getWidth(), 40));
-        
+
         // Configuracion del renderizador para las celdas
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
-                                                          boolean isSelected, boolean hasFocus, int row, int column) {
+                    boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 if (row % 2 == 0) {
                     c.setBackground(new Color(245, 245, 245));
@@ -494,36 +495,35 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
                 return c;
             }
         };
-        
+
         // Aplicar el renderizador a todas las columnas excepto la última
         for (int i = 0; i < projectTable.getColumnCount() - 1; i++) {
             projectTable.getColumnModel().getColumn(i).setCellRenderer(renderer);
         }
-        
+
         // Configurar renderizador para la columna de botones
         TableColumn buttonColumn = projectTable.getColumnModel().getColumn(4);
         buttonColumn.setCellRenderer(new DetailsButton());
         buttonColumn.setCellEditor(new ButtonEditorDetails(new JCheckBox()));
         buttonColumn.setMaxWidth(70);
-        
+
         // Configurar anchos de columnas
         projectTable.getColumnModel().getColumn(0).setPreferredWidth(50);  // No
         projectTable.getColumnModel().getColumn(1).setPreferredWidth(150); // Nombre Empresa
         projectTable.getColumnModel().getColumn(2).setPreferredWidth(150); // Nombre Proyecto
         projectTable.getColumnModel().getColumn(3).setPreferredWidth(250); // Resumen Proyecto
-        
+
         // Crear JScrollPane para la tabla
         JScrollPane scrollPane = new JScrollPane(projectTable);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setBackground(Color.WHITE);
-        
+
         // Añadir datos de prueba
         //addSampleData();
-        
         // Añadir botones de navegación
         JPanel navigationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         navigationPanel.setBackground(Color.WHITE);
-        
+
         //BOTONES PARA LA NAVEGACION DE LAS PAGINAS DE LA LISTA DE PROYECTOS
         btnPrevious = new JButton("Anterior");
         btnPrevious.setBackground(new Color(19, 45, 70));
@@ -539,7 +539,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         btnNext = new JButton("Siguiente");
         btnNext.setBackground(new Color(19, 45, 70));
         btnNext.setForeground(Color.WHITE);
@@ -554,37 +554,37 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         // Agregar botones al panel
         navigationPanel.add(btnPrevious);
         navigationPanel.add(btnPage);
         navigationPanel.add(btnNext);
-        
+
         // Configurar layout del panel principal
         GroupLayout layout = (GroupLayout) jPanelProjectList.getLayout();
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitleProjectList)
-                    .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                    .addComponent(navigationPanel, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
-                .addContainerGap())
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblTitleProjectList)
+                                        .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                                        .addComponent(navigationPanel, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblTitleProjectList)
-                .addGap(20, 20, 20)
-                .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                .addGap(10, 10, 10)
-                .addComponent(navigationPanel, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(lblTitleProjectList)
+                                .addGap(20, 20, 20)
+                                .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                                .addGap(10, 10, 10)
+                                .addComponent(navigationPanel, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
     }
-    
+
     private void displayCurrentPage() {
         // Limpiar tabla
         tableModel.setRowCount(0);
@@ -600,11 +600,11 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         for (int i = start; i < end; i++) {
             Project p = allProjects.get(i);
             Object[] rowData = {
-                p.getId(),            // Columna oculta: ID real del proyecto
-                (i + 1),              // Número visible (columna 1)
-                p.getName(),          // Nombre Proyecto (columna 2)
-                p.getSummary(),       // Resumen Proyecto (columna 3)
-                "Ver detalles"        // Botón o texto (columna 4)
+                p.getId(), // Columna oculta: ID real del proyecto
+                (i + 1), // Número visible (columna 1)
+                p.getName(), // Nombre Proyecto (columna 2)
+                p.getSummary(), // Resumen Proyecto (columna 3)
+                "Ver detalles" // Botón o texto (columna 4)
             };
             tableModel.addRow(rowData);
         }
@@ -617,21 +617,23 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         int totalPages = (int) Math.ceil((double) allProjects.size() / PROJECTS_PER_PAGE);
         btnNext.setEnabled(currentPage < totalPages);
     }
-    
+
     // Método para obtener el nombre de la empresa a partir del companyId
     private String getCompanyNameById(Long companyId) {
         return CompanyAPIClient.getCompanyNameById(companyId);
     }
-    
+
     private void addSampleData() {
         tableModel.addRow(new Object[]{"00000", "Nombre Empresa", "Nombre Proyecto", "resumen del proyecto resumen del proyecto", ">"});
         tableModel.addRow(new Object[]{"00000", "Nombre Empresa", "Nombre Proyecto", "resumen del proyecto resumen del proyecto", ">"});
         tableModel.addRow(new Object[]{"00000", "Nombre Empresa", "Nombre Proyecto", "resumen del proyecto resumen del proyecto", ">"});
         tableModel.addRow(new Object[]{"00000", "Nombre Empresa", "Nombre Proyecto", "resumen del proyecto resumen del proyecto", ">"});
     }
-    
+
     private void btnCloseSessionStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSessionStudentActionPerformed
-        //HAY QUE COLOCAR LA LOGICA DE LLAMADA AL MICROSERVICIO DE LOGIN
+        AuthService authService = new AuthService(new UserRepositoryMS()); // Crear la instancia del servicio de autenticación
+        GUILogin login = new GUILogin(authService); // Pasar la instancia al constructor
+        login.setVisible(true); // Mostrar la ventana
         this.dispose();
     }//GEN-LAST:event_btnCloseSessionStudentActionPerformed
 

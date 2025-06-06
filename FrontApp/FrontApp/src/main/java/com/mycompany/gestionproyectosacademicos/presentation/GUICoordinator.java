@@ -1,39 +1,40 @@
 package com.mycompany.gestionproyectosacademicos.presentation;
 
 import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
-import com.mycompany.gestionproyectosacademicos.access.Factory;
-import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
-import com.mycompany.gestionproyectosacademicos.access.IProjectRepository;
-import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
 import com.mycompany.gestionproyectosacademicos.access.ProjectRepositoryMS;
-
 import com.mycompany.gestionproyectosacademicos.access.UserRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.entities.Company;
-import com.mycompany.gestionproyectosacademicos.entities.Coordinator;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
 import com.mycompany.gestionproyectosacademicos.observer.IObserver;
 import com.mycompany.gestionproyectosacademicos.services.AcademicPeriodGeneratorService;
-import com.mycompany.gestionproyectosacademicos.services.CoordinatorService;
 import com.mycompany.gestionproyectosacademicos.services.ProjectService;
 import com.mycompany.gestionproyectosacademicos.services.AuthService;
 
-import com.mycompany.gestionproyectosacademicos.state.Accepted;
-import com.mycompany.gestionproyectosacademicos.state.Closed;
-import com.mycompany.gestionproyectosacademicos.state.InProgress;
-import com.mycompany.gestionproyectosacademicos.state.ProjectState;
-import com.mycompany.gestionproyectosacademicos.state.Received;
-import com.mycompany.gestionproyectosacademicos.state.Rejected;
-
 import com.mycompany.gestionproyectosacademicos.services.CompanyService;
-import com.mycompany.gestionproyectosacademicos.services.UserServices;
+import java.awt.BorderLayout;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.axis.NumberAxis;
 
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.util.List;
+import java.util.Map;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 import javax.swing.JButton;
@@ -41,12 +42,28 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 
 public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
+    // Colores para los gráficos de barras y pastel
+    private static final Color[] STATE_COLORS = {
+        new Color(19, 45, 70),    // #00039d
+        new Color(46, 133, 110),  // #1514b0
+        new Color(240, 244, 248),  // #2a24c4
+        new Color(255, 126, 103),  // #3e35d7
+        new Color(74, 137, 220)   // #5345ea
+    };
+
+    private static final String[] STATE_ORDER = {
+        "RECEIVED", "IN_PROGRESS", "ACCEPTED", "CLOSED", "REJECTED"
+    };
+    
     ProjectService projectService = new ProjectService(new ProjectRepositoryMS());
     CompanyService companyService = new CompanyService(new CompanyRepositoryMS());
     private final AcademicPeriodGeneratorService periodGenerator;
@@ -163,7 +180,8 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         cmbAcademicPeriod = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         pnlStatisticalControl = new javax.swing.JPanel();
-        lblSolicitudes1 = new javax.swing.JLabel();
+        lblStatisticalControl = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
 
         GUISeeDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         GUISeeDetails.setResizable(false);
@@ -721,6 +739,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         pnlRight.setBackground(new java.awt.Color(255, 255, 255));
         pnlRight.setLayout(new java.awt.CardLayout());
 
+        pnlRequests.setBackground(new java.awt.Color(255, 255, 255));
         pnlRequests.setLayout(new java.awt.BorderLayout());
 
         lblSolicitudes.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -728,7 +747,10 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         lblSolicitudes.setBorder(new EmptyBorder(70, 50, 20, 20)); // Margen superior, izquierdo, inferior, derecho
         pnlRequests.add(lblSolicitudes, java.awt.BorderLayout.NORTH);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         tblRequests.setBackground(new java.awt.Color(232, 232, 232));
         tblRequests.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -773,6 +795,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(661, 80));
 
         cmbAcademicPeriod.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -813,12 +836,16 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         pnlRight.add(pnlRequests, "card2");
 
+        pnlStatisticalControl.setBackground(new java.awt.Color(255, 255, 255));
         pnlStatisticalControl.setLayout(new java.awt.BorderLayout());
 
-        lblSolicitudes1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        lblSolicitudes1.setText("Estadísticas de proyectos");
-        lblSolicitudes.setBorder(new EmptyBorder(70, 50, 20, 20)); // Margen superior, izquierdo, inferior, derecho
-        pnlStatisticalControl.add(lblSolicitudes1, java.awt.BorderLayout.NORTH);
+        lblStatisticalControl.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblStatisticalControl.setText("Estadísticas de proyectos");
+        lblStatisticalControl.setBorder(new EmptyBorder(70, 50, 20, 20)); // Margen superior, izquierdo, inferior, derecho
+        pnlStatisticalControl.add(lblStatisticalControl, java.awt.BorderLayout.NORTH);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+        pnlStatisticalControl.add(jPanel5, java.awt.BorderLayout.CENTER);
 
         pnlRight.add(pnlStatisticalControl, "card6");
 
@@ -843,10 +870,183 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         this.projectService.notifyObservers();
     }//GEN-LAST:event_btnRequestsActionPerformed
 
+    private JFreeChart createPieChart(Map<String, Long> data) {
+        // Crear dataset para el gráfico de pastel
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        // Traducir los estados a español para mejor presentación
+        Map<String, String> stateTranslations = Map.of(
+            "RECEIVED", "Recibidos",
+            "IN_PROGRESS", "En progreso",
+            "ACCEPTED", "Aceptados",
+            "CLOSED", "Cerrados",
+            "REJECTED", "Rechazados"
+        );
+
+        // Agregar datos al dataset
+        data.forEach((state, count) -> {
+            String translatedState = stateTranslations.getOrDefault(state, state);
+            dataset.setValue(translatedState, count);
+        });
+
+        // Crear el gráfico de pastel
+        JFreeChart chart = ChartFactory.createPieChart(
+            "",  // Título
+            dataset,                 // Dataset
+            true,                    // Mostrar leyenda
+            true,                    // Mostrar tooltips
+            false                    // No URLs
+        );
+
+        // Personalizar el gráfico
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setSectionOutlinesVisible(false);
+        
+        plot.setLabelGenerator(null);
+
+        // Eliminar bordes de las secciones
+        plot.setSectionOutlinesVisible(false);
+        
+        // Configurar el fondo transparente
+        plot.setBackgroundPaint(null);          // Fondo del plot transparente
+        plot.setOutlineVisible(false);          // Eliminar borde del plot
+        chart.setBackgroundPaint(null);         // Fondo del chart transparente
+        
+        // Agregar márgenes internos al gráfico
+        plot.setInteriorGap(0.1); // 10% de espacio alrededor del pastel
+        plot.setLabelGap(0.02);   // Espacio entre etiquetas y gráfico
+        
+        // Asignar colores personalizados
+        for (int i = 0; i < STATE_ORDER.length; i++) {
+            String translatedState = stateTranslations.get(STATE_ORDER[i]);
+            if (dataset.getIndex(translatedState) >= 0) {
+                plot.setSectionPaint(translatedState, STATE_COLORS[i]);
+            }
+        }
+        
+        return chart;
+    }
+
+    private JFreeChart createBarChart(Map<String, Long> data) {
+        // Crear dataset para el gráfico de barras
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        // Traducir los estados a español para mejor presentación
+        Map<String, String> stateTranslations = Map.of(
+            "RECEIVED", "Recibidos",
+            "IN_PROGRESS", "En progreso",
+            "ACCEPTED", "Aceptados",
+            "CLOSED", "Cerrados",
+            "REJECTED", "Rechazados"
+        );
+
+        // Asegurarse de que todos los estados estén presentes, incluso con valor 0
+        for (String state : STATE_ORDER) {
+            String translatedState = stateTranslations.get(state);
+            long count = data.getOrDefault(state, 0L);
+            dataset.addValue(count, "Proyectos", translatedState);
+        }
+
+        // Crear el gráfico de barras
+        JFreeChart chart = ChartFactory.createBarChart(
+            "",  // Título
+            "Estado",               // Etiqueta eje X
+            "Cantidad",             // Etiqueta eje Y
+            dataset                // Dataset
+        );
+
+        // Personalizar el gráfico
+        CategoryPlot plot = chart.getCategoryPlot();
+        BarRenderer renderer = (BarRenderer) plot.getRenderer();
+
+        // Configurar todas las barras con el mismo color (#132d46)
+        Color barColor = new Color(25, 70, 127); // Equivalente HEX #132d46
+        renderer.setSeriesPaint(0, barColor);   // Todas las series usan el mismo color
+
+        renderer.setBarPainter(new StandardBarPainter());
+        
+        // Estilo de las barras (sin sombras)
+        renderer.setDrawBarOutline(false);
+        renderer.setShadowVisible(false); // Deshabilitar sombras
+        renderer.setSeriesPaint(0, barColor);
+
+        // Deshabilitar cualquier efecto 3D
+        //renderer.setRenderAsPercentages(false);
+        renderer.setGradientPaintTransformer(null);
+        
+        // Espaciado entre barras
+        renderer.setItemMargin(0.2);
+
+        // Configurar márgenes en el eje X
+        CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setLowerMargin(0.05);
+        domainAxis.setUpperMargin(0.05);
+        domainAxis.setCategoryMargin(0.15);
+        domainAxis.setMaximumCategoryLabelLines(3);
+
+        // Configurar eje Y para mostrar 0 cuando no hay valores
+        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        rangeAxis.setLowerMargin(0.1);
+        rangeAxis.setUpperMargin(0.1);
+        rangeAxis.setAutoRangeIncludesZero(true); // Asegurar que el 0 esté incluido
+
+        // Configurar fondo
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setRangeGridlinePaint(new Color(100, 100, 100));
+
+        // Configurar fondo del chart
+        chart.setBackgroundPaint(Color.WHITE);
+        
+        // Opcional: Personalizar fuente de las etiquetas
+        Font labelFont = new Font("SansSerif", Font.PLAIN, 12);
+        domainAxis.setTickLabelFont(labelFont);
+        rangeAxis.setTickLabelFont(labelFont);
+        
+        return chart;
+    }
+    
     private void btnStatisticalControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticalControlActionPerformed
         CardLayout cl = (CardLayout) pnlRight.getLayout();
         cl.show(pnlRight, "card6");
         changeColorBtn(btnStatisticalControl);
+
+        Map<String, Long> lista = projectService.countProjectsByState();
+
+        jPanel5.removeAll();
+        jPanel5.setLayout(new BorderLayout());
+
+        // Panel contenedor con mejor espaciado
+        JPanel chartsContainer = new JPanel(new GridLayout(1, 2, 30, 30));
+        chartsContainer.setBorder(new EmptyBorder(40, 40, 40, 40));
+        chartsContainer.setBackground(Color.WHITE);
+
+        // Gráfico de pastel
+        JFreeChart pieChart = createPieChart(lista);
+        ChartPanel pieChartPanel = new ChartPanel(pieChart);
+        pieChartPanel.setPreferredSize(new Dimension(450, 350));
+        pieChartPanel.setBackground(Color.WHITE);
+
+        // Gráfico de barras
+        JFreeChart barChart = createBarChart(lista);
+        ChartPanel barChartPanel = new ChartPanel(barChart) {
+            @Override
+            public void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+                                  RenderingHints.VALUE_ANTIALIAS_OFF); // Desactiva antialiasing para bordes perfectamente rectos
+                super.paintComponent(g2);
+            }
+        };
+        barChartPanel.setPreferredSize(new Dimension(450, 350));
+        barChartPanel.setBackground(Color.WHITE);
+
+        chartsContainer.add(pieChartPanel);
+        chartsContainer.add(barChartPanel);
+
+        jPanel5.add(chartsContainer, BorderLayout.CENTER);
+        jPanel5.revalidate();
+        jPanel5.repaint();
     }//GEN-LAST:event_btnStatisticalControlActionPerformed
 
     private void cmbAcademicPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAcademicPeriodActionPerformed
@@ -884,25 +1084,24 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         GUIChangeState.setVisible(true);
 
         // Configurar el estado actual del proyecto en los radio buttons
-        // Configurar el estado actual del proyecto en los radio buttons
         switch (selectedProject.getStatus()) {
-            case "ACCEPTED":  // Nuevo estado equivalente a APPROVED
+            case "APPROVED":
                 rBtnApprove.setSelected(true);
                 break;
-            case "IN_PROGRESS":  // Nuevo estado equivalente a ASSIGNED
+            case "ASSIGNED":
                 rBtnAssign.setSelected(true);
                 break;
-            case "CLOSED":  // Nuevo estado equivalente a COMPLETED
+            case "COMPLETED":
                 rBtnComplete.setSelected(true);
                 break;
-            case "RECEIVED":  // Nuevo estado equivalente a PENDING
+            case "PENDING":
                 rBtnPending.setSelected(true);
                 break;
-            case "REJECTED":  // Se mantiene igual
+            case "REJECTED":
                 rBtnReject.setSelected(true);
                 break;
             default:
-                rBtnPending.setSelected(true);  // Por defecto RECEIVED/PENDING
+                rBtnApprove.setSelected(true);
         }
     }//GEN-LAST:event_btnChangeStateActionPerformed
 
@@ -917,17 +1116,17 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         String newStatus = "";
 
         if (rBtnApprove.isSelected()) {
-            newStatus = "ACCEPTED";  // Cambiado de APPROVED a ACCEPTED
+            newStatus = "APPROVED";
         } else if (rBtnAssign.isSelected()) {
-            newStatus = "IN_PROGRESS";  // Cambiado de ASSIGNED a IN_PROGRESS
+            newStatus = "ASSIGNED";
         } else if (rBtnComplete.isSelected()) {
-            newStatus = "CLOSED";  // Cambiado de COMPLETED to CLOSED
+            newStatus = "COMPLETED";
         } else if (rBtnPending.isSelected()) {
-            newStatus = "RECEIVED";  // Cambiado de PENDING to RECEIVED
+            newStatus = "PENDING";
         } else if (rBtnReject.isSelected()) {
-            newStatus = "REJECTED";  // Se mantiene igual
+            newStatus = "REJECTED";
         }
-
+        System.out.println(newStatus);
         boolean success = projectService.evaluateProject(selectedProject.getId(), newStatus);
 
         if (success) {
@@ -1080,6 +1279,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpLeft;
@@ -1116,8 +1316,8 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     private javax.swing.JLabel lblProjectName;
     private javax.swing.JLabel lblProyecto;
     private javax.swing.JLabel lblSolicitudes;
-    private javax.swing.JLabel lblSolicitudes1;
     private javax.swing.JLabel lblState;
+    private javax.swing.JLabel lblStatisticalControl;
     private javax.swing.JLabel lblSummary;
     private javax.swing.JLabel lblUser;
     private javax.swing.JPanel pnl;

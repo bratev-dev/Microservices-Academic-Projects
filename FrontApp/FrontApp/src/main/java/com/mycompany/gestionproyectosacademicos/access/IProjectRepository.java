@@ -3,6 +3,7 @@ package com.mycompany.gestionproyectosacademicos.access;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 /**
  * Interfaz para repositorio de Proyectos.
  * Define las operaciones que se pueden realizar sobre los proyectos.
@@ -40,5 +41,7 @@ public interface IProjectRepository {
      */
     
     boolean evaluateProject(Long projectId, String newStatus);
+    
+    Map<String, Long> countProjectsByState();
     
 }

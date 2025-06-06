@@ -25,6 +25,7 @@ com\mycompany\gestionproyectosacademicos\presentation\GUICoordinatorButtonRender
 com\mycompany\gestionproyectosacademicos\entities\Student.class
 com\mycompany\gestionproyectosacademicos\presentation\GUIcompanyRegister$8.class
 com\mycompany\gestionproyectosacademicos\presentation\GUIProjectDetails$1.class
+com\mycompany\gestionproyectosacademicos\services\SessionContext.class
 com\mycompany\gestionproyectosacademicos\dto\ProjectDTO.class
 com\mycompany\gestionproyectosacademicos\presentation\CommentListener.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICoordinatorButtonEditor.class
@@ -61,6 +62,7 @@ com\mycompany\gestionproyectosacademicos\presentation\GUILogin$4.class
 com\mycompany\gestionproyectosacademicos\presentation\GUIStudentProjectList$NonEditableTableModel.class
 com\mycompany\gestionproyectosacademicos\services\AcademicPeriodGeneratorService.class
 com\mycompany\gestionproyectosacademicos\presentation\GUIcompanyRegister$4.class
+com\mycompany\gestionproyectosacademicos\client\ApiClient.class
 com\mycompany\gestionproyectosacademicos\entities\RegisterRequest.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICoordinator$2.class
 com\mycompany\gestionproyectosacademicos\client\CompanyAPIClient.class

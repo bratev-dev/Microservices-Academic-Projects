@@ -1,30 +1,72 @@
 package com.example.apigateway;
 
-
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverterAdapter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
-// SecurityConfig.java en Gateway:
-@EnableWebSecurity
+import java.util.*;
+import java.util.stream.Collectors;
+
+@Configuration
+@EnableWebFluxSecurity
 public class SecurityConfig {
+
     @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http
+    public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
+        return http
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/company/api/projects", "/company/api/projects/*").hasRole("coordinator")
-                        .pathMatchers("/company/**").hasRole("company")
-                        .pathMatchers("/coordinator/**").hasRole("coordinator")
-                        .pathMatchers("/coordinator/api/projects").hasRole("student")
-                        .pathMatchers("/student/**").hasRole("student")
-                        .anyExchange().authenticated()
+                        .pathMatchers("/company/api/projects", "/company/api/projects/**")
+                        .hasAnyRole("coordinator", "company", "student")
+                        .pathMatchers("/company/**")
+                        .hasRole("company")
+                        .pathMatchers("/coordinator/api/projects")
+                        .hasAnyRole("student", "coordinator")
+                        .pathMatchers("/coordinator/**")
+                        .hasRole("coordinator")
+                        .pathMatchers("/student/**")
+                        .hasRole("student")
+                        .anyExchange()
+                        .authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(Customizer.withDefaults())
-                );
+                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                )
+                .csrf(csrf -> csrf.disable())
+                .build();
+    }
 
-        return http.build();
+    @Bean
+    public ReactiveJwtAuthenticationConverterAdapter jwtAuthenticationConverter() {
+        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+        converter.setJwtGrantedAuthoritiesConverter(this::extractAuthoritiesFromJwt);
+        return new ReactiveJwtAuthenticationConverterAdapter(converter);
+    }
+
+    private Collection<GrantedAuthority> extractAuthoritiesFromJwt(Jwt jwt) {
+        Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
+        if (resourceAccess == null || !resourceAccess.containsKey("sistema-desktop")) {
+            return Collections.emptyList();
+        }
+
+        Map<String, Object> clientAccess = (Map<String, Object>) resourceAccess.get("sistema-desktop");
+        if (clientAccess == null) {
+            return Collections.emptyList();
+        }
+
+        List<String> roles = (List<String>) clientAccess.get("roles");
+        if (roles == null) {
+            return Collections.emptyList();
+        }
+
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                .collect(Collectors.toList());
     }
 }

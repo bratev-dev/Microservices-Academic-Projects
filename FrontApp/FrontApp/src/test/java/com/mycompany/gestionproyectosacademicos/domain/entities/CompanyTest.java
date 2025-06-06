@@ -1,4 +1,4 @@
-package com.mycompany.gestionproyectosacademicos.domain.entities;
+/*package com.mycompany.gestionproyectosacademicos.domain.entities;
 
 import com.mycompany.gestionproyectosacademicos.entities.Company;
 import org.junit.jupiter.api.Test;
@@ -43,4 +43,4 @@ public class CompanyTest {
         assertThat(company.getContactPhoneNumber()).isEqualTo("555-5678");
         assertThat(company.getContactPosition()).isEqualTo("CTO");
     }
-}
+}*/

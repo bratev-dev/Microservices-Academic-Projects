@@ -39,11 +39,6 @@ public interface IProjectRepository {
      * @param projectId Identificador único del proyecto a eliminar.
      */
     
-    void deleteProject(int projectId);
-    
     boolean evaluateProject(Long projectId, String newStatus);
     
-    public boolean existsProject(String nit, String email);
-    public int getNextProjectId();
-    public boolean existsCompany(String nit, String email);
 }

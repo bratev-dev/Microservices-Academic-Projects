@@ -1,13 +1,8 @@
 package com.mycompany.gestionproyectosacademicos.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mycompany.gestionproyectosacademicos.state.ProjectState;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import com.mycompany.gestionproyectosacademicos.observer.IObserver;
 import java.time.format.DateTimeFormatter;
-import lombok.Data;
 
 public class Project {
     

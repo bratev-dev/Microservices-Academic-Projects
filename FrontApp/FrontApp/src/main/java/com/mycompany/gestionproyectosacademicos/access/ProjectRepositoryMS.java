@@ -3,9 +3,15 @@ package com.mycompany.gestionproyectosacademicos.access;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.gestionproyectosacademicos.client.ApiClient;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
@@ -145,4 +151,23 @@ public class ProjectRepositoryMS implements IProjectRepository {
         }
         return filteredProjects;
     }
+    
+    @Override
+    public Map<String, Long> countProjectsByState() {
+    try {
+        String jsonResponse = ApiClient.get(BASE_PATH + "/count-by-state");
+        if (jsonResponse == null) {
+            LOGGER.severe("No se pudo obtener respuesta del API");
+            return new HashMap<>();
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(jsonResponse, new TypeReference<Map<String, Long>>() {
+        });
+
+    } catch (Exception e) {
+        LOGGER.log(Level.SEVERE, "Error al contar proyectos por estado", e);
+        return new HashMap<>();
+    }
+}
 }

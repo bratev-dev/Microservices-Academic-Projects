@@ -11,6 +11,7 @@ com\mycompany\gestionproyectosacademicos\presentation\GUICoordinator$6.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICoordinator.class
 com\mycompany\gestionproyectosacademicos\state\Accepted.class
 com\mycompany\gestionproyectosacademicos\presentation\GUIStudentProjectList$4.class
+com\mycompany\gestionproyectosacademicos\access\ProjectRepositoryMS$2.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICompany$2.class
 com\mycompany\gestionproyectosacademicos\access\ConexionPostgreSQL.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICompany$5.class
@@ -72,6 +73,7 @@ com\mycompany\gestionproyectosacademicos\presentation\GUIcompanyRegister$7.class
 com\mycompany\gestionproyectosacademicos\access\IUserRepository.class
 com\mycompany\gestionproyectosacademicos\access\ProjectRepositoryMS$1.class
 com\mycompany\gestionproyectosacademicos\presentation\GUILogin.class
+com\mycompany\gestionproyectosacademicos\presentation\GUICoordinator$8.class
 com\mycompany\gestionproyectosacademicos\state\ProjectState.class
 com\mycompany\gestionproyectosacademicos\observer\IObserver.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICoordinatorButtonEditor$1.class

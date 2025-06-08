@@ -22,16 +22,26 @@ public class SecurityConfig {
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
         return http
                 .authorizeExchange(exchanges -> exchanges
+                        // ===== REGLAS MÁS ESPECÍFICAS PRIMERO =====
+                        .pathMatchers("/company/api/companies", "/company/api/companies/**")
+                        .permitAll()
+
                         .pathMatchers("/company/api/projects", "/company/api/projects/**")
                         .hasAnyRole("coordinator", "company", "student")
-                        .pathMatchers("/company/**")
-                        .hasRole("company")
+
                         .pathMatchers("/coordinator/api/projects")
                         .hasAnyRole("student", "coordinator")
+
+                        // ===== REGLAS GENERALES AL FINAL =====
+                        .pathMatchers("/company/**")
+                        .hasRole("company")
+
                         .pathMatchers("/coordinator/**")
                         .hasRole("coordinator")
+
                         .pathMatchers("/student/**")
                         .hasRole("student")
+
                         .anyExchange()
                         .authenticated()
                 )

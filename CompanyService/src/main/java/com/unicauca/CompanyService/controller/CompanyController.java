@@ -19,13 +19,30 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
+    @GetMapping("/test")
+    //@PreAuthorize("permitAll()")
+    public String test() {
+        System.out.println("=== ENDPOINT TEST FUNCIONANDO ===");
+        return "Funcionando!";
+    }
+
     // Crear una nueva empresa
     @PostMapping
-    @PreAuthorize("hasRole('company')")
+    //@PreAuthorize("permitAll()")
     public ResponseEntity<Company> createCompany(@RequestBody Company company) {
-        Company createdCompany = companyService.createCompany(company);
-        System.out.println("Recibido ID: " + company.getId());
-        return ResponseEntity.created(URI.create("/api/companies/" + createdCompany.getId())).body(createdCompany);
+        System.out.println("=== PETICIÓN LLEGÓ AL CONTROLLER ===");
+        System.out.println("NIT: " + company.getNIT());
+        System.out.println("Nombre: " + company.getName());
+
+        try {
+            Company createdCompany = companyService.createCompany(company);
+            System.out.println("Usuario creado exitosamente");
+            return ResponseEntity.created(URI.create("/api/companies/" + createdCompany.getNIT())).body(createdCompany);
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @Autowired
@@ -34,10 +51,9 @@ public class CompanyController {
     @GetMapping("/buscar")
     @PreAuthorize("hasRole('company')")
     public ResponseEntity<Boolean> existeEmpresaPorIdYEmail(
-            @RequestParam Long id,
-            @RequestParam String email) {
+            @RequestParam String NIT) {
 
-        boolean existe = empresaService.existsCompany(id, email);
+        boolean existe = empresaService.existsCompany(NIT);
         return ResponseEntity.ok(existe);
     }
 
@@ -60,8 +76,8 @@ public class CompanyController {
 
     @GetMapping("/nombre/{id}")
     @PreAuthorize("hasRole('company') or hasRole('coordinator')")
-    public ResponseEntity<String> getNombreEmpresaById(@PathVariable long id) {
-        Optional<Company> company = companyService.getCompanyById(id);
+    public ResponseEntity<String> getNombreEmpresaById(@PathVariable String NIT) {
+        Optional<Company> company = companyService.getCompanyById(NIT);
         if (company.isPresent()) {
             return ResponseEntity.ok(company.get().getName()); // Solo retorna el nombre
         } else {
@@ -70,8 +86,8 @@ public class CompanyController {
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('company') or hasRole('coordinator')")
-    public ResponseEntity<Company> getCompanyById(@PathVariable long id) {
-        Optional<Company> company = companyService.getCompanyById(id);
+    public ResponseEntity<Company> getCompanyById(@PathVariable String NIT) {
+        Optional<Company> company = companyService.getCompanyById(NIT);
         if (company.isPresent()) {
             return ResponseEntity.ok(company.get());
         } else {
@@ -82,11 +98,11 @@ public class CompanyController {
     // Actualizar una empresa
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('company')")
-    public ResponseEntity<Company> updateCompany(@PathVariable long id, @RequestBody Company companyDetails) {
-        Optional<Company> existingCompany = companyService.getCompanyById(id);
+    public ResponseEntity<Company> updateCompany(@PathVariable String NIT, @RequestBody Company companyDetails) {
+        Optional<Company> existingCompany = companyService.getCompanyById(NIT);
 
         if (existingCompany.isPresent()) {
-            Company updatedCompany = companyService.updateCompany(id, companyDetails);
+            Company updatedCompany = companyService.updateCompany(NIT, companyDetails);
             return ResponseEntity.ok(updatedCompany);
         } else {
             return ResponseEntity.notFound().build();  // Devolver 404 si no se encuentra la empresa
@@ -96,10 +112,10 @@ public class CompanyController {
     // Eliminar una empresa
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('company')")
-    public ResponseEntity<Void> deleteCompany(@PathVariable long id) {
-        Optional<Company> existingCompany = companyService.getCompanyById(id);
+    public ResponseEntity<Void> deleteCompany(@PathVariable String NIT) {
+        Optional<Company> existingCompany = companyService.getCompanyById(NIT);
         if (existingCompany.isPresent()) {
-            companyService.deleteCompany(id);
+            companyService.deleteCompany(NIT);
             return ResponseEntity.noContent().build();  // Devolver 204 No Content si la eliminación fue exitosa
         } else {
             return ResponseEntity.notFound().build();  // Devolver 404 si no se encuentra la empresa

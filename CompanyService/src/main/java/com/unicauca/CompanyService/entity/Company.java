@@ -7,19 +7,15 @@ import jakarta.persistence.Table;
 import lombok.*;
 import org.springframework.data.annotation.Version;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "companies")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class Company {
-//Comentario de prueba para commit
-
     @Id
-    @JsonProperty("nit")
-    private Long id;
+    @JsonProperty("NIT")
+    private String NIT;
 
     private String name;
     private String email;
@@ -30,8 +26,8 @@ public class Company {
     private String contactPosition;
     private String password;
 
-
     @Version
     private Long version;
 }
+
 

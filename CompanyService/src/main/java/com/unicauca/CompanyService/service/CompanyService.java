@@ -1,9 +1,8 @@
 package com.unicauca.CompanyService.service;
 
-import com.unicauca.CompanyService.dto.UserRegisterRequest;
 import com.unicauca.CompanyService.entity.Company;
-import com.unicauca.CompanyService.repository.AuthFeignClient;
 import com.unicauca.CompanyService.repository.CompanyRepository;
+import com.unicauca.CompanyService.repository.KeycloakUserCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,27 +17,26 @@ public class CompanyService {
 
     @Autowired
     private final CompanyRepository companyRepository;
-    private final AuthFeignClient authFeignClient;
+    private final KeycloakUserCreator keycloakUserCreator;
 
 
-    public boolean existsCompany(Long id, String email) {
-        return companyRepository.existsByIdAndEmail(id, email);
+    public boolean existsCompany(String NIT) {
+        return companyRepository.existsByNIT(NIT);
     }
 
     @Transactional
     // Crear una nueva empresa
     public Company createCompany(Company company) {
-
         Company saveCompany = companyRepository.save(company);
-        UserRegisterRequest userRegisterRequest = UserRegisterRequest.builder()
-                .email(company.getEmail())
-                .password(company.getPassword())
-                .role("COMPANY")
-                .build();
-        //authFeignClient.register(userRegisterRequest);
+
+        try {
+            keycloakUserCreator.createUserInKeycloak(saveCompany);
+        } catch (Exception e) {
+            companyRepository.deleteById(saveCompany.getNIT());
+            throw new RuntimeException("Error creando usuario en Keycloak. Registro deshecho.", e);
+        }
 
         return saveCompany;
-
     }
 
     // Obtener todas las empresas
@@ -47,13 +45,13 @@ public class CompanyService {
     }
 
     // Obtener una empresa por ID
-    public Optional<Company> getCompanyById(long id) {
+    public Optional<Company> getCompanyById(String id) {
         return companyRepository.findById(id);
     }
 
 
     // Actualizar una empresa
-    public Company updateCompany(Long id, Company companyDetails) {
+    public Company updateCompany(String id, Company companyDetails) {
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Empresa no encontrada con id " + id));
 
@@ -64,7 +62,7 @@ public class CompanyService {
     }
 
     // Eliminar una empresa
-    public void deleteCompany(Long id) {
+    public void deleteCompany(String id) {
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Empresa no encontrada con id " + id));
 

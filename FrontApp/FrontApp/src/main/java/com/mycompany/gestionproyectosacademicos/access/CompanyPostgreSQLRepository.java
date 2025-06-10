@@ -199,7 +199,7 @@ public class CompanyPostgreSQLRepository implements ICompanyRepository {
 
 
     @Override
-   public boolean existsCompany(Long nit, String email) {
+   public boolean existsCompany(String nit, String email) {
     CloseableHttpClient httpClient = HttpClients.createDefault();
     boolean exists = false;
 
@@ -232,7 +232,7 @@ public class CompanyPostgreSQLRepository implements ICompanyRepository {
 
 
     @Override
-    public Company findByNIT(Long idCompany) {
+    public Company findByNIT(String idCompany) {
     CloseableHttpClient httpClient = HttpClients.createDefault();
     ObjectMapper mapper = new ObjectMapper();
     Company company = null;

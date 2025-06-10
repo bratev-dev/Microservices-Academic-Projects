@@ -41,13 +41,13 @@ public class GUICompany extends javax.swing.JFrame {
      */
     private CardLayout card;
     private CompanyService companyService;
-    private Long companyId;
+    private String companyId;
     private ProjectService projectService;
 
     public GUICompany(CompanyService companyService, ProjectService projectService, String companyIdStr) {
         this.companyService = companyService;
         this.projectService = projectService;
-        this.companyId = Long.parseLong(companyIdStr);
+        this.companyId = companyIdStr;
         initComponents();
     }
 
@@ -474,7 +474,7 @@ public class GUICompany extends javax.swing.JFrame {
         sdf.parse(date); // Si la fecha es inválida, lanzará ParseException
     }
 
-    private void btnPublish1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPublish1ActionPerformed
+    private void btnPublish1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         try {
             String name = jTextNameProject.getText().trim();
             String summary = jTextSummary.getText().trim();

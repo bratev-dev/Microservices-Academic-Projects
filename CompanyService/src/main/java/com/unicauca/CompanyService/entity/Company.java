@@ -26,8 +26,8 @@ public class Company {
     private String contactPosition;
     private String password;
 
-    @Version
-    private Long version;
+   // @Version
+    //private Long version;
 }
 
 

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.mycompany.gestionproyectosacademicos.services.UserServicesTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.526 s -- in com.mycompany.gestionproyectosacademicos.services.UserServicesTest

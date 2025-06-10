@@ -1,47 +1,117 @@
-version: '3.9'
 
 services:
-
+  
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    command: start-dev --import-realm
+    environment:
+      KEYCLOAK_ADMIN: rubeiro
+      KEYCLOAK_ADMIN_PASSWORD: 1234
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_DATABASE: companydb
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: postgres
+    volumes:
+      - ./keycloak/realms:/opt/keycloak/data/import
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+  
   postgres:
-    image: postgres:15
+    image: postgres:latest
+    restart: always
     container_name: postgres
     environment:
       POSTGRES_DB: companydb
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - app-network
 
   company-service:
-    build: ./CompanyService
+    build:
+      context: ./CompanyService
+    container_name: company-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/companydb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/sistema
     depends_on:
       - postgres
-    ports:
-      - "8081:8080"
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
+      - keycloak
+    networks:
+      - app-network
 
   student-service:
-    build: ./StudentService
+    build:
+      context: ./StudentService
+    container_name: student-service
     ports:
-      - "8082:8080"
-
-  auth-service:
-    build: ./AuthService
-    ports:
-      - "8083:8080"
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/sistema
+    depends_on:
+      - keycloak
+    networks:
+      - app-network
 
   coordinator-service:
-    build: ./CoordinatorService
+    build:
+      context: ./CoordinatorService
+    container_name: coordinator-service
     ports:
-      - "8084:8080"
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/sistema
+    depends_on:
+      - keycloak
+    networks:
+      - app-network
 
   api-gateway:
-    build: ./api-gateway
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
     ports:
-      - "8080:8080"
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_ID=company-service
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_URI=http://company-service:8081
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0=Path=/company/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_ID=student-service
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_URI=http://student-service:8082
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_PREDICATES_0=Path=/students/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_ID=coordinator-service
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_URI=http://coordinator-service:8084
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_PREDICATES_0=Path=/coordinator/**
+    depends_on:
+      - company-service
+      - student-service
+      - coordinator-service
+    networks:
+      - app-network
 
 volumes:
   postgres-data:
+
+networks:
+  app-network:
+    driver: bridge

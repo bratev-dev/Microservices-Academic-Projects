@@ -345,6 +345,11 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         btnProjectList.setMaximumSize(new java.awt.Dimension(28, 17));
         btnProjectList.setMinimumSize(new java.awt.Dimension(28, 17));
         btnProjectList.setPreferredSize(new java.awt.Dimension(28, 17));
+        btnProjectList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProjectListActionPerformed(evt);
+            }
+        });
 
         btnMyProjects.setBackground(new java.awt.Color(98, 114, 129));
         btnMyProjects.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -640,6 +645,10 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
     private void btnProfileStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileStudentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnProfileStudentActionPerformed
+
+    private void btnProjectListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjectListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProjectListActionPerformed
 
     /**
      * @param args the command line arguments

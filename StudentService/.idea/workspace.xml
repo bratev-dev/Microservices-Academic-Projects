@@ -5,138 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00b92b3a-4636-44c9-8459-94caa5cc2bb3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../AuthService/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AuthService/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CompanyService/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/nbactions.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/CompanyService-0.0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/CompanyService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/CompanyRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/CompanyRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/CompanyResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/CompanyResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/ProjectDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/ProjectDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/UserRegisterRequest$UserRegisterRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/UserRegisterRequest$UserRegisterRequestBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/UserRegisterRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/UserRegisterRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Company.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Company.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Project.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/event/ProjectPublishedEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/event/ProjectPublishedEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/observer/ProjectObserver.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/observer/ProjectObserver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/CompanyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/CompanyService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/AcceptedState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/AcceptedState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/InProgressState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/InProgressState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/ReceivedState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/state/ReceivedState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/surefire-reports/2025-05-26T15-07-55_974.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/surefire-reports/TEST-com.unicauca.CompanyService.CompanyServiceApplicationTests.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/target/surefire-reports/com.unicauca.CompanyService.CompanyServiceApplicationTests.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/adapter/in/rest/ProjectServicePortImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/adapter/in/rest/ProjectServicePortImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity$JpaProjectEntityBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity$JpaProjectEntityBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/repository/StatusMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/repository/StatusMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/NotificationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/NotificationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest$EvaluationRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest$EvaluationRequestBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/EvaluationRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/PostulationNotificationDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/PostulationNotificationDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/ProjectDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/ProjectDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/test-classes/com/unicauca/CoordinatorService/infraestructure/ProjectServicePortImplTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/IProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/IProjectRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/ProjectArrayRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/ProjectArrayRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/ProjectPostgreSQLRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/ProjectPostgreSQLRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/ProjectRepositoryMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/access/ProjectRepositoryMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/entities/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/entities/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.form" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/ProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/CompanyPostgreSQLRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/CompanyPostgreSQLRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/CompanyRepositoryMS.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/CompanyRepositoryMS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/IProjectRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/IProjectRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/ProjectArrayRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/ProjectArrayRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/ProjectPostgreSQLRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/ProjectPostgreSQLRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/ProjectRepositoryMS$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/ProjectRepositoryMS$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/ProjectRepositoryMS.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/ProjectRepositoryMS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/UserRepositoryMS.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/access/UserRepositoryMS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/client/CompanyAPIClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/client/CompanyAPIClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/client/CoordinatorAPIClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/client/CoordinatorAPIClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/client/StudentAPIClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/client/StudentAPIClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/entities/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/entities/Project.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/entities/Sector.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/entities/Sector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/entities/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/entities/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/entities/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICompany.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinatorButtonEditor$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinatorButtonEditor$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinatorButtonEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinatorButtonEditor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUILogin$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIProjectDetails$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIProjectDetails$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIProjectDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIProjectDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$ButtonEditorDetails$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$ButtonEditorDetails$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$ButtonEditorDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$ButtonEditorDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$DetailsButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$DetailsButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$NonEditableTableModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList$NonEditableTableModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIStudentProjectList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/AcademicPeriodGeneratorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/AcademicPeriodGeneratorService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/AuthService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/ProjectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/ProjectService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/TEST-com.mycompany.gestionproyectosacademicos.domain.entities.CompanyTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/TEST-com.mycompany.gestionproyectosacademicos.domain.entities.ProjectTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/TEST-com.mycompany.gestionproyectosacademicos.domain.entities.UserTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/TEST-com.mycompany.gestionproyectosacademicos.services.CompanyServiceTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/TEST-com.mycompany.gestionproyectosacademicos.services.ProjectServiceTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/com.mycompany.gestionproyectosacademicos.domain.entities.CompanyTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/com.mycompany.gestionproyectosacademicos.domain.entities.ProjectTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/com.mycompany.gestionproyectosacademicos.domain.entities.UserTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/com.mycompany.gestionproyectosacademicos.services.CompanyServiceTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/surefire-reports/com.mycompany.gestionproyectosacademicos.services.ProjectServiceTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/test-classes/com/mycompany/gestionproyectosacademicos/domain/entities/ProjectTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/test-classes/com/mycompany/gestionproyectosacademicos/domain/entities/UserTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/test-classes/com/mycompany/gestionproyectosacademicos/services/CompanyServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/test-classes/com/mycompany/gestionproyectosacademicos/services/ProjectServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/test-classes/com/mycompany/gestionproyectosacademicos/services/UserServicesTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/repository/KeycloakUserCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/repository/KeycloakUserCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister.form" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUIcompanyRegister.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -153,12 +32,19 @@
     &quot;assignee&quot;: &quot;Rubeiro-Romero&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://bratev-dev@github.com/bratev-dev/Microservices-Academic-Projects.git",
-    "accountId": "130e4b1e-1c6d-4122-9e26-96e7c63c0dea"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://%40Rubeiro-Romero@github.com/bratev-dev/Microservices-Academic-Projects.git&quot;,
+    &quot;accountId&quot;: &quot;44d2bcd0-1e7d-4caa-b442-870bafde7250&quot;
   }
-}]]></component>
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -167,26 +53,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.StudentServiceApplication.executor": "Run",
-    "git-widget-placeholder": "feature/coordination-service",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/bryan/Desktop/1/1. U/6. SEMESTRE/PROYECTO FINAL/Exe/Academic-Projects/Academic-Projects/Microservices-Academic-Projects/StudentService",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.StudentServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/company-service&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/rubei/Documents/INGENIERIA DEL SOFTWARE/Microservices-Academic-Projects/StudentService&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="StudentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -200,8 +86,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
       </set>
     </attachedChunks>
   </component>
@@ -217,6 +103,7 @@
       <workItem from="1747935805248" duration="1756000" />
       <workItem from="1748388072023" duration="1864000" />
       <workItem from="1749222059893" duration="2020000" />
+      <workItem from="1749400968263" duration="4975000" />
     </task>
     <servers />
   </component>

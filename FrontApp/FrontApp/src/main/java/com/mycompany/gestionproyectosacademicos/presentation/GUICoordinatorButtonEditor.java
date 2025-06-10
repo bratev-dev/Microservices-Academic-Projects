@@ -5,7 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
+import java.sql.SQLException;
 import java.util.List; // Importación necesaria para usar List<Project>
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GUICoordinatorButtonEditor extends DefaultCellEditor {
     private JPanel panel;
@@ -31,7 +34,11 @@ public class GUICoordinatorButtonEditor extends DefaultCellEditor {
             public void actionPerformed(ActionEvent e) {
                 // Lógica para el botón "Ver más"
                 if (guiCoordinator != null) {
-                    guiCoordinator.openSeeDetails(currentRow); // Llamar a un método en GUICoordinator
+                    try {
+                        guiCoordinator.openSeeDetails(currentRow); // Llamar a un método en GUICoordinator
+                    } catch (SQLException ex) {
+                        Logger.getLogger(GUICoordinatorButtonEditor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 fireEditingStopped();
             }

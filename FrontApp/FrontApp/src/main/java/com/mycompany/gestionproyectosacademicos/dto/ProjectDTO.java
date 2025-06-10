@@ -41,7 +41,7 @@ public class ProjectDTO {
     public String getCompanyName() {
         String companyName = null;
         companyName = CompanyAPIClient.getCompanyNameById(companyId);
-        System.out.println("Nombre de la empresa recuperado: " + companyName);
+        System.out.println("Nombre recuperado de la empresa: " + companyName);
         return companyName; }
     public String getStatus() { return status; }
 }

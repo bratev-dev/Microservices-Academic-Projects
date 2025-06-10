@@ -29,7 +29,7 @@ public class SecurityConfig {
                         .pathMatchers("/company/api/projects", "/company/api/projects/**")
                         .hasAnyRole("coordinator", "company", "student")
 
-                        .pathMatchers("/coordinator/api/projects")
+                        .pathMatchers("/coordinator/api/projects", "/coordinator/api/projects/**")
                         .hasAnyRole("student", "coordinator")
 
                         // ===== REGLAS GENERALES AL FINAL =====

@@ -5,6 +5,7 @@
 
 package com.mycompany.gestionproyectosacademicos.presentation;
 
+import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
 import com.mycompany.gestionproyectosacademicos.access.Factory;
 import com.mycompany.gestionproyectosacademicos.access.ICompanyRepository;
 import com.mycompany.gestionproyectosacademicos.access.IUserRepository;
@@ -443,19 +444,13 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
             return ;
         }
         
-        try {
-            BigInteger nit = new BigInteger(JCompanyNIT.getText());
+            //tring nit = new String(JCompanyNIT.getText());
                // System.out.println("✅ NIT válido: " + nit);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "❌ Error:"
-                        + " El NIT solo debe contener números.", "Error"
-                                + "", JOptionPane.ERROR_MESSAGE);
-            return;
-            }
+            
        
          
          try {
-            BigInteger nit = new BigInteger(JContactNumber.getText());
+            BigInteger phone = new BigInteger(JContactNumber.getText());
               //  System.out.println("✅ telefono válido: " + nit);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "❌ Error:"
@@ -487,18 +482,10 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
             return ;
         }
         
-    try {
-        // Validar NIT
-        String nitTexto = JCompanyNIT.getText().trim();
-        if (!nitTexto.matches("\\d+")) {
-            
-        }
-
-
         // Crear la empresa
         Company company = new Company(
+                JCompanyNIT.getText().trim(),
                 JCompanyName.getText().trim(),
-                Long.valueOf(JCompanyNIT.getText().trim()),
                 JCompanyEmail.getText().trim(),
                 jSector.getSelectedItem().toString().trim(),
                 JContactName.getText().trim(),
@@ -517,7 +504,8 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
         // Crear el servicio de empresas inyectando el repositorio
         
         
-        ICompanyRepository compRepo = Factory.getInstance().getRepository(ICompanyRepository.class, "POSTGRE");
+        //ICompanyRepository compRepo = Factory.getInstance().getRepository(ICompanyRepository.class, "POSTGRE");
+        ICompanyRepository compRepo = new CompanyRepositoryMS();
         CompanyService companyService = new CompanyService(compRepo, userRepo);
 
         // Guardar la empresa
@@ -525,7 +513,8 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
         if (!companySaved) {
             JOptionPane.showMessageDialog(null, "Error al guardar la empresa.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        }else{
+        }
+        /*else{
             // Crear el usuario asociado a la empresa
             int id =Integer.parseInt(JCompanyNIT.getText());
             User user = new User(
@@ -541,7 +530,7 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error al guardar el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        }
+        }*/
 
         
 
@@ -557,9 +546,6 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
         // Cerrar la ventana actual
         this.dispose();
 
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Error: Ingrese solo números en el NIT y el número de contacto.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_button1ActionPerformed
 
     private void JCompanyNITActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCompanyNITActionPerformed

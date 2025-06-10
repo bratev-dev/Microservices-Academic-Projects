@@ -1,5 +1,5 @@
 package com.mycompany.gestionproyectosacademicos.entities;
 
 public enum Sector {
-    TECNOLOGÍA, SALUD, EDUCACIÓN, SERVICIOS, OTROS
+    TECNOLOGIA, SALUD, EDUCACION, SERVICIOS, OTROS
 }

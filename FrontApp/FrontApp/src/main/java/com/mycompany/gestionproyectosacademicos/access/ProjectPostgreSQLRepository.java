@@ -129,7 +129,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 
                     Company company = new Company();
                     company.setName(rs.getString("companyname"));
-                    company.setNit(rs.getLong("companynit"));
+                    company.setNIT(rs.getString("companynit"));
                     company.setSector(rs.getString("companysector"));
                     company.setContactNames(rs.getString("contactname"));
                     company.setContactLastNames(rs.getString("contactlastname"));
@@ -212,7 +212,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 
         Company company = new Company();
         company.setName(rs.getString("companyname"));
-        company.setNit(rs.getLong("companynit"));
+        company.setNIT(rs.getString("companynit"));
         company.setSector(rs.getString("companysector"));
         company.setContactNames(rs.getString("contactname"));
         company.setContactLastNames(rs.getString("contactlastname"));

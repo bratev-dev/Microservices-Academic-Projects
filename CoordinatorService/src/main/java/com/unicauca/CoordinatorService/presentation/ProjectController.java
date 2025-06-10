@@ -24,7 +24,7 @@ public class ProjectController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('coordinator')")
+    @PreAuthorize("hasRole('coordinator') or hasRole('student')")
     public List<ProjectDTO> getAllProjects() {
         return projectService.getAllProjects();
     }
@@ -49,7 +49,7 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('coordinator')")
+    @PreAuthorize("hasRole('coordinator') or hasRole('student')")
     public ResponseEntity<JpaProjectEntity> getProjectById(@PathVariable Long id) {
         JpaProjectEntity projectDTO = projectService.getProjectById(String.valueOf(id));
         if (projectDTO != null) {

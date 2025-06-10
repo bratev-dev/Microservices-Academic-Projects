@@ -49,7 +49,7 @@ public class CompanyController {
     private CompanyService empresaService;
 
     @GetMapping("/buscar")
-    @PreAuthorize("hasRole('company')")
+   // @PreAuthorize("hasRole('company')")
     public ResponseEntity<Boolean> existeEmpresaPorIdYEmail(
             @RequestParam String NIT) {
 

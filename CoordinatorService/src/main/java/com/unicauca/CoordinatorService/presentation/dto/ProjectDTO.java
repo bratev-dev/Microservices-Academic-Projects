@@ -12,6 +12,6 @@ public class ProjectDTO {
     private String summary;
     private String description;
     private String status;
-    private Long companyId;
+    private String companyId;
     private String date;
 }

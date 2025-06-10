@@ -27,7 +27,7 @@ public class Project {
     private String comments;
 
     // Relación con empresa (por ejemplo vía ID o DTO externo)
-    private Long companyId;
+    private String companyId;
 
     // Atributo para saber a quién está asignado el proyecto
     private Long assignedTo;

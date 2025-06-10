@@ -25,7 +25,7 @@ class JpaProjectEntityMapperTest {
                 50000.0,
                 java.time.LocalDate.of(2023, 10, 20),
                 "Test Comments",
-                101L,
+                "101L",
                 102L,
                 ProjectStatus.IN_PROGRESS
         );
@@ -60,7 +60,7 @@ class JpaProjectEntityMapperTest {
                 .budget(50000.0)
                 .date(java.time.LocalDate.of(2023, 10, 20))
                 .comments("Test Comments")
-                .companyId(101L)
+                .companyId("101L")
                 .assignedTo(102L)
                 .status(JpaProjectStatusEntity.IN_PROGRESS)
                 .build();

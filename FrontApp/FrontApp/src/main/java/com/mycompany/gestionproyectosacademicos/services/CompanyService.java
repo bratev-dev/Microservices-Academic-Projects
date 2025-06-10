@@ -29,10 +29,10 @@ public class CompanyService {
      */
     public boolean registerCompany(Company company) {
         // Validar si ya existe una empresa con el mismo NIT o correo electrónico
-        if (companyRepository.existsCompany(company.getNit(), company.getEmail())) {
+       /* if (companyRepository.existsCompany(company.getNit(), company.getEmail())) {
             System.out.println("Ya existe una empresa con el mismo NIT o correo electrónico.");
             return false; // No continuar si ya existe
-        }
+        }*/
 
         // Paso 4: Guardar la empresa
         boolean companySaved = companyRepository.save(company);
@@ -47,7 +47,7 @@ public class CompanyService {
     }
     // Método privado para validar que los datos no estén vacíos
     private boolean validarEmpresa(Company company) {
-        if (company.getNit() == null) {
+        if (company.getNIT()== null) {
             return false;
         }
         if (company.getName() == null || company.getName().trim().isEmpty()) {
@@ -74,7 +74,7 @@ public class CompanyService {
 
         return true; // Si todo está correcto, devuelve true
     }
-    public Company getCompany(Long idCompany) {
+    public Company getCompany(String idCompany) {
         return companyRepository.findByNIT(idCompany);
     }
 

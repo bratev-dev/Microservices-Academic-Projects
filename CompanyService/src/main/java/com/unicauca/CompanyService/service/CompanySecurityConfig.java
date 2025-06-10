@@ -22,7 +22,7 @@ public class CompanySecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         // Permitir sin autenticación
                         .requestMatchers("/api/companies/test").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/companies").permitAll()
+                        .requestMatchers("/api/companies", "/api/companies/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll() // Para H2 console
 
                         // Todos los demás endpoints requieren autenticación

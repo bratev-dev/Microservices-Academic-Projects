@@ -50,7 +50,7 @@ public class CompanyController {
     private CompanyService empresaService;
 
     @GetMapping("/buscar")
-    @PreAuthorize("hasRole('company')")
+   // @PreAuthorize("hasRole('company')")
     public ResponseEntity<Boolean> existeEmpresaPorIdYEmail(
             @RequestParam String NIT) {
 
@@ -85,9 +85,9 @@ public class CompanyController {
             return ResponseEntity.notFound().build(); // 404 si no existe
         }
     }
-    @GetMapping("/{id}")
+    @GetMapping("/{NIT}")
     @PreAuthorize("hasRole('company') or hasRole('coordinator')")
-    public ResponseEntity<Company> getCompanyById(@PathVariable String NIT) {
+    public ResponseEntity<Company> getCompanyById(@PathVariable("NIT") String NIT) {
         Optional<Company> company = companyService.getCompanyById(NIT);
         if (company.isPresent()) {
             return ResponseEntity.ok(company.get());
@@ -97,7 +97,7 @@ public class CompanyController {
     }
 
     // Actualizar una empresa
-    @PutMapping("/{id}")
+    @PutMapping("/{NIT}")
     @PreAuthorize("hasRole('company')")
     public ResponseEntity<Company> updateCompany(@PathVariable String NIT, @RequestBody Company companyDetails) {
         Optional<Company> existingCompany = companyService.getCompanyById(NIT);

@@ -246,6 +246,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
                         project.getId(),
                         project.getDescription(),
                         project.getSummary(),
+                        project.getCompanyId(),
                         project.getCompanyName(),
                         project.getStatus() != null ? project.getStatus().toString() : ""
                 );
@@ -618,10 +619,7 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         btnNext.setEnabled(currentPage < totalPages);
     }
 
-    // Método para obtener el nombre de la empresa a partir del companyId
-    private String getCompanyNameById(Long companyId) {
-        return CompanyAPIClient.getCompanyNameById(companyId);
-    }
+
 
     private void addSampleData() {
         tableModel.addRow(new Object[]{"00000", "Nombre Empresa", "Nombre Proyecto", "resumen del proyecto resumen del proyecto", ">"});

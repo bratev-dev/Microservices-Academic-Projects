@@ -25,13 +25,13 @@ public class UserRepositoryMS implements IUserRepository {
     private final ObjectMapper mapper = new ObjectMapper();
 
    @Override
-public User authenticate(String email, String password) {
+public User authenticate(String usern, String password) {
     HttpClient httpClient = HttpClients.createDefault();
 
     try {
         String body = "grant_type=" + GRANT_TYPE
                 + "&client_id=" + CLIENT_ID
-                + "&username=" + email
+                + "&username=" + usern
                 + "&password=" + password;
 
         System.out.println("[DEBUG] Request Body: " + body);
@@ -86,12 +86,12 @@ public User authenticate(String email, String password) {
         System.out.println("[DEBUG] Rol extraído: " + role);
 
         User user = new User();
-        user.setEmail(username);
+        user.setUsername(username);
         user.setPassword(password);
         user.setRole(role);
         user.setId(0);
 
-        System.out.println("[DEBUG] Usuario autenticado: " + user.getEmail() + ", Rol: " + user.getRole());
+        System.out.println("[DEBUG] Usuario autenticado: " + user.getUsername() + ", Rol: " + user.getRole());
 
         return user;
 

@@ -39,8 +39,8 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public JFrame login(String email, String password) {
-        User user = userRepository.authenticate(email, password);
+    public JFrame login(String username, String password) {
+        User user = userRepository.authenticate(username, password);
 
         if (user == null) {
             return null;
@@ -64,7 +64,7 @@ public class AuthService {
                 }
                 CompanyService companyService = new CompanyService(companyRepo);
                 ProjectService projectService = new ProjectService(projectRepo);
-                GUICompany guiCompany = new GUICompany(companyService, projectService, user.getEmail());
+                GUICompany guiCompany = new GUICompany(companyService, projectService, user.getUsername());
 
                 guiCompany.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 return guiCompany;

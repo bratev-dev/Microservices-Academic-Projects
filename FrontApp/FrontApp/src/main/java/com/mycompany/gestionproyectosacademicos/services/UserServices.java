@@ -24,8 +24,8 @@ public class UserServices {
      * @param password Contraseña del usuario.
      * @return true si la autenticación es exitosa, false en caso contrario.
      */
-    public boolean autenticarUsuario(String email, String password) {
-        User user = userRepository.authenticate(email, password);
+    public boolean autenticarUsuario(String username, String password) {
+        User user = userRepository.authenticate(username, password);
         return user != null;
     }
 
@@ -37,13 +37,13 @@ public class UserServices {
      */
     public boolean saveUser(User user) {
         // Validar si el usuario ya existe
-        if (userRepository.getUserIdByEmail(user.getEmail()) != -1) {
+        if (userRepository.getUserIdByEmail(user.getUsername()) != -1) {
             JOptionPane.showMessageDialog(null, "❌ Ya existe un usuario con el mismo correo electrónico.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         // Guardar el usuario en la base de datos
-        boolean saved = userRepository.saveUser( user.getId(), user.getEmail(), user.getPassword(), user.getRole());
+        boolean saved = userRepository.saveUser( user.getId(), user.getUsername(), user.getPassword(), user.getRole());
         if (saved) {
             JOptionPane.showMessageDialog(null, "✅ Usuario registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             return true;

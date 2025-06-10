@@ -74,8 +74,8 @@ public class CompanyController {
 //                .orElse(ResponseEntity.notFound().build());
 //    }
 
-    @GetMapping("/nombre/{id}")
-    @PreAuthorize("hasRole('company') or hasRole('coordinator')")
+    @GetMapping("/nombre/{NIT}")
+    //@PreAuthorize("hasRole('company') or hasRole('coordinator')")
     public ResponseEntity<String> getNombreEmpresaById(@PathVariable String NIT) {
         Optional<Company> company = companyService.getCompanyById(NIT);
         if (company.isPresent()) {
@@ -85,7 +85,7 @@ public class CompanyController {
         }
     }
     @GetMapping("/{NIT}")
-    @PreAuthorize("hasRole('company') or hasRole('coordinator')")
+   // @PreAuthorize("hasRole('company') or hasRole('coordinator')")
     public ResponseEntity<Company> getCompanyById(@PathVariable("NIT") String NIT) {
         Optional<Company> company = companyService.getCompanyById(NIT);
         if (company.isPresent()) {

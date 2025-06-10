@@ -21,7 +21,7 @@ public class CompanySecurityConfig {
         return http
                 .authorizeHttpRequests(authz -> authz
                         // Permitir sin autenticación
-                        .requestMatchers("/api/companies/test").permitAll()
+                        //.requestMatchers("/api/companies/test").permitAll()
                         .requestMatchers("/api/companies", "/api/companies/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll() // Para H2 console
 

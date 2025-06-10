@@ -18,7 +18,7 @@ public class Project {
     private LocalDate date;
     private String comments;
 
-    private Long companyId;
+    private String companyId;
     private Long assignedTo;
 
     private ProjectStatus status; // Valor serializable
@@ -26,7 +26,7 @@ public class Project {
 
     public Project(Long id, String name, String summary, String goals, String description,
                    Integer maxtimeMonths, double budget, LocalDate date, String comments,
-                   Long companyId, Long assignedTo, ProjectStatus status) {
+                   String companyId, Long assignedTo, ProjectStatus status) {
         this.id = id;
         this.name = name;
         this.summary = summary;
@@ -102,7 +102,7 @@ public class Project {
         return comments;
     }
 
-    public Long getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 

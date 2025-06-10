@@ -20,7 +20,7 @@ public class Project {
     private String status;
     //private Company company;
     private String comments;
-    private Long companyId;
+    private String companyId;
 
     public Long getId() {
         return id;
@@ -102,11 +102,11 @@ public class Project {
         this.comments = comments;
     }
 
-    public Long getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Long companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 

@@ -18,6 +18,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -28,7 +29,7 @@ import javax.swing.JOptionPane;
 
 public class CompanyRepositoryMS implements ICompanyRepository {
 
-    private static final String apiUrl = "http://localhost:8081/api/companies/";
+    private static final String apiUrl = "http://localhost:8083/company/api/companies";
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
@@ -37,22 +38,31 @@ public class CompanyRepositoryMS implements ICompanyRepository {
             URL url = new URL(apiUrl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type", "application/json; utf-8");
+
+            // CAMBIO 1: Asegurar UTF-8 en Content-Type
+            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+            // CAMBIO 2: Agregar Accept header con UTF-8
+            con.setRequestProperty("Accept", "application/json; charset=UTF-8");
+
             con.setDoOutput(true);
 
             String json = mapper.writeValueAsString(company);
             System.out.println("📦 JSON enviado: " + json);
 
-            try (OutputStream os = con.getOutputStream()) {
-                byte[] input = json.getBytes("utf-8");
-                os.write(input, 0, input.length);
+            // CAMBIO 3: Asegurar UTF-8 al escribir
+            try (OutputStream os = con.getOutputStream(); OutputStreamWriter writer = new OutputStreamWriter(os, StandardCharsets.UTF_8)) {
+                writer.write(json);
+                writer.flush();
             }
 
             int code = con.getResponseCode();
             System.out.println("🔁 Código HTTP: " + code);
 
+            // CAMBIO 4: Asegurar UTF-8 al leer la respuesta
             try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                    (code >= 200 && code < 300) ? con.getInputStream() : con.getErrorStream(), "utf-8"))) {
+                    (code >= 200 && code < 300) ? con.getInputStream() : con.getErrorStream(),
+                    StandardCharsets.UTF_8))) {
                 StringBuilder response = new StringBuilder();
                 String responseLine;
                 while ((responseLine = br.readLine()) != null) {
@@ -72,13 +82,13 @@ public class CompanyRepositoryMS implements ICompanyRepository {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "❌ Excepción al llamar al servicio: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();  // también muestra en consola
+            e.printStackTrace();
             return false;
         }
     }
 
     @Override
-    public boolean existsCompany(Long nit, String email) {
+    public boolean existsCompany(String NIT, String email) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         boolean exists = false;
 
@@ -87,7 +97,7 @@ public class CompanyRepositoryMS implements ICompanyRepository {
             String encodedEmail = URLEncoder.encode(email, StandardCharsets.UTF_8.toString());
 
             // Construir la URL con los parámetros
-            String apiUrl = "http://localhost:8080/api/companies/exists?nit=" + nit + "&email=" + encodedEmail;
+            String apiUrl = "http://localhost:8083/company/api/companies/buscar?nit=" + NIT + "&email=" + encodedEmail;
 
             // Crear solicitud GET
             HttpGet request = new HttpGet(apiUrl);
@@ -110,7 +120,7 @@ public class CompanyRepositoryMS implements ICompanyRepository {
     }
 
     @Override
-    public Company findByNIT(Long idCompany) {
+    public Company findByNIT(String idCompany) {
         // Construir la URL completa para obtener la compañía
         String url = apiUrl + idCompany;
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {

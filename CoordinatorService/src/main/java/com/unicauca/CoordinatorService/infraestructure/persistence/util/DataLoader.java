@@ -11,7 +11,11 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 public class DataLoader implements CommandLineRunner {
+    @Override
+    public void run(String... args) throws Exception {
 
+    }
+/*
     private final JpaProjectSpringDataRepository projectRepository;
 
     public DataLoader(JpaProjectSpringDataRepository projectRepository) {
@@ -414,4 +418,5 @@ public class DataLoader implements CommandLineRunner {
 
 
     }
-}
+    */
+ }

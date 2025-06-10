@@ -5,12 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00b92b3a-4636-44c9-8459-94caa5cc2bb3" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.form" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/ProjectService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/ProjectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/ProjectService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/dto/ProjectDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/dto/ProjectDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/entity/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/ProjectDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/ProjectDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/src/test/java/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/src/test/java/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity$JpaProjectEntityBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity$JpaProjectEntityBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/test-classes/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityMapperTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/test-classes/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityMapperTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/AuthService.class" afterDir="false" />
+>>>>>>> 0b5ed9fd5d638a82441547de9ed1a683506683d8
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,10 +42,17 @@
     &quot;assignee&quot;: &quot;Rubeiro-Romero&quot;
   }
 }</component>
+<<<<<<< HEAD
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://bratev-dev@github.com/bratev-dev/Microservices-Academic-Projects.git&quot;,
     &quot;accountId&quot;: &quot;130e4b1e-1c6d-4122-9e26-96e7c63c0dea&quot;
+=======
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://JuanDv1@github.com/bratev-dev/Microservices-Academic-Projects",
+    "accountId": "d7e22809-148f-42ac-95bc-7efcf4cd2058"
+>>>>>>> 0b5ed9fd5d638a82441547de9ed1a683506683d8
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -49,7 +72,11 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Spring Boot.StudentServiceApplication.executor&quot;: &quot;Run&quot;,
+<<<<<<< HEAD
     &quot;git-widget-placeholder&quot;: &quot;feature/coordination-service&quot;,
+=======
+    &quot;git-widget-placeholder&quot;: &quot;auth&quot;,
+>>>>>>> 0b5ed9fd5d638a82441547de9ed1a683506683d8
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/bryan/Desktop/1/1. U/6. SEMESTRE/PROYECTO FINAL/Exe/Academic-Projects/Academic-Projects/Microservices-Academic-Projects/StudentService&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -90,10 +117,15 @@
       <workItem from="1747935805248" duration="1756000" />
       <workItem from="1748388072023" duration="1864000" />
       <workItem from="1749222059893" duration="2020000" />
+<<<<<<< HEAD
       <workItem from="1749225951124" duration="164000" />
       <workItem from="1749226791658" duration="120000" />
       <workItem from="1749512429524" duration="624000" />
       <workItem from="1749579133568" duration="1840000" />
+=======
+      <workItem from="1749511227811" duration="2647000" />
+      <workItem from="1749520814005" duration="347000" />
+>>>>>>> 0b5ed9fd5d638a82441547de9ed1a683506683d8
     </task>
     <servers />
   </component>

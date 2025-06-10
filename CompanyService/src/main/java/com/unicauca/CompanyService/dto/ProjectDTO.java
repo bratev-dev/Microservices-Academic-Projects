@@ -21,6 +21,6 @@ public class ProjectDTO {
     private String status; // Usamos String para recibir el estado
     private String comments;
     @NotNull
-    private Long companyId;
+    private String companyId;
     private Long assignedTo;
 }

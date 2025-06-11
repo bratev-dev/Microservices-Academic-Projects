@@ -34,7 +34,6 @@ public class ProjectDataLoader implements CommandLineRunner {
         project1.setComments("Proyecto inicial");
         projectRepository.save(project1);
 
-        /*
         // Proyecto 2
         Project project2 = new Project();
         project2.setBudget(5000000);
@@ -412,6 +411,5 @@ public class ProjectDataLoader implements CommandLineRunner {
         project30.setStatus(ProjectStatus.IN_PROGRESS);
         project30.setComments("Transporte inteligente en desarrollo");
         projectRepository.save(project30);
-        */
     }
 }

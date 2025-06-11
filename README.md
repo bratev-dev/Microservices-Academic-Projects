@@ -8,17 +8,10 @@ Este repositorio contiene un conjunto de microservicios desarrollados con el obj
 
 El sistema está dividido en múltiples microservicios independientes que se comunican entre sí. Cada servicio encapsula una funcionalidad específica del dominio:
 
-- **users-service**: Manejo de usuarios (estudiantes, docentes, administradores).
-- **project-service**: Gestión de proyectos académicos.
-- **qualification-service**: Administración de calificaciones y evaluaciones.
-- **delivery-service**: Control de entregas y revisiones de proyectos.
-- **gateway-service**: API Gateway para unificar el acceso a los servicios.
-- **config-service**: Servicio de configuración centralizada.
-- **eureka-server**: Descubrimiento de servicios (Service Registry).
-- **admin-service**: Servicio administrativo y monitoreo.
-- **security-service**: Autenticación y autorización.
-
-Cada servicio sigue el principio de responsabilidad única y puede desplegarse de forma independiente.
+- **Gateway-service**: Autenticación y Autorización de usuarios (estudiantes, docentes, administradores).
+- **Company-service**: Gestión de Empresas y sus proyectos académicos postulados.
+- **Coordinator-service**: Gestion de postulaciones y evaluaciones.
+- **Student-service**: Gestión de postulaciones y revisiones de proyectos.
 
 ---
 
@@ -29,7 +22,6 @@ Cada servicio sigue el principio de responsabilidad única y puede desplegarse d
 - **Docker** para contenerización
 - **Maven** como gestor de dependencias
 - **JWT** para autenticación
-- **MySQL/PostgreSQL** (dependiendo del servicio)
 - **Lombok** para simplificación del código
 
 ---
@@ -40,7 +32,7 @@ Cada servicio sigue el principio de responsabilidad única y puede desplegarse d
 
 - Java 11
 - Maven 3.8+
-- Docker y Docker Compose (opcional pero recomendado)
+- Docker y Docker Compose
 
 ### Clonación del Repositorio
 

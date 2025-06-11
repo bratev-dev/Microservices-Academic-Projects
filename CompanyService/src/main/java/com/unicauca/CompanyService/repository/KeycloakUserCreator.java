@@ -26,8 +26,8 @@ public class KeycloakUserCreator {
     private final String TARGET_REALM = "sistema";
 
     private final String CLIENT_ID = "admin-cli";
-    private final String ADMIN_USER = "juandv"; // admin de Keycloak
-    private final String ADMIN_PASS = "1234"; // password del admin de Keycloak
+    private final String ADMIN_USER = "admin"; // admin de Keycloak
+    private final String ADMIN_PASS = "admin"; // password del admin de Keycloak
     //private final String CLIENT_SECRET = "Hs9tPitAPOuX1oorA0bewzo0hUxxbpcX"; // Agregar esta constante
 
     public void createUserInKeycloak(Company company) {

@@ -1,6 +1,6 @@
 # Sistema de Gestión de Proyectos Académicos
 
-Este repositorio contiene un conjunto de microservicios desarrollados con el objetivo de gestionar proyectos académicos en un entorno educativo. El sistema está orientado a permitir la administración de usuarios, proyectos, entregas, calificaciones y roles académicos de manera distribuida, utilizando una arquitectura basada en microservicios.
+Este repositorio contiene un conjunto de microservicios desarrollados con el objetivo de gestionar proyectos académicos en un entorno educativo. El sistema está orientado a permitir la administración de usuarios, proyectos, entregas, y roles académicos de manera distribuida, utilizando una arquitectura basada en microservicios.
 
 ---
 

@@ -4,29 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00b92b3a-4636-44c9-8459-94caa5cc2bb3" name="Changes" comment="">
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.form" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/ProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/ProjectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/ProjectService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/dto/ProjectDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/dto/ProjectDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/src/main/java/com/unicauca/CompanyService/entity/Project.java" afterDir="false" />
+    <list default="true" id="af177ee9-e09f-4160-b69e-795bba1866b8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/CompanyServiceApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/controller/CompanyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/controller/CompanyController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/ProjectDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/dto/ProjectDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Company.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Company.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/entity/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/repository/AuthFeignClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/repository/CompanyRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/repository/ProjectRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/CompanySecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/CompanySecurityConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CompanyService/target/classes/com/unicauca/CompanyService/service/ProjectService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/src/main/java/com/unicauca/CoordinatorService/domain/model/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/src/main/java/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/src/test/java/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/src/test/java/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity$JpaProjectEntityBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity$JpaProjectEntityBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/infraestructure/persistence/entity/JpaProjectEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/test-classes/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityMapperTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/test-classes/com/unicauca/CoordinatorService/infraestructure/JpaProjectEntityMapperTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/services/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/target/classes/com/mycompany/gestionproyectosacademicos/services/AuthService.class" afterDir="false" />
->>>>>>> 0b5ed9fd5d638a82441547de9ed1a683506683d8
+      <change beforePath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/ProjectDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CoordinatorService/target/classes/com/unicauca/CoordinatorService/presentation/dto/ProjectDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontApp/FrontApp/src/main/java/com/mycompany/gestionproyectosacademicos/presentation/GUICoordinator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,57 +30,41 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Rubeiro-Romero&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "JuanDv1"
   }
-}</component>
-<<<<<<< HEAD
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://bratev-dev@github.com/bratev-dev/Microservices-Academic-Projects.git&quot;,
-    &quot;accountId&quot;: &quot;130e4b1e-1c6d-4122-9e26-96e7c63c0dea&quot;
-=======
+}]]></component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://JuanDv1@github.com/bratev-dev/Microservices-Academic-Projects",
     "accountId": "d7e22809-148f-42ac-95bc-7efcf4cd2058"
->>>>>>> 0b5ed9fd5d638a82441547de9ed1a683506683d8
   }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
-  <component name="ProjectId" id="2wKQcsYf3J4s1DVycQTAOFrmr2S" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2yLByMvUU30Wo8QNlAhNncOlzJa" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.StudentServiceApplication.executor&quot;: &quot;Run&quot;,
-<<<<<<< HEAD
-    &quot;git-widget-placeholder&quot;: &quot;feature/coordination-service&quot;,
-=======
-    &quot;git-widget-placeholder&quot;: &quot;auth&quot;,
->>>>>>> 0b5ed9fd5d638a82441547de9ed1a683506683d8
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/bryan/Desktop/1/1. U/6. SEMESTRE/PROYECTO FINAL/Exe/Academic-Projects/Academic-Projects/Microservices-Academic-Projects/StudentService&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.StudentServiceApplication.executor": "Run",
+    "git-widget-placeholder": "feature/coordination-service",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="StudentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -108,24 +86,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="00b92b3a-4636-44c9-8459-94caa5cc2bb3" name="Changes" comment="" />
-      <created>1745787868520</created>
+      <changelist id="af177ee9-e09f-4160-b69e-795bba1866b8" name="Changes" comment="" />
+      <created>1749604227270</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1745787868520</updated>
-      <workItem from="1745787870032" duration="33000" />
-      <workItem from="1747935805248" duration="1756000" />
-      <workItem from="1748388072023" duration="1864000" />
-      <workItem from="1749222059893" duration="2020000" />
-<<<<<<< HEAD
-      <workItem from="1749225951124" duration="164000" />
-      <workItem from="1749226791658" duration="120000" />
-      <workItem from="1749512429524" duration="624000" />
-      <workItem from="1749579133568" duration="1840000" />
-=======
-      <workItem from="1749511227811" duration="2647000" />
-      <workItem from="1749520814005" duration="347000" />
->>>>>>> 0b5ed9fd5d638a82441547de9ed1a683506683d8
+      <updated>1749604227270</updated>
+      <workItem from="1749604228347" duration="655000" />
     </task>
     <servers />
   </component>

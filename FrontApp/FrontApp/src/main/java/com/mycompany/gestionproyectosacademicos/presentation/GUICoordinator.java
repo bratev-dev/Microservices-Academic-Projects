@@ -1264,7 +1264,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         Company company = companyService.getCompany(project.getCompanyId());
         if (company != null) {
             lblCompanyName.setText("<html>" + company.getName() + "</html>");
-            lblCompanyNit.setText(company.getNIT() != null ? String.valueOf(company.getNIT()) : "");
+            lblCompanyNit.setText(company.getNIT());
             lblCompanyEmail.setText(company.getEmail());
             lblCompanySector.setText(company.getSector());
             lblCompanyContactPhone.setText(company.getContactPhoneNumber());

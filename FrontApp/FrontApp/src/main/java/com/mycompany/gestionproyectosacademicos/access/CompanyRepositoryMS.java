@@ -122,7 +122,7 @@ public class CompanyRepositoryMS implements ICompanyRepository {
     @Override
     public Company findByNIT(String idCompany) {
         // Construir la URL completa para obtener la compañía
-        String url = apiUrl + idCompany;
+        String url = apiUrl + "/" + idCompany;
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(url);
             request.setHeader("Accept", "application/json");

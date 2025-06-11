@@ -1,12 +1,5 @@
 # Sistema de Gestión de Proyectos Académicos
 
-## Autores:
-- Javier Alexis Cerón Anacona
-- Brayan Steven Gomes Lasso
-- Jhonatan Palacios Gómez
-- Juan David Perdomo Ramos
-- Rubeiro Romero
-
 Este repositorio contiene un conjunto de microservicios desarrollados con el objetivo de gestionar proyectos académicos en un entorno educativo. El sistema está orientado a permitir la administración de usuarios, proyectos, entregas, calificaciones y roles académicos de manera distribuida, utilizando una arquitectura basada en microservicios.
 
 ---
@@ -54,3 +47,11 @@ Cada servicio sigue el principio de responsabilidad única y puede desplegarse d
 ```bash
 git clone https://github.com/bratev-dev/Microservices-Academic-Projects.git
 cd Microservices-Academic-Projects
+
+## Autores:
+- Javier Alexis Cerón Anacona
+- Brayan Steven Gomes Lasso
+- Jhonatan Palacios Gómez
+- Juan David Perdomo Ramos
+- Rubeiro Romero
+

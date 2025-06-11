@@ -33,6 +33,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import javax.swing.border.EmptyBorder;
@@ -46,6 +47,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 
@@ -87,7 +89,11 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         List<String> periods = this.periodGenerator.generateAcademicPeriods();
         for (String period : periods) {
             cmbAcademicPeriod.addItem(period);
+            cmbAcademicPeriodStatisticalControl.addItem(period);
         }
+        
+        // Cargar proyectos inicialmente
+        projectService.notifyObservers();
     }
 
     private void centerContentCells(JTable table) {
@@ -182,6 +188,10 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         pnlStatisticalControl = new javax.swing.JPanel();
         lblStatisticalControl = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        cmbAcademicPeriodStatisticalControl = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
 
         GUISeeDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         GUISeeDetails.setResizable(false);
@@ -845,6 +855,56 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         pnlStatisticalControl.add(lblStatisticalControl, java.awt.BorderLayout.NORTH);
 
         jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        cmbAcademicPeriodStatisticalControl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cmbAcademicPeriodStatisticalControl.setBorder(null);
+        cmbAcademicPeriodStatisticalControl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbAcademicPeriodStatisticalControlActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setText("Periodo Académico:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(314, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(28, 28, 28)
+                .addComponent(cmbAcademicPeriodStatisticalControl, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbAcademicPeriodStatisticalControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        jPanel5.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 661, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 496, Short.MAX_VALUE)
+        );
+
+        jPanel5.add(jPanel6, java.awt.BorderLayout.CENTER);
+
         pnlStatisticalControl.add(jPanel5, java.awt.BorderLayout.CENTER);
 
         pnlRight.add(pnlStatisticalControl, "card6");
@@ -1010,47 +1070,27 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         CardLayout cl = (CardLayout) pnlRight.getLayout();
         cl.show(pnlRight, "card6");
         changeColorBtn(btnStatisticalControl);
+        
+        // Obtener el período académico seleccionado (o el primero si no hay selección)
+        String selectedPeriod = (String) cmbAcademicPeriodStatisticalControl.getSelectedItem();
+        if (selectedPeriod == null && cmbAcademicPeriodStatisticalControl.getItemCount() > 0) {
+            selectedPeriod = (String) cmbAcademicPeriodStatisticalControl.getItemAt(0);
+        }
+        
+        // Filtrar los proyectos por el período académico seleccionado
+        List<Project> filteredProjects = selectedPeriod != null ? 
+                projectService.getProjectsByAcademicPeriod(selectedPeriod) : 
+                projectService.getProjects();
 
-        Map<String, Long> lista = projectService.countProjectsByState();
+        // Contar los proyectos por estado
+        Map<String, Long> projectCounts = projectService.countProjectsByState(filteredProjects);
 
-        jPanel5.removeAll();
-        jPanel5.setLayout(new BorderLayout());
-
-        // Panel contenedor con mejor espaciado
-        JPanel chartsContainer = new JPanel(new GridLayout(1, 2, 30, 30));
-        chartsContainer.setBorder(new EmptyBorder(40, 40, 40, 40));
-        chartsContainer.setBackground(Color.WHITE);
-
-        // Gráfico de pastel
-        JFreeChart pieChart = createPieChart(lista);
-        ChartPanel pieChartPanel = new ChartPanel(pieChart);
-        pieChartPanel.setPreferredSize(new Dimension(450, 350));
-        pieChartPanel.setBackground(Color.WHITE);
-
-        // Gráfico de barras
-        JFreeChart barChart = createBarChart(lista);
-        ChartPanel barChartPanel = new ChartPanel(barChart) {
-            @Override
-            public void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g;
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
-                                  RenderingHints.VALUE_ANTIALIAS_OFF); // Desactiva antialiasing para bordes perfectamente rectos
-                super.paintComponent(g2);
-            }
-        };
-        barChartPanel.setPreferredSize(new Dimension(450, 350));
-        barChartPanel.setBackground(Color.WHITE);
-
-        chartsContainer.add(pieChartPanel);
-        chartsContainer.add(barChartPanel);
-
-        jPanel5.add(chartsContainer, BorderLayout.CENTER);
-        jPanel5.revalidate();
-        jPanel5.repaint();
+        // Actualizar las gráficas
+        updateCharts(projectCounts);
     }//GEN-LAST:event_btnStatisticalControlActionPerformed
 
     private void cmbAcademicPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAcademicPeriodActionPerformed
-        List<Project> projects = projectService.getProjects();
+//        List<Project> projects = projectService.getProjects();
         String selectedPeriod = (String) cmbAcademicPeriod.getSelectedItem();
         // Filtrar los proyectos por el período académico seleccionado
         List<Project> filteredProjects = projectService.getProjectsByAcademicPeriod(selectedPeriod);
@@ -1145,6 +1185,20 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         }
     }//GEN-LAST:event_btnSaveStateActionPerformed
 
+    private void cmbAcademicPeriodStatisticalControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAcademicPeriodStatisticalControlActionPerformed
+        // Obtener el período académico seleccionado
+        String selectedPeriod = (String) cmbAcademicPeriodStatisticalControl.getSelectedItem();
+
+        // Filtrar los proyectos por el período académico seleccionado
+        List<Project> filteredProjects = projectService.getProjectsByAcademicPeriod(selectedPeriod);
+
+        // Contar los proyectos por estado para los proyectos filtrados
+        Map<String, Long> projectCounts = projectService.countProjectsByState(filteredProjects);
+
+        // Actualizar las gráficas con los nuevos datos
+        updateCharts(projectCounts);
+    }//GEN-LAST:event_cmbAcademicPeriodStatisticalControlActionPerformed
+
     private void changeColorBtn(JButton botonSeleccionado) {
         // Restaurar el estilo de todos los botones
         for (JButton boton : new JButton[]{btnStatisticalControl, btnRequests}) {
@@ -1164,24 +1218,36 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         inst.setVisible(true);
     }
 
-    public void openSeeDetails(int row) {
-        // Obtener el proyecto correspondiente a la fila seleccionada
-        List<Project> projects = projectService.getProjects();
-
-        // Verificar si la lista está vacía
-        if (projects == null || projects.isEmpty()) {
-            System.out.println("No hay proyectos disponibles.");
-            return; // Salir del método si no hay proyectos
+    public void openSeeDetails(int row) throws SQLException {
+        // Obtener el modelo de la tabla
+        DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
+        
+        // Verificar si la fila es válida
+        if (row < 0 || row >= model.getRowCount()) {
+            System.out.println("Índice fuera de los límites de la tabla.");
+            return;
         }
 
-        // Verificar si el índice (row) es válido
-        if (row < 0 || row >= projects.size()) {
-            System.out.println("Índice fuera de los límites de la lista de proyectos.");
-            return; // Salir del método si el índice no es válido
-        }
+        // Obtener el ID del proyecto desde la tabla (columna oculta)
+        Object idValue = tblRequests.getModel().getValueAt(row, 0); // Obtener como Object
 
-        // Obtener el proyecto correspondiente a la fila seleccionada
-        Project project = projects.get(row);
+        // Verificar el tipo y convertir
+        int projectId;
+        if (idValue instanceof Long) {
+            projectId = ((Long) idValue).intValue(); // Convertir Long a int
+        } else if (idValue instanceof Integer) {
+            projectId = (Integer) idValue; // Si ya es Integer, castear directamente
+        } else {
+            // Manejar el caso si el tipo es inesperado (lanzar excepción o loggear error)
+            throw new ClassCastException("El ID del proyecto no es ni Long ni Integer: " + idValue.getClass().getName());
+        }
+        // Buscar el proyecto por ID en el servicio
+        Project project = projectService.getProjectById(projectId);
+
+        if (project == null) {
+            System.out.println("No se encontró el proyecto con ID: " + projectId);
+            return;
+        }
 
         // Configurar los detalles del proyecto en GUISeeDetails
         lblProjectName.setText("<html>" + project.getName() + "</html>");
@@ -1198,7 +1264,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         Company company = companyService.getCompany(project.getCompanyId());
         if (company != null) {
             lblCompanyName.setText("<html>" + company.getName() + "</html>");
-            lblCompanyNit.setText(company.getNIT() != null ? String.valueOf(company.getNIT()) : "");
+            lblCompanyNit.setText(company.getNIT());
             lblCompanyEmail.setText(company.getEmail());
             lblCompanySector.setText(company.getSector());
             lblCompanyContactPhone.setText(company.getContactPhoneNumber());
@@ -1234,31 +1300,86 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
     @Override
     public void update(Object o) {
+        System.out.println("Actualizando tabla con datos...");
         // Verificar si el objeto notificado es una lista de proyectos
         if (o instanceof List<?>) {
             List<?> projects = (List<?>) o;
-
+            System.out.println("Número de proyectos recibidos: " + projects.size());
             // Crear un modelo de tabla para tblRequests
             //DefaultTableModel model = new DefaultTableModel(new String[]{"Nombre", "Empresa", "Opciones"}, 0);
-            DefaultTableModel model = new DefaultTableModel(new String[]{"Nombre", "Opciones"}, 0);
-
+            DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nombre", "Opciones"}, 0)
+            {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return column == 2; // Solo la columna de opciones es editable
+                }
+            };
+            
             // Llenar la tabla con los proyectos
             for (Object project : projects) {
                 if (project instanceof Project) {
                     Project p = (Project) project;
                     //model.addRow(new Object[]{p.getName(), p.getCompany().getName(), ""});
-                    model.addRow(new Object[]{p.getName(), ""});
+                    model.addRow(new Object[]{p.getId(), p.getName(), ""});
                 }
             }
-
+            
             // Asignar el modelo a la tabla
             tblRequests.setModel(model);
             tblRequests.getColumn("Opciones").setCellRenderer(new GUICoordinatorButtonRenderer());
             tblRequests.getColumn("Opciones").setCellEditor(new GUICoordinatorButtonEditor(new JCheckBox(), this));
 
+            // Ocultar la columna ID
+            TableColumn idColumn = tblRequests.getColumn("ID");
+            idColumn.setMinWidth(0);
+            idColumn.setMaxWidth(0);
+            idColumn.setWidth(0);
+            idColumn.setPreferredWidth(0);
+            
             // Centrar el contenido de las celdas en las columnas
             centerContentCells(tblRequests);
+            
+            // Forzar actualización visual
+            tblRequests.revalidate();
+            tblRequests.repaint();
         }
+    }
+    
+    private void updateCharts(Map<String, Long> projectCounts) {
+        jPanel6.removeAll();
+        jPanel6.setLayout(new BorderLayout());
+
+        // Panel contenedor con mejor espaciado
+        JPanel chartsContainer = new JPanel(new GridLayout(1, 2, 30, 30));
+        chartsContainer.setBorder(new EmptyBorder(40, 40, 40, 40));
+        chartsContainer.setBackground(Color.WHITE);
+
+        // Gráfico de pastel
+        JFreeChart pieChart = createPieChart(projectCounts);
+        ChartPanel pieChartPanel = new ChartPanel(pieChart);
+        pieChartPanel.setPreferredSize(new Dimension(450, 350));
+        pieChartPanel.setBackground(Color.WHITE);
+
+        // Gráfico de barras
+        JFreeChart barChart = createBarChart(projectCounts);
+        ChartPanel barChartPanel = new ChartPanel(barChart) {
+            @Override
+            public void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+                                  RenderingHints.VALUE_ANTIALIAS_OFF);
+                super.paintComponent(g2);
+            }
+        };
+        barChartPanel.setPreferredSize(new Dimension(450, 350));
+        barChartPanel.setBackground(Color.WHITE);
+
+        chartsContainer.add(pieChartPanel);
+        chartsContainer.add(barChartPanel);
+
+        jPanel6.add(chartsContainer, BorderLayout.CENTER);
+        jPanel6.revalidate();
+        jPanel6.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1273,13 +1394,17 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     private javax.swing.JToggleButton btnSaveState;
     private javax.swing.JButton btnStatisticalControl;
     private javax.swing.JComboBox<String> cmbAcademicPeriod;
+    private javax.swing.JComboBox<String> cmbAcademicPeriodStatisticalControl;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpLeft;

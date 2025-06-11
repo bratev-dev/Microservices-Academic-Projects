@@ -13,6 +13,7 @@ com\mycompany\gestionproyectosacademicos\state\Accepted.class
 com\mycompany\gestionproyectosacademicos\presentation\GUIStudentProjectList$4.class
 com\mycompany\gestionproyectosacademicos\access\ProjectRepositoryMS$2.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICompany$2.class
+com\mycompany\gestionproyectosacademicos\presentation\GUICoordinator$9.class
 com\mycompany\gestionproyectosacademicos\access\ConexionPostgreSQL.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICompany$5.class
 com\mycompany\gestionproyectosacademicos\services\UserServices.class
@@ -28,6 +29,7 @@ com\mycompany\gestionproyectosacademicos\presentation\GUIcompanyRegister$8.class
 com\mycompany\gestionproyectosacademicos\presentation\GUIProjectDetails$1.class
 com\mycompany\gestionproyectosacademicos\services\SessionContext.class
 com\mycompany\gestionproyectosacademicos\dto\ProjectDTO.class
+com\mycompany\gestionproyectosacademicos\presentation\GUICoordinator$10.class
 com\mycompany\gestionproyectosacademicos\presentation\CommentListener.class
 com\mycompany\gestionproyectosacademicos\presentation\GUICoordinatorButtonEditor.class
 com\mycompany\gestionproyectosacademicos\entities\Sector.class

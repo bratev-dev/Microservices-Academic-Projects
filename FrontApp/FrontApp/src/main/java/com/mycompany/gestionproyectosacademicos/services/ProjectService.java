@@ -4,9 +4,11 @@ import com.mycompany.gestionproyectosacademicos.access.IProjectRepository;
 import com.mycompany.gestionproyectosacademicos.entities.Project;
 import com.mycompany.gestionproyectosacademicos.observer.IObserver;
 import com.mycompany.gestionproyectosacademicos.observer.Subject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ProjectService implements Subject {
 
@@ -16,6 +18,7 @@ public class ProjectService implements Subject {
 
     public ProjectService(IProjectRepository repository) {
         this.repo = repository;
+        this.projects = repo.getAllProjects();
     }
 
     /**
@@ -23,8 +26,9 @@ public class ProjectService implements Subject {
     * 
     * @return Mapa donde la clave es el nombre del estado y el valor es la cantidad de proyectos en ese estado.
     */
-    public Map<String, Long> countProjectsByState() {
-        return repo.countProjectsByState();
+    public Map<String, Long> countProjectsByState(List<Project> projects) {
+        return projects.stream()
+                .collect(Collectors.groupingBy(Project::getStatus, Collectors.counting()));
     }
     
     public void addProject(Project project) {
@@ -33,7 +37,7 @@ public class ProjectService implements Subject {
     }
 
     public List<Project> getProjects() {
-        List<Project> projects = repo.getAllProjects();
+        this.projects = repo.getAllProjects();
         return projects;
     }
 
@@ -68,9 +72,18 @@ public class ProjectService implements Subject {
 
     @Override
     public void notifyObservers() {
+        this.projects = repo.getAllProjects();
         for (IObserver observer : observers) {
             observer.update(projects); // Notificar a los observadores con la lista de proyectos
         }
+    }
+    
+    public Project getProjectById(int id) throws SQLException {
+        return repo.getProjectById(id);
+    }
+    
+    public void clearProjects() {
+        this.projects.clear();
     }
 /*
     public int getNextProjectId() {

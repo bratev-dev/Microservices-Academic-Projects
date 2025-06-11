@@ -26,13 +26,6 @@ El sistema está dividido en múltiples microservicios independientes que se com
 
 ---
 
-## Cómo Ejecutar el Proyecto
-
-### Prerrequisitos
-
-- Java 11
-- Maven 3.8+
-- Docker y Docker Compose
 
 ### Clonación del Repositorio
 

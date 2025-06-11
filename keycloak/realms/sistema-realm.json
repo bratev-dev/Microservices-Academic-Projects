@@ -402,6 +402,32 @@
   "webAuthnPolicyPasswordlessAcceptableAaguids" : [ ],
   "webAuthnPolicyPasswordlessExtraOrigins" : [ ],
   "users" : [ {
+    "id" : "9e9282b7-4258-49ce-8865-6bedc63ecf14",
+    "username" : "company",
+    "firstName" : "company",
+    "lastName" : "company",
+    "email" : "company@gmail.com",
+    "emailVerified" : false,
+    "createdTimestamp" : 1749603377583,
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "23e0e6b6-4bda-4ea3-b7e1-81c7a63b8fea",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1749603388240,
+      "secretData" : "{\"value\":\"Q9BV7v6/lfZHcNevTWZh3vmRyvZxTE7DaJHQTt6VIxw=\",\"salt\":\"hlFNeF0rocegfZ/dacAwyQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-sistema" ],
+    "clientRoles" : {
+      "sistema-desktop" : [ "company" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
     "id" : "5afdb32c-f087-4eae-b14f-43ddf32fbdd8",
     "username" : "juan",
     "firstName" : "juan",
@@ -424,6 +450,32 @@
     "realmRoles" : [ "default-roles-sistema" ],
     "clientRoles" : {
       "sistema-desktop" : [ "student" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "378efd9c-a39b-49b3-98d2-acd103f607f0",
+    "username" : "julio",
+    "firstName" : "julio",
+    "lastName" : "Hurtado",
+    "email" : "julio@unicauca.edu.co",
+    "emailVerified" : false,
+    "createdTimestamp" : 1749603263614,
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "3ff5f474-3299-4ba6-981d-381c817738c4",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1749603275980,
+      "secretData" : "{\"value\":\"B7PMmi3t0b/tZjYOe89HMC3fVQVjauE2/9qR6N8r5qw=\",\"salt\":\"LFJpvt8vyorIudCuXP0gaA==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-sistema" ],
+    "clientRoles" : {
+      "sistema-desktop" : [ "coordinator" ]
     },
     "notBefore" : 0,
     "groups" : [ ]

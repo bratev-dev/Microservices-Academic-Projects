@@ -32,4 +32,6 @@ public class Project {
 
     // Atributo para saber a quién está asignado el proyecto
     private Long assignedTo;
+
+
 }

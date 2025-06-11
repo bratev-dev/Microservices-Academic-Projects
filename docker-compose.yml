@@ -6,6 +6,9 @@ services:
     container_name: keycloak
     command: start-dev --import-realm
     environment:
+      KC_HOSTNAME: keycloak
+      KC_HOSTNAME_STRICT: false
+      KC_FRONTEND_URL: http://keycloak:8080
       KEYCLOAK_ADMIN: rubeiro
       KEYCLOAK_ADMIN_PASSWORD: 1234
       KC_DB: postgres
@@ -31,6 +34,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"

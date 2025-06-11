@@ -1306,21 +1306,27 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
             List<?> projects = (List<?>) o;
             System.out.println("Número de proyectos recibidos: " + projects.size());
             // Crear un modelo de tabla para tblRequests
-            //DefaultTableModel model = new DefaultTableModel(new String[]{"Nombre", "Empresa", "Opciones"}, 0);
-            DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nombre", "Opciones"}, 0)
+            DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nombre", "Empresa","Opciones"}, 0)
             {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    return column == 2; // Solo la columna de opciones es editable
+                    return column == 3; // Solo la columna de opciones es editable
                 }
             };
-            
+
             // Llenar la tabla con los proyectos
             for (Object project : projects) {
                 if (project instanceof Project) {
                     Project p = (Project) project;
-                    //model.addRow(new Object[]{p.getName(), p.getCompany().getName(), ""});
-                    model.addRow(new Object[]{p.getId(), p.getName(), ""});
+                    String companyid = p.getCompanyId();
+                    Company c = companyService.getCompany(companyid);
+                    String companyName;
+                    if(c == null){
+                        companyName = "N/D";
+                    }else{
+                        companyName = c.getName();
+                    }
+                    model.addRow(new Object[]{p.getId(), p.getName(), companyName, ""});
                 }
             }
             

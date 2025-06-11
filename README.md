@@ -47,6 +47,9 @@ Cada servicio sigue el principio de responsabilidad única y puede desplegarse d
 ```bash
 git clone https://github.com/bratev-dev/Microservices-Academic-Projects.git
 cd Microservices-Academic-Projects
+```
+
+---
 
 ## Autores:
 - Javier Alexis Cerón Anacona

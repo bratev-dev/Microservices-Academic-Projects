@@ -55,6 +55,7 @@ public class GUILogin extends javax.swing.JFrame {
         agregarPlaceholder(txtEmail, "Ingrese el usuario!");
         agregarPlaceholder(txtPassword, "Ingrese su contraseña!");
     }
+
     private void agregarPlaceholder(JTextField textField, String placeholder) {
         textField.setText(placeholder);
         textField.setForeground(Color.GRAY);
@@ -317,14 +318,14 @@ public class GUILogin extends javax.swing.JFrame {
             txtEmail.requestFocus();
             return false;
         }
-/*
+        /*
         String regExEmail = "^[A-Za-z0-9+_.-]+@(.+)\\.com$";
         if (!Pattern.matches(regExEmail, email)) {
             Messages.showMessageDialog("El email ingresado no es válido.", "Atención");
             txtEmail.requestFocus();
             return false;
         }
-*/
+         */
         if (password.isEmpty()) {
             Messages.showMessageDialog("Debe ingresar la contraseña", "Atención");
             txtPassword.requestFocus();
@@ -366,7 +367,6 @@ public class GUILogin extends javax.swing.JFrame {
         GUIcompanyRegister register = new GUIcompanyRegister(companyService);    // GUICompany Register
         register.setVisible(true);
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;

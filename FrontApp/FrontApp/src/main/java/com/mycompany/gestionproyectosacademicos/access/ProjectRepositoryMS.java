@@ -52,10 +52,12 @@ public class ProjectRepositoryMS implements IProjectRepository {
     @Override
     public boolean evaluateProject(Long projectId, String newStatus) {
         try {
-            String url = BASE_PATH + "/" + projectId + "/evaluate";
-            String body = "{\"status\":\"" + newStatus + "\"}";
 
-            String response = ApiClient.post(url, body);
+            String url = BASE_PATH + "/" + projectId;
+            String body = "{\"status\":\"" + newStatus + "\"}";
+            System.out.println("Ms evalueProject:  " + url);
+            System.out.println("Body: " + body);
+            String response = ApiClient.put(url, body);
             if (response != null) {
                 if (projects != null) {
                     projects.stream()
@@ -151,23 +153,23 @@ public class ProjectRepositoryMS implements IProjectRepository {
         }
         return filteredProjects;
     }
-    
+
     @Override
     public Map<String, Long> countProjectsByState() {
-    try {
-        String jsonResponse = ApiClient.get(BASE_PATH + "/count-by-state");
-        if (jsonResponse == null) {
-            LOGGER.severe("No se pudo obtener respuesta del API");
+        try {
+            String jsonResponse = ApiClient.get(BASE_PATH + "/count-by-state");
+            if (jsonResponse == null) {
+                LOGGER.severe("No se pudo obtener respuesta del API");
+                return new HashMap<>();
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(jsonResponse, new TypeReference<Map<String, Long>>() {
+            });
+
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error al contar proyectos por estado", e);
             return new HashMap<>();
         }
-
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(jsonResponse, new TypeReference<Map<String, Long>>() {
-        });
-
-    } catch (Exception e) {
-        LOGGER.log(Level.SEVERE, "Error al contar proyectos por estado", e);
-        return new HashMap<>();
     }
-}
 }

@@ -17,5 +17,5 @@ public class AcademicPeriodFilter implements IFilter {
         }
         return filteredProjects;
     }
-    
+
 }

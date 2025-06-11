@@ -4,6 +4,7 @@ package com.mycompany.gestionproyectosacademicos.entities;
  * Clase que representa un usuario en el sistema.
  */
 public class User {
+
     private int id;
     private String username;
     private String password;

@@ -108,10 +108,7 @@
 //    }
 //    
 //}
-
 package com.mycompany.gestionproyectosacademicos.access;
-
-
 
 import javax.swing.JOptionPane;
 
@@ -140,10 +137,8 @@ import org.apache.http.util.EntityUtils;
 
 public class CompanyPostgreSQLRepository implements ICompanyRepository {
 
-
     private final Connection connection;
 
-   
     public CompanyPostgreSQLRepository(Connection connection) {
         this.connection = connection;
     }
@@ -195,71 +190,67 @@ public class CompanyPostgreSQLRepository implements ICompanyRepository {
             e.printStackTrace();  // también muestra en consola
             return false;
         }
-}
-
-
-    @Override
-   public boolean existsCompany(String nit, String email) {
-    CloseableHttpClient httpClient = HttpClients.createDefault();
-    boolean exists = false;
-
-    try {
-        // Codificar el parámetro email por si tiene caracteres especiales
-        String encodedEmail = URLEncoder.encode(email, StandardCharsets.UTF_8.toString());
-
-        // Construir la URL con los parámetros
-        String apiUrl = "http://localhost:8080/api/companies/exists?nit=" + nit + "&email=" + encodedEmail;
-
-        // Crear solicitud GET
-        HttpGet request = new HttpGet(apiUrl);
-        HttpResponse response = httpClient.execute(request);
-
-        int statusCode = response.getStatusLine().getStatusCode();
-
-        if (statusCode == 200) {
-            String jsonResponse = EntityUtils.toString(response.getEntity());
-            exists = Boolean.parseBoolean(jsonResponse); // Interpretar la respuesta JSON "true"/"false"
-        } else {
-            Logger.getLogger(getClass().getName()).log(Level.WARNING,
-                "Fallo al verificar existencia de empresa. Código: " + statusCode);
-        }
-    } catch (IOException e) {
-        Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error en existsCompany", e);
     }
 
-    return exists;
-}
+    @Override
+    public boolean existsCompany(String nit, String email) {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        boolean exists = false;
 
+        try {
+            // Codificar el parámetro email por si tiene caracteres especiales
+            String encodedEmail = URLEncoder.encode(email, StandardCharsets.UTF_8.toString());
+
+            // Construir la URL con los parámetros
+            String apiUrl = "http://localhost:8080/api/companies/exists?nit=" + nit + "&email=" + encodedEmail;
+
+            // Crear solicitud GET
+            HttpGet request = new HttpGet(apiUrl);
+            HttpResponse response = httpClient.execute(request);
+
+            int statusCode = response.getStatusLine().getStatusCode();
+
+            if (statusCode == 200) {
+                String jsonResponse = EntityUtils.toString(response.getEntity());
+                exists = Boolean.parseBoolean(jsonResponse); // Interpretar la respuesta JSON "true"/"false"
+            } else {
+                Logger.getLogger(getClass().getName()).log(Level.WARNING,
+                        "Fallo al verificar existencia de empresa. Código: " + statusCode);
+            }
+        } catch (IOException e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error en existsCompany", e);
+        }
+
+        return exists;
+    }
 
     @Override
     public Company findByNIT(String idCompany) {
-    CloseableHttpClient httpClient = HttpClients.createDefault();
-    ObjectMapper mapper = new ObjectMapper();
-    Company company = null;
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        ObjectMapper mapper = new ObjectMapper();
+        Company company = null;
 
-    try {
-        // Definir la URL de la API REST de empresas
-        String apiUrl = "http://localhost:8080/api/companies/nit/" + idCompany;
-        HttpGet request = new HttpGet(apiUrl);
+        try {
+            // Definir la URL de la API REST de empresas
+            String apiUrl = "http://localhost:8080/api/companies/nit/" + idCompany;
+            HttpGet request = new HttpGet(apiUrl);
 
-        // Ejecutar la solicitud
-        HttpResponse response = httpClient.execute(request);
+            // Ejecutar la solicitud
+            HttpResponse response = httpClient.execute(request);
 
-        int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode == 200) {
-            String jsonResponse = EntityUtils.toString(response.getEntity());
-            company = mapper.readValue(jsonResponse, Company.class); // Mapear a Company
-        } else {
-            Logger.getLogger(CompanyService.class.getName()).log(Level.SEVERE, 
-                "Error al obtener compañía. Código de estado: " + statusCode);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                String jsonResponse = EntityUtils.toString(response.getEntity());
+                company = mapper.readValue(jsonResponse, Company.class); // Mapear a Company
+            } else {
+                Logger.getLogger(CompanyService.class.getName()).log(Level.SEVERE,
+                        "Error al obtener compañía. Código de estado: " + statusCode);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CompanyService.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } catch (IOException ex) {
-        Logger.getLogger(CompanyService.class.getName()).log(Level.SEVERE, null, ex);
+
+        return company;
     }
-
-    return company;
-}
-
-  
 
 }

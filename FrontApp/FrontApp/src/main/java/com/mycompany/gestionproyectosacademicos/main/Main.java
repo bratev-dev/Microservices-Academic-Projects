@@ -19,6 +19,7 @@ import com.mycompany.gestionproyectosacademicos.services.CoordinatorService;
 import javax.swing.JFrame;
 
 public class Main {
+
     public static void main(String[] args) {
         UserRepositoryMS userRepo = new UserRepositoryMS();
         CompanyRepositoryMS compRepo = new CompanyRepositoryMS();

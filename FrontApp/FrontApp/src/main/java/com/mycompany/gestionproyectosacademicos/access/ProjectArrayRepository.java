@@ -12,15 +12,15 @@ import java.util.Map;
 /**
  * Repositorio en memoria con una lista de proyectos predefinidos
  */
+public class ProjectArrayRepository implements IProjectRepository {
 
-
-public class ProjectArrayRepository implements IProjectRepository{
     private static List<Project> projects;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
     /**
      * @brief Constructor que inicializa la lista de proyectos.
      */
-    
+
     public ProjectArrayRepository() {
         /*if (projects == null) {
             projects = new ArrayList<>();
@@ -148,12 +148,12 @@ public class ProjectArrayRepository implements IProjectRepository{
             "9", "4000000", "2025-12-10", "En revisión", company));
         }*/
     }
-    
+
     @Override
     public List<Project> getAllProjects() {
         return projects;
     }
-    
+
     @Override
     public List<Project> getProjectsByAcademicPeriod(String academicPeriod) {
         List<Project> filteredProjects = new ArrayList<>();
@@ -167,8 +167,8 @@ public class ProjectArrayRepository implements IProjectRepository{
 
     @Override
     public Project getProjectById(int projectId) {
-        for(Project project : projects) {
-            if(project.getId() == projectId) {
+        for (Project project : projects) {
+            if (project.getId() == projectId) {
                 return project;
             }
         }

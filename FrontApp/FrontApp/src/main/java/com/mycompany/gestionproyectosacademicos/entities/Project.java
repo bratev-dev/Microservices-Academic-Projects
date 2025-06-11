@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Project {
-    
+
     private Long id;
     private String name;
     private String summary;
@@ -13,10 +13,10 @@ public class Project {
     private String description;
     private Integer maxtimeMonths;
     private double budget;
-    
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private String date;
-    
+
     private String status;
     //private Company company;
     private String comments;
@@ -118,13 +118,12 @@ public class Project {
         this.assignedTo = assignedTo;
     }
     private Long assignedTo;
-    
+
     //private int calificacion;
     //private String request;
     //private Student[] students;
     //private List<IObserver> observers = new ArrayList<>();
-
-    public  Project(){
+    public Project() {
         //Constructor por defecto
     }
 
@@ -140,6 +139,5 @@ public class Project {
             return year + "-2"; // Segundo semestre
         }
     }
-    
-    
+
 }

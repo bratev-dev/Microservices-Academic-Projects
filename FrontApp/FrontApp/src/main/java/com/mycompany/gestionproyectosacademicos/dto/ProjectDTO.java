@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectDTO {
+
     private String name;
     private int id;
     private String description;
@@ -17,11 +18,11 @@ public class ProjectDTO {
     private String companyId;
     private String companyName;
     private String status;
-    
+
     // Constructor vacío necesario para Jackson
     public ProjectDTO() {
     }
-    
+
     public ProjectDTO(String name, int id, String description, String summary, String companyId, String companyName, String status) {
         this.name = name;
         this.id = id;
@@ -33,16 +34,34 @@ public class ProjectDTO {
     }
 
     // Getters 
-    public String getName() { return name; }
-    public int getId() { return id; }
-    public String getDescription() { return description; }
-    public String getSummary() { return summary; }
-    public String getCompanyId() {return companyId; }
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
     public String getCompanyName() {
         String companyName = null;
         companyName = CompanyAPIClient.getCompanyNameById(companyId);
         System.out.println("Nombre recuperado de la empresa: " + companyName);
-        return companyName; }
-    public String getStatus() { return status; }
-}
+        return companyName;
+    }
 
+    public String getStatus() {
+        return status;
+    }
+}

@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.gestionproyectosacademicos.services;
+
 public class SessionContext {
+
     private static String accessToken;
     private static String refreshToken;
     private static long expirationTime;
@@ -36,4 +38,3 @@ public class SessionContext {
         expirationTime = 0;
     }
 }
-

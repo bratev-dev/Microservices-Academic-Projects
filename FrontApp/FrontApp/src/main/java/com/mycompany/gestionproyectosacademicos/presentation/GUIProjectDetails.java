@@ -5,6 +5,7 @@ import com.mycompany.gestionproyectosacademicos.dto.ProjectDTO;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 /**
  *
  * @author Jhonatan
@@ -12,13 +13,14 @@ import javax.swing.*;
 public class GUIProjectDetails extends javax.swing.JFrame {
 
     private ProjectDTO project;
-    
+
     public GUIProjectDetails() {
         this(null); // Constructor por defecto
     }
-    
+
     /**
      * Constructor que inicializa la ventana con un proyecto específico.
+     *
      * @param project El proyecto a mostrar
      */
     public GUIProjectDetails(ProjectDTO project) {
@@ -27,8 +29,6 @@ public class GUIProjectDetails extends javax.swing.JFrame {
         loadProjectData();
     }
 
-    
-    
     //Personalizacion de los botones del sidebar.
     private void customizeButton(JButton button, String text, boolean isLogout) {
         button.setText(text);
@@ -40,20 +40,20 @@ public class GUIProjectDetails extends javax.swing.JFrame {
         button.setHorizontalAlignment(SwingConstants.LEFT);
         button.setOpaque(true);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+
         if (isLogout) {
             button.setPreferredSize(new Dimension(150, 40));
         } else {
             button.setPreferredSize(new Dimension(200, 40));
         }
-        
+
         // Añadir borde para simular botones
         button.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createEmptyBorder(5, 10, 5, 10),
-            BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(98, 114, 129))
+                BorderFactory.createEmptyBorder(5, 10, 5, 10),
+                BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(98, 114, 129))
         ));
     }
-    
+
     //Carga datos del proyecto en la interfaz.
     private void loadProjectData() {
         SwingUtilities.invokeLater(() -> {
@@ -98,7 +98,7 @@ public class GUIProjectDetails extends javax.swing.JFrame {
             companyPanel.add(companyLabel, BorderLayout.NORTH);
             companyPanel.add(companyDetails, BorderLayout.CENTER);
             companyPanel.add(companyDetailsLabel, BorderLayout.SOUTH);
-            companyPanel.add(companyScroll, BorderLayout.AFTER_LAST_LINE); 
+            companyPanel.add(companyScroll, BorderLayout.AFTER_LAST_LINE);
 
             // Panel de detalles del proyecto
             JPanel projectPanel = new JPanel(new BorderLayout(10, 10));
@@ -125,7 +125,7 @@ public class GUIProjectDetails extends javax.swing.JFrame {
             // Panel de botones
             JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
             buttonPanel.setBackground(Color.WHITE);
-            
+
             JButton btnPostulate = new JButton("Postularse");
             btnPostulate.setFont(new Font("Arial", Font.BOLD, 14));
             btnPostulate.setForeground(Color.WHITE);
@@ -135,7 +135,7 @@ public class GUIProjectDetails extends javax.swing.JFrame {
             btnPostulate.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btnPostulate.setPreferredSize(new Dimension(120, 40));
             btnPostulate.addActionListener(this::btnPostulateActionPerformed);
-            
+
             JButton btnBack = new JButton("Atrás");
             btnBack.setFont(new Font("Arial", Font.BOLD, 14));
             btnBack.setForeground(Color.WHITE);
@@ -145,21 +145,21 @@ public class GUIProjectDetails extends javax.swing.JFrame {
             btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btnBack.setPreferredSize(new Dimension(120, 40));
             btnBack.addActionListener(this::btnBackActionPerformed);
-            
+
             buttonPanel.add(btnPostulate);
             buttonPanel.add(btnBack);
-            
+
             // Panel para organizar los dos paneles de información
             JPanel infoPanel = new JPanel(new GridLayout(1, 2, 20, 0));
             infoPanel.setBackground(Color.WHITE);
             infoPanel.add(companyPanel);
             infoPanel.add(projectPanel);
-            
+
             // Agregar todos los componentes al panel principal
             contentPanel.add(projectTitle, BorderLayout.NORTH);
             contentPanel.add(infoPanel, BorderLayout.CENTER);
             contentPanel.add(buttonPanel, BorderLayout.SOUTH);
-            
+
             // Configurar el panel principal en la ventana
             jPanelProjectList.removeAll();
             jPanelProjectList.setLayout(new BorderLayout());
@@ -168,7 +168,7 @@ public class GUIProjectDetails extends javax.swing.JFrame {
             jPanelProjectList.repaint();
         });
     }
-    
+
     //Método que se invoca cuando se presiona el botón Postularse.
     private void btnPostulateActionPerformed(ActionEvent evt) {
         int studentId = 1; // Luego lo obtendrás del login
@@ -183,14 +183,11 @@ public class GUIProjectDetails extends javax.swing.JFrame {
         }
     }
 
-
-    
     //Método que se invoca cuando se presiona el botón Atrás.
     private void btnBackActionPerformed(ActionEvent evt) {
         dispose();
         new GUIStudentProjectList().setVisible(true);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -350,7 +347,7 @@ public class GUIProjectDetails extends javax.swing.JFrame {
         //login.setVisible(true);
         this.dispose(); // Cierra la ventana actual (panel estudiante)
     }//GEN-LAST:event_btnCloseSessionStudentActionPerformed
- 
+
     /**
      * @param args the command line arguments
      */

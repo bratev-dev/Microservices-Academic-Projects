@@ -8,7 +8,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AcademicPeriodGeneratorService{
+public class AcademicPeriodGeneratorService {
+
     public List<String> generateAcademicPeriods() {
         List<String> periods = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();

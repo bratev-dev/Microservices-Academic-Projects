@@ -22,15 +22,16 @@ public class ProjectService implements Subject {
     }
 
     /**
-    * @brief Obtiene el conteo de proyectos agrupados por su estado.
-    * 
-    * @return Mapa donde la clave es el nombre del estado y el valor es la cantidad de proyectos en ese estado.
-    */
+     * @brief Obtiene el conteo de proyectos agrupados por su estado.
+     *
+     * @return Mapa donde la clave es el nombre del estado y el valor es la
+     * cantidad de proyectos en ese estado.
+     */
     public Map<String, Long> countProjectsByState(List<Project> projects) {
         return projects.stream()
                 .collect(Collectors.groupingBy(Project::getStatus, Collectors.counting()));
     }
-    
+
     public void addProject(Project project) {
         repo.saveProject(project); // Agrega al repositorio
         notifyObservers(); // Notifica a todos los observers que la lista cambió
@@ -46,11 +47,11 @@ public class ProjectService implements Subject {
         return repo.getProjectsByAcademicPeriod(academicPeriod);
     }
 
-  /*  public void deleteProject(int projectId) {
+    /*  public void deleteProject(int projectId) {
         repo.deleteProject(projectId);
         notifyObservers();
     }
-*/
+     */
     public boolean evaluateProject(Long projectId, String newStatus) {
         boolean success = repo.evaluateProject(projectId, newStatus);
         if (success) {
@@ -58,7 +59,7 @@ public class ProjectService implements Subject {
         }
         return success;
     }
-    
+
     // Métodos de Observer
     @Override
     public void addObserver(IObserver observer) {
@@ -77,15 +78,15 @@ public class ProjectService implements Subject {
             observer.update(projects); // Notificar a los observadores con la lista de proyectos
         }
     }
-    
+
     public Project getProjectById(int id) throws SQLException {
         return repo.getProjectById(id);
     }
-    
+
     public void clearProjects() {
         this.projects.clear();
     }
-/*
+    /*
     public int getNextProjectId() {
         return repo.getNextProjectId();
     }*/

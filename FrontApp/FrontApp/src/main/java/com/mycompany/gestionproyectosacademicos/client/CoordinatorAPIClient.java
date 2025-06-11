@@ -2,6 +2,7 @@ package com.mycompany.gestionproyectosacademicos.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.gestionproyectosacademicos.dto.ProjectDTO;
+import com.mycompany.gestionproyectosacademicos.entities.Project;
 
 public class CoordinatorAPIClient {
 

@@ -7,7 +7,7 @@ public class CompanyAPIClient {
 
     private static final String BASE_PATH = "/company/api/companies";
 
-    public static String getCompanyNameById(Long companyId) {
+    public static String getCompanyNameById(String companyId) {
         String endpoint = BASE_PATH + "/nombre/" + companyId;
         String json = ApiClient.get(endpoint);
 

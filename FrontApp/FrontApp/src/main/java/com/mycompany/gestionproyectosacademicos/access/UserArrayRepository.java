@@ -7,7 +7,10 @@ import java.util.List;
 /**
  * Repositorio en memoria con una lista de usuarios predefinidos
  */
-public class UserArrayRepository implements IUserRepository {
+public class UserArrayRepository
+        //implements IUserRepository 
+{
+    /*
     private static List<User> users;
 
     public UserArrayRepository() {
@@ -22,7 +25,7 @@ public class UserArrayRepository implements IUserRepository {
 
     /**
      * Método para validar si un usuario existe con el correo y contraseña dados
-     */
+     // 
     @Override
     public User authenticate(String email, String password) {
         for (User user : users) {
@@ -34,15 +37,14 @@ public class UserArrayRepository implements IUserRepository {
     }
 
     /**
-     * Método para obtener todos los usuarios (solo para pruebas)
-     */
+   
     public List<User> listarUsuarios() {
         return users;
     }
 
     /**
      * Método para guardar un nuevo usuario en la lista en memoria
-     */
+    
     @Override
     public boolean saveUser(int id, String email, String password, String role) {
         // Validar que el email no esté duplicado
@@ -67,7 +69,7 @@ public class UserArrayRepository implements IUserRepository {
 
     /**
      * Método para obtener el ID de un usuario por su email
-     */
+
     @Override
     public int getUserIdByEmail(String email) {
         for (User user : users) {
@@ -77,4 +79,5 @@ public class UserArrayRepository implements IUserRepository {
         }
         return -1; // Retornar -1 si no se encuentra el usuario
     }
+*/
 }

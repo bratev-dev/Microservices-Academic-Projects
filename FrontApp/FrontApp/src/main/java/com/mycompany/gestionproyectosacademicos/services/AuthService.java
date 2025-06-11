@@ -64,7 +64,7 @@ public class AuthService {
                 }
                 CompanyService companyService = new CompanyService(companyRepo);
                 ProjectService projectService = new ProjectService(projectRepo);
-                GUICompany guiCompany = new GUICompany(companyService, projectService, String.valueOf(user.getId()));
+                GUICompany guiCompany = new GUICompany(companyService, projectService, user.getEmail());
 
                 guiCompany.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 return guiCompany;

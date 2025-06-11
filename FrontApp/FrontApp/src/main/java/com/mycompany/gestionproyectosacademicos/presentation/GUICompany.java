@@ -474,7 +474,7 @@ public class GUICompany extends javax.swing.JFrame {
         sdf.parse(date); // Si la fecha es inválida, lanzará ParseException
     }
 
-    private void btnPublish1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void btnPublish1ActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             String name = jTextNameProject.getText().trim();
             String summary = jTextSummary.getText().trim();
@@ -572,7 +572,6 @@ public class GUICompany extends javax.swing.JFrame {
         botonSeleccionado.setBackground(colorBackSelect);
         botonSeleccionado.setForeground(colorTxtSelect);
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCloseSessionCompany;

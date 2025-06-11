@@ -55,17 +55,17 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
     // Colores para los gráficos de barras y pastel
     private static final Color[] STATE_COLORS = {
-        new Color(19, 45, 70),    // #00039d
-        new Color(46, 133, 110),  // #1514b0
-        new Color(240, 244, 248),  // #2a24c4
-        new Color(255, 126, 103),  // #3e35d7
-        new Color(74, 137, 220)   // #5345ea
+        new Color(19, 45, 70), // #00039d
+        new Color(46, 133, 110), // #1514b0
+        new Color(240, 244, 248), // #2a24c4
+        new Color(255, 126, 103), // #3e35d7
+        new Color(74, 137, 220) // #5345ea
     };
 
     private static final String[] STATE_ORDER = {
         "RECEIVED", "IN_PROGRESS", "ACCEPTED", "CLOSED", "REJECTED"
     };
-    
+
     ProjectService projectService = new ProjectService(new ProjectRepositoryMS());
     CompanyService companyService = new CompanyService(new CompanyRepositoryMS());
     private final AcademicPeriodGeneratorService periodGenerator;
@@ -91,7 +91,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
             cmbAcademicPeriod.addItem(period);
             cmbAcademicPeriodStatisticalControl.addItem(period);
         }
-        
+
         // Cargar proyectos inicialmente
         projectService.notifyObservers();
     }
@@ -936,11 +936,11 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         // Traducir los estados a español para mejor presentación
         Map<String, String> stateTranslations = Map.of(
-            "RECEIVED", "Recibidos",
-            "IN_PROGRESS", "En progreso",
-            "ACCEPTED", "Aceptados",
-            "CLOSED", "Cerrados",
-            "REJECTED", "Rechazados"
+                "RECEIVED", "Recibidos",
+                "IN_PROGRESS", "En progreso",
+                "ACCEPTED", "Aceptados",
+                "CLOSED", "Cerrados",
+                "REJECTED", "Rechazados"
         );
 
         // Agregar datos al dataset
@@ -951,31 +951,31 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         // Crear el gráfico de pastel
         JFreeChart chart = ChartFactory.createPieChart(
-            "",  // Título
-            dataset,                 // Dataset
-            true,                    // Mostrar leyenda
-            true,                    // Mostrar tooltips
-            false                    // No URLs
+                "", // Título
+                dataset, // Dataset
+                true, // Mostrar leyenda
+                true, // Mostrar tooltips
+                false // No URLs
         );
 
         // Personalizar el gráfico
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setSectionOutlinesVisible(false);
-        
+
         plot.setLabelGenerator(null);
 
         // Eliminar bordes de las secciones
         plot.setSectionOutlinesVisible(false);
-        
+
         // Configurar el fondo transparente
         plot.setBackgroundPaint(null);          // Fondo del plot transparente
         plot.setOutlineVisible(false);          // Eliminar borde del plot
         chart.setBackgroundPaint(null);         // Fondo del chart transparente
-        
+
         // Agregar márgenes internos al gráfico
         plot.setInteriorGap(0.1); // 10% de espacio alrededor del pastel
         plot.setLabelGap(0.02);   // Espacio entre etiquetas y gráfico
-        
+
         // Asignar colores personalizados
         for (int i = 0; i < STATE_ORDER.length; i++) {
             String translatedState = stateTranslations.get(STATE_ORDER[i]);
@@ -983,7 +983,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
                 plot.setSectionPaint(translatedState, STATE_COLORS[i]);
             }
         }
-        
+
         return chart;
     }
 
@@ -993,11 +993,11 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         // Traducir los estados a español para mejor presentación
         Map<String, String> stateTranslations = Map.of(
-            "RECEIVED", "Recibidos",
-            "IN_PROGRESS", "En progreso",
-            "ACCEPTED", "Aceptados",
-            "CLOSED", "Cerrados",
-            "REJECTED", "Rechazados"
+                "RECEIVED", "Recibidos",
+                "IN_PROGRESS", "En progreso",
+                "ACCEPTED", "Aceptados",
+                "CLOSED", "Cerrados",
+                "REJECTED", "Rechazados"
         );
 
         // Asegurarse de que todos los estados estén presentes, incluso con valor 0
@@ -1009,10 +1009,10 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         // Crear el gráfico de barras
         JFreeChart chart = ChartFactory.createBarChart(
-            "",  // Título
-            "Estado",               // Etiqueta eje X
-            "Cantidad",             // Etiqueta eje Y
-            dataset                // Dataset
+                "", // Título
+                "Estado", // Etiqueta eje X
+                "Cantidad", // Etiqueta eje Y
+                dataset // Dataset
         );
 
         // Personalizar el gráfico
@@ -1024,7 +1024,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         renderer.setSeriesPaint(0, barColor);   // Todas las series usan el mismo color
 
         renderer.setBarPainter(new StandardBarPainter());
-        
+
         // Estilo de las barras (sin sombras)
         renderer.setDrawBarOutline(false);
         renderer.setShadowVisible(false); // Deshabilitar sombras
@@ -1033,7 +1033,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         // Deshabilitar cualquier efecto 3D
         //renderer.setRenderAsPercentages(false);
         renderer.setGradientPaintTransformer(null);
-        
+
         // Espaciado entre barras
         renderer.setItemMargin(0.2);
 
@@ -1057,30 +1057,30 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
 
         // Configurar fondo del chart
         chart.setBackgroundPaint(Color.WHITE);
-        
+
         // Opcional: Personalizar fuente de las etiquetas
         Font labelFont = new Font("SansSerif", Font.PLAIN, 12);
         domainAxis.setTickLabelFont(labelFont);
         rangeAxis.setTickLabelFont(labelFont);
-        
+
         return chart;
     }
-    
+
     private void btnStatisticalControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticalControlActionPerformed
         CardLayout cl = (CardLayout) pnlRight.getLayout();
         cl.show(pnlRight, "card6");
         changeColorBtn(btnStatisticalControl);
-        
+
         // Obtener el período académico seleccionado (o el primero si no hay selección)
         String selectedPeriod = (String) cmbAcademicPeriodStatisticalControl.getSelectedItem();
         if (selectedPeriod == null && cmbAcademicPeriodStatisticalControl.getItemCount() > 0) {
             selectedPeriod = (String) cmbAcademicPeriodStatisticalControl.getItemAt(0);
         }
-        
+
         // Filtrar los proyectos por el período académico seleccionado
-        List<Project> filteredProjects = selectedPeriod != null ? 
-                projectService.getProjectsByAcademicPeriod(selectedPeriod) : 
-                projectService.getProjects();
+        List<Project> filteredProjects = selectedPeriod != null
+                ? projectService.getProjectsByAcademicPeriod(selectedPeriod)
+                : projectService.getProjects();
 
         // Contar los proyectos por estado
         Map<String, Long> projectCounts = projectService.countProjectsByState(filteredProjects);
@@ -1156,17 +1156,18 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         String newStatus = "";
 
         if (rBtnApprove.isSelected()) {
-            newStatus = "APPROVED";
+            newStatus = "ACCEPTED";
         } else if (rBtnAssign.isSelected()) {
-            newStatus = "ASSIGNED";
+            newStatus = "IN_PROGRESS";//
         } else if (rBtnComplete.isSelected()) {
-            newStatus = "COMPLETED";
+            newStatus = "CLOSED";
         } else if (rBtnPending.isSelected()) {
-            newStatus = "PENDING";
+            newStatus = "RECEIVED";//
         } else if (rBtnReject.isSelected()) {
             newStatus = "REJECTED";
         }
         System.out.println(newStatus);
+        System.out.println("IdProject: " + selectedProject.getId() + " Status:" + newStatus);
         boolean success = projectService.evaluateProject(selectedProject.getId(), newStatus);
 
         if (success) {
@@ -1221,7 +1222,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
     public void openSeeDetails(int row) throws SQLException {
         // Obtener el modelo de la tabla
         DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
-        
+
         // Verificar si la fila es válida
         if (row < 0 || row >= model.getRowCount()) {
             System.out.println("Índice fuera de los límites de la tabla.");
@@ -1260,7 +1261,6 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
         lblState.setText(project.getStatus());
 
         // Configurar los detalles de la empresa
-        
         Company company = companyService.getCompany(project.getCompanyId());
         if (company != null) {
             lblCompanyName.setText("<html>" + company.getName() + "</html>");
@@ -1306,8 +1306,7 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
             List<?> projects = (List<?>) o;
             System.out.println("Número de proyectos recibidos: " + projects.size());
             // Crear un modelo de tabla para tblRequests
-            DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nombre", "Empresa","Opciones"}, 0)
-            {
+            DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nombre", "Empresa", "Opciones"}, 0) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     return column == 3; // Solo la columna de opciones es editable
@@ -1321,15 +1320,15 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
                     String companyid = p.getCompanyId();
                     Company c = companyService.getCompany(companyid);
                     String companyName;
-                    if(c == null){
+                    if (c == null) {
                         companyName = "N/D";
-                    }else{
+                    } else {
                         companyName = c.getName();
                     }
                     model.addRow(new Object[]{p.getId(), p.getName(), companyName, ""});
                 }
             }
-            
+
             // Asignar el modelo a la tabla
             tblRequests.setModel(model);
             tblRequests.getColumn("Opciones").setCellRenderer(new GUICoordinatorButtonRenderer());
@@ -1341,16 +1340,16 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
             idColumn.setMaxWidth(0);
             idColumn.setWidth(0);
             idColumn.setPreferredWidth(0);
-            
+
             // Centrar el contenido de las celdas en las columnas
             centerContentCells(tblRequests);
-            
+
             // Forzar actualización visual
             tblRequests.revalidate();
             tblRequests.repaint();
         }
     }
-    
+
     private void updateCharts(Map<String, Long> projectCounts) {
         jPanel6.removeAll();
         jPanel6.setLayout(new BorderLayout());
@@ -1372,8 +1371,8 @@ public class GUICoordinator extends javax.swing.JFrame implements IObserver {
             @Override
             public void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g;
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
-                                  RenderingHints.VALUE_ANTIALIAS_OFF);
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                        RenderingHints.VALUE_ANTIALIAS_OFF);
                 super.paintComponent(g2);
             }
         };

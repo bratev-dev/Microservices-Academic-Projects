@@ -1,6 +1,7 @@
 package com.mycompany.gestionproyectosacademicos.entities;
 
 public class Coordinator {
+
     private int id;
     private String name;
     private int userId; // Nuevo atributo para la relación con la tabla "user"

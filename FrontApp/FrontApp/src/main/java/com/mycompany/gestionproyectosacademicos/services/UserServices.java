@@ -20,7 +20,7 @@ public class UserServices {
     /**
      * Autentica a un usuario verificando su correo y contraseña.
      *
-     * @param email    Correo electrónico del usuario.
+     * @param email Correo electrónico del usuario.
      * @param password Contraseña del usuario.
      * @return true si la autenticación es exitosa, false en caso contrario.
      */
@@ -33,7 +33,8 @@ public class UserServices {
      * Guarda un nuevo usuario en la base de datos.
      *
      * @param user Usuario a guardar.
-     * @return true si el usuario se guardó correctamente, false en caso contrario.
+     * @return true si el usuario se guardó correctamente, false en caso
+     * contrario.
      */
     public boolean saveUser(User user) {
         // Validar si el usuario ya existe
@@ -43,7 +44,7 @@ public class UserServices {
         }
 
         // Guardar el usuario en la base de datos
-        boolean saved = userRepository.saveUser( user.getId(), user.getUsername(), user.getPassword(), user.getRole());
+        boolean saved = userRepository.saveUser(user.getId(), user.getUsername(), user.getPassword(), user.getRole());
         if (saved) {
             JOptionPane.showMessageDialog(null, "✅ Usuario registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             return true;

@@ -15,7 +15,7 @@ public class CompanyService {
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
     }
-  
+
     public CompanyService(ICompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
@@ -23,13 +23,13 @@ public class CompanyService {
     /**
      * Registra una nueva empresa y su usuario asociado.
      *
-     * @param company  La empresa a registrar.
+     * @param company La empresa a registrar.
      * @param password La contraseña del usuario asociado.
      * @return true si el registro fue exitoso, false en caso contrario.
      */
     public boolean registerCompany(Company company) {
         // Validar si ya existe una empresa con el mismo NIT o correo electrónico
-       /* if (companyRepository.existsCompany(company.getNit(), company.getEmail())) {
+        /* if (companyRepository.existsCompany(company.getNit(), company.getEmail())) {
             System.out.println("Ya existe una empresa con el mismo NIT o correo electrónico.");
             return false; // No continuar si ya existe
         }*/
@@ -45,9 +45,10 @@ public class CompanyService {
 
         return true;
     }
+
     // Método privado para validar que los datos no estén vacíos
     private boolean validarEmpresa(Company company) {
-        if (company.getNIT()== null) {
+        if (company.getNIT() == null) {
             return false;
         }
         if (company.getName() == null || company.getName().trim().isEmpty()) {
@@ -74,6 +75,7 @@ public class CompanyService {
 
         return true; // Si todo está correcto, devuelve true
     }
+
     public Company getCompany(String idCompany) {
         return companyRepository.findByNIT(idCompany);
     }

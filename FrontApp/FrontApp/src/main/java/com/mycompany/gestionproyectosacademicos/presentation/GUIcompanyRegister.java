@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 package com.mycompany.gestionproyectosacademicos.presentation;
 
 import com.mycompany.gestionproyectosacademicos.access.CompanyRepositoryMS;
@@ -42,7 +41,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author Rubeiro Romero 
+ * @author Rubeiro Romero
  */
 //interface Company
 public class GUIcompanyRegister extends javax.swing.JFrame {
@@ -51,17 +50,18 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
      * Creates new form GUIcompanyRegister
      */
     private CompanyService companyService;
+
     public GUIcompanyRegister(CompanyService companyService) {
         this.companyService = companyService;
         initComponents();
         this.setLocationRelativeTo(null);
-        SwingUtilities.invokeLater(() -> fillSectors()); 
+        SwingUtilities.invokeLater(() -> fillSectors());
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-    
-    private void fillSectors(){
+
+    private void fillSectors() {
         jSector.removeAllItems();
-        for(Sector sector: Sector.values()){
+        for (Sector sector : Sector.values()) {
             jSector.addItem(sector.toString());
         }
     }
@@ -418,71 +418,68 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
     private void JContactLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JContactLastNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JContactLastNameActionPerformed
- private static final Pattern SOLO_NUMEROS = Pattern.compile("^[0-9]+$");
- private static final Pattern SOLO_LETRAS = Pattern.compile("^[A-Za-z ]+$");
- 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-             // TODO add your handling code here:
-        
-       if (JCompanyNIT.getText().isEmpty()
-            || JCompanyEmail.getText().isEmpty()
-            || JCompanyName.getText().isEmpty()
-            || JContactName.getText().isEmpty()
-            || JContactNumber.getText().isEmpty()
-            || JContactLastName.getText().isEmpty()
-            || JContactPosition.getText().isEmpty()) {
-        JOptionPane.showMessageDialog(null,
-                "Por favor, diligencie los campos obligatorios. "
-                        + "Están marcados con: *",
-                "¡ERROR!", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+    private static final Pattern SOLO_NUMEROS = Pattern.compile("^[0-9]+$");
+    private static final Pattern SOLO_LETRAS = Pattern.compile("^[A-Za-z ]+$");
 
-       String regExEmail = "^[A-Za-z0-9+_.-]+@(.+)\\.com$";
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+
+        if (JCompanyNIT.getText().isEmpty()
+                || JCompanyEmail.getText().isEmpty()
+                || JCompanyName.getText().isEmpty()
+                || JContactName.getText().isEmpty()
+                || JContactNumber.getText().isEmpty()
+                || JContactLastName.getText().isEmpty()
+                || JContactPosition.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Por favor, diligencie los campos obligatorios. "
+                    + "Están marcados con: *",
+                    "¡ERROR!", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String regExEmail = "^[A-Za-z0-9+_.-]+@(.+)\\.com$";
         if (!Pattern.matches(regExEmail, JCompanyEmail.getText())) {
             Messages.showMessageDialog("El email ingresado no es válido.", "Atención");
-       
-            return ;
+
+            return;
         }
-        
-            //tring nit = new String(JCompanyNIT.getText());
-               // System.out.println("✅ NIT válido: " + nit);
-            
-       
-         
-         try {
+
+        //tring nit = new String(JCompanyNIT.getText());
+        // System.out.println("✅ NIT válido: " + nit);
+        try {
             BigInteger phone = new BigInteger(JContactNumber.getText());
-              //  System.out.println("✅ telefono válido: " + nit);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "❌ Error:"
-                        + " El número de contacto debe contener solo números."
-                        + "", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-      
+            //  System.out.println("✅ telefono válido: " + nit);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "❌ Error:"
+                    + " El número de contacto debe contener solo números."
+                    + "", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         if (!SOLO_LETRAS.matcher(JContactName.getText()).matches()) {
-            JOptionPane.showMessageDialog(null, 
-                        "Nombre de contacto debe contener solo letras."
-                        , "❌ Error: ", JOptionPane.ERROR_MESSAGE);
-     
-            return ;
+            JOptionPane.showMessageDialog(null,
+                    "Nombre de contacto debe contener solo letras.",
+                    "❌ Error: ", JOptionPane.ERROR_MESSAGE);
+
+            return;
         }
-        
-        if (!SOLO_LETRAS.matcher(JContactLastName.getText() ).matches()) {
-            JOptionPane.showMessageDialog(null, 
-                        "Apellido debe contener solo letras."
-                        , "❌ Error: ", JOptionPane.ERROR_MESSAGE);
-            return ;
+
+        if (!SOLO_LETRAS.matcher(JContactLastName.getText()).matches()) {
+            JOptionPane.showMessageDialog(null,
+                    "Apellido debe contener solo letras.",
+                    "❌ Error: ", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        
+
         if (!SOLO_LETRAS.matcher(JContactPosition.getText()).matches()) {
-            JOptionPane.showMessageDialog(null, 
-                        "Cargo debe contener solo letras."
-                        , "❌ Error: ", JOptionPane.ERROR_MESSAGE);
-           
-            return ;
+            JOptionPane.showMessageDialog(null,
+                    "Cargo debe contener solo letras.",
+                    "❌ Error: ", JOptionPane.ERROR_MESSAGE);
+
+            return;
         }
-        
+
         // Crear la empresa
         Company company = new Company(
                 JCompanyNIT.getText().trim(),
@@ -503,8 +500,6 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
         UserServices userService = new UserServices(userRepo);
 
         // Crear el servicio de empresas inyectando el repositorio
-        
-        
         //ICompanyRepository compRepo = Factory.getInstance().getRepository(ICompanyRepository.class, "POSTGRE");
         ICompanyRepository compRepo = new CompanyRepositoryMS();
         CompanyService companyService = new CompanyService(compRepo, userRepo);
@@ -532,8 +527,6 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
                 return;
             }
         }*/
-
-        
 
         // Mostrar mensaje de éxito
         JOptionPane.showMessageDialog(null, "✅ Empresa y usuario registrados con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -583,11 +576,9 @@ public class GUIcompanyRegister extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
-
     /**
      * @param args the command line arguments
      */
- 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button Cancelar;
     private java.awt.TextField JCompanyEmail;

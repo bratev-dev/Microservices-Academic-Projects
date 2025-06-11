@@ -7,8 +7,7 @@ import java.util.List;
 /**
  * Repositorio en memoria con una lista de usuarios predefinidos
  */
-public class UserArrayRepository
-        //implements IUserRepository 
+public class UserArrayRepository //implements IUserRepository 
 {
     /*
     private static List<User> users;
@@ -79,5 +78,5 @@ public class UserArrayRepository
         }
         return -1; // Retornar -1 si no se encuentra el usuario
     }
-*/
+     */
 }

@@ -27,7 +27,9 @@ public class CompanyAPIClient {
         String endpoint = BASE_PATH + "/" + id;
         String json = ApiClient.get(endpoint);
 
-        if (json == null) return null;
+        if (json == null) {
+            return null;
+        }
 
         try {
             ObjectMapper mapper = new ObjectMapper();

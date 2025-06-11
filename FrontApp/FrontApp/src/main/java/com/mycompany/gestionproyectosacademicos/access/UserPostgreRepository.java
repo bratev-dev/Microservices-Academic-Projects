@@ -14,7 +14,6 @@ public class UserPostgreRepository implements IUserRepository {
     public UserPostgreRepository(Connection conn) {
         this.conn = conn;
     }
-       
 
     @Override
     public User authenticate(String email, String password) {
@@ -26,10 +25,10 @@ public class UserPostgreRepository implements IUserRepository {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return new User(
-                    rs.getInt("id"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("role")
                 );
             }
         } catch (SQLException e) {

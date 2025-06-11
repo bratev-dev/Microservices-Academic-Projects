@@ -619,8 +619,6 @@ public class GUIStudentProjectList extends javax.swing.JFrame {
         btnNext.setEnabled(currentPage < totalPages);
     }
 
-
-
     private void addSampleData() {
         tableModel.addRow(new Object[]{"00000", "Nombre Empresa", "Nombre Proyecto", "resumen del proyecto resumen del proyecto", ">"});
         tableModel.addRow(new Object[]{"00000", "Nombre Empresa", "Nombre Proyecto", "resumen del proyecto resumen del proyecto", ">"});

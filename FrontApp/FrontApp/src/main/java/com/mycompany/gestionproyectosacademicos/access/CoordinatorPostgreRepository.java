@@ -26,9 +26,9 @@ public class CoordinatorPostgreRepository implements ICoordinatorRepository {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return new Coordinator(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getInt("user_id")
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("user_id")
                 );
             }
         } catch (SQLException e) {

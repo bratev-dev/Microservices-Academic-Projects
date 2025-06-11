@@ -23,10 +23,10 @@ import javax.swing.JOptionPane;
  *
  * @author ANACONA
  */
-public class ProjectPostgreSQLRepository implements IProjectRepository{
-    
+public class ProjectPostgreSQLRepository implements IProjectRepository {
+
     private Connection conn;
-    
+
     private static final String URL = "jdbc:postgresql://localhost:5432/projectmanagement";
     private static final String USUARIO = "postgres";
     private static final String PASSWORD = "postgres"; //Cambiar por password local de su maquina
@@ -36,25 +36,25 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
         try {
             Class.forName("org.postgresql.Driver"); // Cargar el driver
             conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
-            JOptionPane.showMessageDialog(null
-                    ,"✅ Conexión exitosa a PostgreSQL"
-                    , "AVISO",JOptionPane.WARNING_MESSAGE);
-            
+            JOptionPane.showMessageDialog(null,
+                    "✅ Conexión exitosa a PostgreSQL",
+                    "AVISO", JOptionPane.WARNING_MESSAGE);
+
         } catch (ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null
-                    ,"❌ Error: No se encontró el Driver de PostgreSQL"
-                    , "AVISO",JOptionPane.WARNING_MESSAGE);
-            
+            JOptionPane.showMessageDialog(null,
+                    "❌ Error: No se encontró el Driver de PostgreSQL",
+                    "AVISO", JOptionPane.WARNING_MESSAGE);
+
             e.printStackTrace();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null
-                    ,"❌ Error de conexión: "
-                    , "AVISO",JOptionPane.WARNING_MESSAGE);
-            
+            JOptionPane.showMessageDialog(null,
+                    "❌ Error de conexión: ",
+                    "AVISO", JOptionPane.WARNING_MESSAGE);
+
         }
         return conexion;
     }
-    
+
     private static final String BASE_QUERY = """
         SELECT p.*, 
                 c.companyname AS companyname, 
@@ -72,9 +72,9 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
                 FROM projects p
                 LEFT JOIN company c ON p.company_nit = c.companynit;
         """;
-    
+
     @Override
-    public List<Project> getAllProjects(){
+    public List<Project> getAllProjects() {
         List<Project> projects = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
@@ -116,17 +116,20 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 
                     if (stateClass != null) {
                         state = switch (stateClass) {
-                            case "Aceptado" -> new Accepted().getStateName();
-                            case "Recibido" -> new Received().getStateName();
-                            case "Rechazado" -> new Rejected().getStateName();
-                            default -> null; // Si el estado no es válido, dejamos null
+                            case "Aceptado" ->
+                                new Accepted().getStateName();
+                            case "Recibido" ->
+                                new Received().getStateName();
+                            case "Rechazado" ->
+                                new Rejected().getStateName();
+                            default ->
+                                null; // Si el estado no es válido, dejamos null
                         };
                     } else {
                         state = null; // No asignamos estado si es null
                     }
 
                     //project.setState(state);
-
                     Company company = new Company();
                     company.setName(rs.getString("companyname"));
                     company.setNIT(rs.getString("companynit"));
@@ -147,7 +150,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
         }
         return projects;
     }
-    
+
     @Override
     public Project getProjectById(int projectId) throws SQLException {
 //        String sql = "SELECT p.*, c.companyname, c.companynit " +
@@ -187,7 +190,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 //        
         return new Project(); // esto no es
     }
-    
+
     private Project mapProject(ResultSet rs) throws SQLException {
         Project project = new Project();
         //project.setId(rs.getInt("id"));
@@ -199,17 +202,20 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 
         if (stateClass != null) {
             state = switch (stateClass) {
-                case "Accepted" -> new Accepted().getStateName();
-                case "Received" -> new Received().getStateName();
-                case "Rejected" -> new Rejected().getStateName();
-                default -> null; // Si el estado no es válido, dejamos null
+                case "Accepted" ->
+                    new Accepted().getStateName();
+                case "Received" ->
+                    new Received().getStateName();
+                case "Rejected" ->
+                    new Rejected().getStateName();
+                default ->
+                    null; // Si el estado no es válido, dejamos null
             };
         } else {
             state = null; // No asignamos estado si es null
         }
 
         //project.setState(state);
-
         Company company = new Company();
         company.setName(rs.getString("companyname"));
         company.setNIT(rs.getString("companynit"));
@@ -244,7 +250,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
 
         return projects;
     }*/
-/*
+ /*
     @Override
     public void deleteProject(int projectId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -353,8 +359,7 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-*/
-
+     */
     @Override
     public List<Project> getProjectsByAcademicPeriod(String academicPeriod) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -374,5 +379,5 @@ public class ProjectPostgreSQLRepository implements IProjectRepository{
     public Map<String, Long> countProjectsByState() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

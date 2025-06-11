@@ -2,7 +2,7 @@ package com.mycompany.gestionproyectosacademicos.state;
 
 import com.mycompany.gestionproyectosacademicos.entities.Project;
 
-public class InProgress implements ProjectState{
+public class InProgress implements ProjectState {
 
     @Override
     public void manageState(Project project) {
@@ -13,5 +13,5 @@ public class InProgress implements ProjectState{
     public String getStateName() {
         return "En ejecucion";
     }
-    
+
 }

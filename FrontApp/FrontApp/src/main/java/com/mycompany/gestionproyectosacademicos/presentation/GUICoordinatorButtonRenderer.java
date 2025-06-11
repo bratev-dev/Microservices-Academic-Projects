@@ -5,6 +5,7 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class GUICoordinatorButtonRenderer extends JPanel implements TableCellRenderer {
+
     private JButton btnSeeDetails;
     private JButton btnComment;
 
@@ -15,7 +16,7 @@ public class GUICoordinatorButtonRenderer extends JPanel implements TableCellRen
 
         btnSeeDetails = new JButton("Ver más");
         customizeButton(btnSeeDetails);
-        
+
         btnComment = new JButton("Comentar");
         customizeButton(btnComment);
 
